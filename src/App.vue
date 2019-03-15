@@ -1,31 +1,31 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+  <div class="top-container">
+    <drawer class="drawer"></drawer>
+    <nav-bar class="navbar"></nav-bar>
+
     <router-view />
   </div>
 </template>
 
+<script>
+import Drawer from "./components/Drawer";
+import NavBar from "./components/NavBar";
+
+export default {
+  components: {
+    drawer: Drawer,
+    NavBar
+  }
+};
+</script>
+
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.top-container {
+  display: flex;
+  padding: 0px;
+  margin: 0px;
 }
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.drawer {
+  flex: 0 0 auto;
 }
 </style>
