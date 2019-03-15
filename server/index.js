@@ -1,16 +1,9 @@
-const express = require("express");
-const path = require("path");
+const app = require("./app");
+const PORT = process.env.PORT || 4000;
+const chalk = require("chalk");
 
-const port = process.env.PORT || 8080;
-
-const app = express();
-
-app.use(express.static(path.join(__dirname, "/../dist/")));
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/../dist/index.html"));
+app.listen(PORT, () => {
+  console.log(
+    chalk.green.bold("Server listening on port: ") + chalk.cyan.bold(PORT)
+  );
 });
-
-app.listen(port);
-
-console.log("HELLO EXPRESS! Listening on PORT ", port);

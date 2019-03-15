@@ -9,8 +9,11 @@
     "start": "node server/index.js"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "chalk": "^2.4.2",
     "express": "^4.16.4",
     "material-design-icons-iconfont": "^4.0.5",
+    "morgan": "^1.9.1",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
     "vuetify": "^1.5.6",
