@@ -1,4 +1,6 @@
 const router = require("express").Router();
 
 // Execute /api
-router.get("/");
+// router.get("/");
+
+module.exports = router;
