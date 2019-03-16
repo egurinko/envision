@@ -1,0 +1,15 @@
+{
+    "name": "boat_race_app",
+    "env": {},
+    "formation": {
+      "web": {
+        "quantity": 1
+      }
+    },
+    "addons": ["heroku-postgresql"],
+    "buildpacks": [
+      {
+        "url": "heroku/nodejs"
+      }
+    ]
+  }

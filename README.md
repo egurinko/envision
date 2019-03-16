@@ -1,4 +1,4 @@
-# suntory
+# Boat
 
 ## Project setup
 ```
