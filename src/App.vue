@@ -1,10 +1,12 @@
 <template>
-  <div class="top-container">
-    <drawer class="drawer"></drawer>
-    <nav-bar class="navbar"></nav-bar>
+  <v-app>
+    <div class="top-container">
+      <drawer class="drawer"></drawer>
+      <nav-bar class="navbar"></nav-bar>
 
-    <router-view />
-  </div>
+      <router-view />
+    </div>
+  </v-app>
 </template>
 
 <script>
