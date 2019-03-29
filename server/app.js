@@ -37,4 +37,11 @@ app.use(
   apiRouter
 );
 
+app.use(
+  "/api/envs", // add additional middleware to the server, mounted on the /api/ path
+  (req, res) => {
+    console.log(req.body);
+  }
+);
+
 module.exports = app;
