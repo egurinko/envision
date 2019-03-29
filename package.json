@@ -10,6 +10,7 @@
     "heroku-postbuild": "yarn build"
   },
   "dependencies": {
+    "@mdi/font": "^3.5.95",
     "body-parser": "^1.18.3",
     "chalk": "^2.4.2",
     "express": "^4.16.4",

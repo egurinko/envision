@@ -4,7 +4,7 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
-const apiRouter = require("./api/router");
+const apiRouter = require("./api");
 
 const app = express();
 
@@ -33,16 +33,8 @@ app.get("*", (req, res) => {
 
 // SEND TO APIs
 app.use(
-  "/api/", // add additional middleware to the server, mounted on the /api/ path
+  "/api", // add additional middleware to the server, mounted on the /api/ path
   apiRouter
-);
-
-app.post(
-  "/api/envs", // add additional middleware to the server, mounted on the /api/ path
-  (req, res) => {
-    console.log(req.body);
-    res.sendStatus(200);
-  }
 );
 
 module.exports = app;

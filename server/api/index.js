@@ -1,6 +1,7 @@
 const router = require("express").Router();
+const envsRouter = require("./envs");
 
 // Execute /api
-// router.get("/");
+router.use("/envs", envsRouter);
 
 module.exports = router;

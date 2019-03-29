@@ -3,8 +3,6 @@
     <div class="top-container">
       <drawer class="drawer"></drawer>
       <nav-bar class="navbar"></nav-bar>
-
-      <router-view />
     </div>
   </v-app>
 </template>
@@ -17,6 +15,15 @@ export default {
   components: {
     drawer: Drawer,
     NavBar
+  },
+  created() {
+    window.addEventListener("resize", this.handleWindowResize);
+  },
+  methods: {
+    handleWindowResize() {
+      const width = window.innerWidth;
+      this.$store.dispatch("judgeWindow", width < 767);
+    }
   }
 };
 </script>
