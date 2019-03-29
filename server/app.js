@@ -41,6 +41,7 @@ app.post(
   "/api/envs", // add additional middleware to the server, mounted on the /api/ path
   (req, res) => {
     console.log(req.body);
+    res.sendStatus(200);
   }
 );
 
