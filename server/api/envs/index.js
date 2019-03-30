@@ -8,7 +8,7 @@ module.exports = services => {
 
   router.post("", (req, res) => {
     const data = req.body.items;
-    console.log("REQUEST DATA", data);
+    console.log("REQUEST DATA", data, "Body", req.body);
     services.envs(data);
     res.sendStatus(200);
   });
