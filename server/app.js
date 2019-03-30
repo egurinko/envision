@@ -5,7 +5,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 
-const services = require("../db/index");
+const services = require("../db/index")();
 const apiRouter = require("./api")(services);
 
 const app = express();
