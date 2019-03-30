@@ -20,7 +20,7 @@ const insertDocuments = (db, data, callback) => {
   // myDBデータベースのdocumentsコレクションに対して
   // ドキュメントを3つ追加します
   collection.insertMany(data, (err, result) => {
-    console.log("Inserted 3 documents into the collection", data, result);
+    console.log("Inserted DATA", data, result);
     callback(result);
   });
 };
