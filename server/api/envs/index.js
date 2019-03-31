@@ -11,6 +11,7 @@ module.exports = services => {
     let data;
     for (let key in body) {
       data = req.body[key];
+      console.log("EACH", data);
     }
     console.log("REQUEST DATA", data, body);
     services.envs(data);
