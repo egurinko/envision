@@ -7,12 +7,12 @@ module.exports = services => {
   });
 
   router.post("", (req, res) => {
-    let data = req.body;
-    console.log("REQUEST DATA", data);
-    for (let i in data) {
-      console.log("EACH DATA INDEX", i);
-      console.log("EACH DATA VALUE", data[i]);
+    const rowData = req.body;
+    let data;
+    for (let i in rowData) {
+      data = i;
     }
+    console.log("DATA", typeof data, data);
     services.envs.create(data);
     res.sendStatus(200);
   });
