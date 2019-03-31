@@ -17,10 +17,9 @@ module.exports = client => {
 const insertDocuments = (db, data, callback) => {
   const collection = db.collection("documents");
 
-  // myDBデータベースのdocumentsコレクションに対して
-  // ドキュメントを3つ追加します
   collection.insertMany(data, (err, result) => {
-    console.log("Inserted DATA", data, result);
+    console.log("Inserted DATA", data);
+    console.log("RESULT", result);
     callback(result);
   });
 };
