@@ -12,7 +12,7 @@ module.exports = services => {
     for (let i in rowData) {
       data = i;
     }
-    console.log("DATA", typeof data, JSON.parse(data));
+    console.log("DATA", typeof data, data);
     services.envs.create(data);
     res.sendStatus(200);
   });
