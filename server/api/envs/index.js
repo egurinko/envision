@@ -10,11 +10,11 @@ module.exports = services => {
     const body = req.body;
     let data;
     for (let key in body) {
-      data = req.body[key];
+      data = body[key];
       console.log("EACH", data);
     }
     console.log("REQUEST DATA", data, body);
-    services.envs(data);
+    services.envs.create(data);
     res.sendStatus(200);
   });
 
