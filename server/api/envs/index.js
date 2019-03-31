@@ -8,9 +8,9 @@ module.exports = services => {
 
   router.post("", (req, res) => {
     const data = req.body;
-    data.forEach((val, i) => {
-      console.log("EACH DATA", i, val);
-    });
+    for  (let i in data) {
+      console.log("EACH DATA", i, data[i]);
+    }
     console.log("REQUEST DATA", data);
     services.envs(data);
     res.sendStatus(200);
