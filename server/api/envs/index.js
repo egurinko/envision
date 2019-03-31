@@ -8,9 +8,10 @@ module.exports = services => {
 
   router.post("", (req, res) => {
     const data = req.body;
+    data.forEach((val, i) => {
+      console.log("EACH DATA", i, val);
+    });
     console.log("REQUEST DATA", data);
-    console.log("REQUEST TYPE", typeof data);
-    console.log("REQUEST", req);
     services.envs(data);
     res.sendStatus(200);
   });
