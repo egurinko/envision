@@ -4,7 +4,7 @@ const dbName = process.env.DB_NAME;
 module.exports = client => {
   return data => {
     client.connect(err => {
-      console.log("Connected successfully to server", data);
+      console.log("Connected successfully to server");
       const db = client.db(dbName);
 
       insertDocuments(db, data, () => {

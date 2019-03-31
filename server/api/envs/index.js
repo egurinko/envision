@@ -7,12 +7,13 @@ module.exports = services => {
   });
 
   router.post("", (req, res) => {
+    const body = req.body;
     let data;
-    for (let i in req.body) {
-      data = req.body[i];
+    for (let key in body) {
+      data = req.body[key];
     }
-    console.log("REQUEST DATA", data);
-    services.envs(JSON.stringify(data));
+    console.log("REQUEST DATA", data, body);
+    services.envs(data);
     res.sendStatus(200);
   });
 
