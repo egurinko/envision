@@ -10,6 +10,7 @@ module.exports = services => {
     const data = req.body;
     console.log("REQUEST DATA", data);
     console.log("REQUEST TYPE", typeof data);
+    console.log("REQUEST", req);
     services.envs(data);
     res.sendStatus(200);
   });
