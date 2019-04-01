@@ -2,19 +2,19 @@
   <v-app>
     <div class="top-container">
       <drawer class="drawer"></drawer>
-      <nav-bar class="navbar"></nav-bar>
+      <result class="result"></result>
     </div>
   </v-app>
 </template>
 
 <script>
 import Drawer from "./components/Drawer";
-import NavBar from "./components/NavBar";
+import Result from "./components/Result";
 
 export default {
   components: {
     drawer: Drawer,
-    NavBar
+    Result
   },
   created() {
     window.addEventListener("resize", this.handleWindowResize);
