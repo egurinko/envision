@@ -6,7 +6,12 @@ module.exports = services => {
   });
 
   router.post("", (req, res) => {
-    const data = req.body;
+    const data = [];
+    for (let key in req.body) {
+      const obj = {};
+      obj[key] = req.body[key];
+      data.push(obj);
+    }
     console.log("REQUEST DATA", typeof data, data);
     services.envs.create(data);
     res.sendStatus(200);
