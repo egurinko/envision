@@ -74,6 +74,7 @@ export default {
   methods: {
     init() {
       const url = `${this.$store.state.domain}/envs`;
+      console.log("INIT", "URL", url);
       axios
         .get(url)
         .then(data => {
