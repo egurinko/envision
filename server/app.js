@@ -27,7 +27,6 @@ app.use(
 // Extract JSON data from POST requests
 app.use(bodyParser.json());
 
-app.use(allowCrossDomain);
 const allowCrossDomain = function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
@@ -43,6 +42,7 @@ const allowCrossDomain = function(req, res, next) {
     next();
   }
 };
+app.use(allowCrossDomain);
 
 // SERVE STATIC FILEs
 app.use(express.static(path.join(__dirname, "/../dist/")));
