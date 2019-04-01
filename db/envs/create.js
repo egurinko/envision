@@ -4,7 +4,7 @@ const dbName = process.env.DB_NAME;
 const assert = require("assert");
 
 module.exports = client => {
-  return (async data => {
+  return async data => {
     try {
       await client.connect();
       console.log("Connected successfully to server");
@@ -19,5 +19,5 @@ module.exports = client => {
       console.log(err.stack);
     }
     client.close();
-  })();
+  };
 };
