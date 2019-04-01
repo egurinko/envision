@@ -6,7 +6,7 @@ module.exports = services => {
   });
 
   router.post("", (req, res) => {
-    services.envs.create(req.body);
+    services.co2.create(req.body);
     res.sendStatus(200);
   });
 

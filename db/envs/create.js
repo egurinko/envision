@@ -17,9 +17,6 @@ module.exports = () => {
       let r = await db.collection("envs").insertOne(data);
       assert.equal(1, r.insertedCount);
 
-      console.log("Inserted DATA", data);
-      console.log("RESULT", r);
-
       client.close();
     } catch (err) {
       console.log(err.stack);
