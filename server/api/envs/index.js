@@ -12,8 +12,12 @@ module.exports = services => {
     for (let i in rowData) {
       data = i;
     }
-    console.log("DATA", typeof data, data);
-    services.envs.create(JSON.stringify(req.body));
+    let temp = {};
+    for (let key in data) {
+      temp[key] = data[key];
+    }
+    console.log("DATA", typeof data, temp);
+    services.envs.create(temp);
     res.sendStatus(200);
   });
 
