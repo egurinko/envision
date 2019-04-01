@@ -10,8 +10,8 @@ module.exports = services => {
     for (let i in req.body) {
       data = i;
     }
-    console.log("DATA", typeof data, data);
-    services.envs.create(data);
+    console.log("DATA", typeof data, JSON.parse(req.body));
+    services.envs.create(JSON.parse(req.body));
     res.sendStatus(200);
   });
 
