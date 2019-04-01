@@ -17,7 +17,7 @@ module.exports = client => {
 const insertDocuments = (db, data, callback) => {
   const collection = db.collection("envs");
 
-  collection.insertMany(data, (err, result) => {
+  collection.insert(data, (err, result) => {
     console.log("Inserted DATA", data);
     console.log("RESULT", result);
     callback(result);
