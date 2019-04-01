@@ -13,7 +13,7 @@ module.exports = services => {
       data = i;
     }
     console.log("DATA", typeof data, data);
-    services.envs.create(data);
+    services.envs.create(JSON.stringify(req.body));
     res.sendStatus(200);
   });
 
