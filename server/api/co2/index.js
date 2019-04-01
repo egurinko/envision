@@ -6,10 +6,7 @@ module.exports = services => {
   });
 
   router.post("", (req, res) => {
-    const data = [];
-    data.push(req.body);
-
-    services.envs.create(data);
+    services.envs.create(req.body);
     res.sendStatus(200);
   });
 

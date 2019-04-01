@@ -17,7 +17,7 @@ module.exports = client => {
 const insertDocuments = (db, data, callback) => {
   const collection = db.collection("co2");
 
-  collection.insert(data, (err, result) => {
+  collection.insertOne(data, (err, result) => {
     console.log("Inserted DATA", data);
     console.log("RESULT", result);
     callback(result);
