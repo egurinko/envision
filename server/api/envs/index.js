@@ -8,11 +8,6 @@ module.exports = services => {
   router.post("", (req, res) => {
     const data = req.body;
     console.log("REQUEST DATA", typeof data, data);
-    console.log(
-      "PARSED REQUEST DATA",
-      typeof JSON.parse(data),
-      JSON.parse(data)
-    );
     services.envs.create(data);
     res.sendStatus(200);
   });
