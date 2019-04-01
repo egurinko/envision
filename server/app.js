@@ -25,7 +25,7 @@ app.use(
 );
 
 // Extract JSON data from POST requests
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 // SERVE STATIC FILEs
 app.use(express.static(path.join(__dirname, "/../dist/")));
