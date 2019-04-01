@@ -1,10 +1,14 @@
+const MongoClient = require("mongodb").MongoClient;
 require("dotenv").config();
+const url = process.env.MONGO_URL;
 const dbName = process.env.DB_NAME;
 
 const assert = require("assert");
 
-module.exports = client => {
+module.exports = () => {
   return async data => {
+    const client = MongoClient(url);
+
     try {
       await client.connect();
       console.log("Connected successfully to server");

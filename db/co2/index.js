@@ -1,5 +1,5 @@
-module.exports = client => {
+module.exports = () => {
   return {
-    create: require("./create")(client)
+    create: require("./create")()
   };
 };
