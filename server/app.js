@@ -17,16 +17,11 @@ app.use(
   )
 );
 
-// URL Encode for POST requests
-app.use(
-  bodyParser.urlencoded({
-    extended: true
-  })
-);
-
-// Extract JSON data from POST requests
+// URL ENCODE & JSON PARSE
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// CROSS DOMAIN
 const allowCrossDomain = function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
@@ -35,7 +30,6 @@ const allowCrossDomain = function(req, res, next) {
     "Content-Type, Authorization, Content-Length, X-Requested-With"
   );
 
-  // intercept OPTIONS method
   if ("OPTIONS" == req.method) {
     res.send(200);
   } else {
@@ -51,9 +45,6 @@ app.get("*", (req, res) => {
 });
 
 // SEND TO APIs
-app.use(
-  "/api", // add additional middleware to the server, mounted on the /api/ path
-  apiRouter
-);
+app.use("/api", apiRouter);
 
 module.exports = app;

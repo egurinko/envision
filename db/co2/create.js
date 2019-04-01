@@ -1,21 +1,13 @@
-const MongoClient = require("mongodb").MongoClient;
-require("dotenv").config();
-const url = process.env.MONGO_URL;
-const dbName = process.env.DB_NAME;
-
-const assert = require("assert");
-
-module.exports = () => {
+module.exports = config => {
   return async data => {
-    const client = MongoClient(url);
+    const client = config.MongoClient(config.url);
 
     try {
       await client.connect();
       console.log("Connected successfully to server");
-      const db = client.db(dbName);
+      const db = client.db(config.dbName);
 
-      let r = await db.collection("co2").insertOne(data);
-      assert.equal(1, r.insertedCount);
+      await db.collection("co2").insertOne(data);
 
       client.close();
     } catch (err) {
