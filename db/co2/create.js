@@ -15,9 +15,10 @@ module.exports = client => {
 
       console.log("Inserted DATA", data);
       console.log("RESULT", r);
+
+      client.close();
     } catch (err) {
       console.log(err.stack);
     }
-    client.close();
   };
 };
