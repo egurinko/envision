@@ -38,13 +38,13 @@ const allowCrossDomain = function(req, res, next) {
 };
 app.use(allowCrossDomain);
 
+// SEND TO APIs
+app.use("/api", apiRouter);
+
 // SERVE STATIC FILEs
 app.use(express.static(path.join(__dirname, "/../dist/")));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/../dist/index.html"));
 });
-
-// SEND TO APIs
-app.use("/api", apiRouter);
 
 module.exports = app;

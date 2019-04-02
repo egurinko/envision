@@ -1,6 +1,6 @@
-module.exports = config => {
+module.exports = () => {
   return {
-    create: require("./create")(config),
-    list: require("./list")(config)
+    create: require("./create")(),
+    list: require("./list")()
   };
 };

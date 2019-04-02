@@ -1,9 +1,8 @@
 const router = require("express").Router();
 
 module.exports = services => {
-  router.get("/", (req, res) => {
-    const data = services.envs.list();
-    console.log("HELLO", data);
+  router.get("/", async (req, res) => {
+    const data = await services.envs.list();
     res.status(200).json(data.data);
   });
 

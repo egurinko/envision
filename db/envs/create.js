@@ -1,17 +1,7 @@
-module.exports = config => {
+const callDB = require("../module/callDB");
+
+module.exports = () => {
   return async data => {
-    const client = config.MongoClient(config.url);
-
-    try {
-      await client.connect();
-      console.log("Connected successfully to server");
-      const db = client.db(config.dbName);
-
-      await db.collection("envs").insertOne(data);
-
-      client.close();
-    } catch (err) {
-      console.log(err.stack);
-    }
+    await callDB("POST", "envs", data);
   };
 };
