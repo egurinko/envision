@@ -46,6 +46,7 @@
 
 <script>
 import axios from "axios";
+import { Promise } from "bluebird";
 export default {
   data() {
     return {
@@ -65,7 +66,9 @@ export default {
           src: "https://cdn.vuetifyjs.com/images/cards/plane.jpg",
           flex: 6
         }
-      ]
+      ],
+      envs: null,
+      co2: null
     };
   },
   created() {
@@ -73,16 +76,13 @@ export default {
   },
   methods: {
     init() {
-      // const url = `${this.$store.state.domain}/envs`;
-      const url = "/api/envs";
-      axios
-        .get(url)
-        .then(data => {
-          console.log("DATA", data);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      Promise.all([axios.get("/api/envs"), axios.get("/api/co2")]).then(
+        ([envs, co2]) => {
+          console.log(envs, co2);
+          this.envs = envs;
+          this.co2 = co2;
+        }
+      );
     }
   }
 };

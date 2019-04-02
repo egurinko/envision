@@ -2,8 +2,8 @@ const router = require("express").Router();
 
 module.exports = services => {
   router.get("/", async (req, res) => {
-    const data = await services.envs.list();
-    res.status(200).json(data.data);
+    const data = await services.co2.list();
+    res.status(200).send(data);
   });
 
   router.post("/", (req, res) => {
