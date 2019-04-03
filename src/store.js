@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import colors from "./module/colorTheme";
 
 Vue.use(Vuex);
 
@@ -9,7 +10,8 @@ export default new Vuex.Store({
     domain:
       process.env.NODE_ENV === "development"
         ? "https://prod-bot-staging.herokuapp.com/api"
-        : "/api"
+        : "/api",
+    colors
   },
   mutations: {
     judgeWindow(state, isPhone) {
