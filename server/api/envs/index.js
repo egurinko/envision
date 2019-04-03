@@ -3,7 +3,7 @@ const router = require("express").Router();
 module.exports = services => {
   router.get("/", async (req, res) => {
     const data = await services.envs.list();
-    res.status(200).send(data.data);
+    res.status(200).send(data);
   });
 
   router.post("/", (req, res) => {
