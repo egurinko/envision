@@ -1,25 +1,25 @@
 <template>
-  <v-navigation-drawer permanent height="100vh" width="250">
-    <v-toolbar flat>
+  <v-navigation-drawer permanent height="100vh" width="250" class="primary">
+    <v-toolbar flat class="primary" height="100">
       <v-list>
         <v-list-tile>
-          <v-list-tile-title class="title">
+          <v-list-tile-title class="drawer-title">
             PRODUCTIVITY CHECKER
           </v-list-tile-title>
         </v-list-tile>
       </v-list>
     </v-toolbar>
 
-    <v-divider></v-divider>
-
     <v-list dense class="pt-0">
       <v-list-tile v-for="item in items" :key="item.title">
-        <v-list-tile-action>
-          <v-icon>{{ item.icon }}</v-icon>
+        <v-list-tile-action class="list-icon">
+          <v-icon x-large>{{ item.icon }}</v-icon>
         </v-list-tile-action>
 
-        <v-list-tile-content>
-          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+        <v-list-tile-content class="list-title">
+          <v-list-tile-title class="headline">{{
+            item.title
+          }}</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       items: [
-        { title: "Home", icon: "dashboard" },
+        { title: "Home", icon: "home" },
         { title: "About", icon: "question_answer" }
       ],
       right: null
@@ -56,19 +56,19 @@ export default {
 };
 </script>
 
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+<style>
+.drawer-title {
+  margin: 10px auto;
+  vertical-align: middle;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+.v-list__tile {
+  display: flex;
+  flex-direction: column;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+.list-title {
+  height: 20px;
 }
-a {
-  color: #42b983;
+.pt-0 > div {
+  height: 100px;
 }
 </style>

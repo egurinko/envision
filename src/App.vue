@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app dark>
     <div class="top-container">
       <drawer class="drawer"></drawer>
       <result class="result"></result>
