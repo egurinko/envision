@@ -6,7 +6,10 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isPhone: window.innerWidth < 726,
-    domain: "https://prod-bot-staging.herokuapp.com/api"
+    domain:
+      process.env.NODE_ENV === "development"
+        ? "https://prod-bot-staging.herokuapp.com/api"
+        : "/api"
   },
   mutations: {
     judgeWindow(state, isPhone) {
