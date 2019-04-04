@@ -21,6 +21,7 @@
 import axios from "axios";
 import { Promise } from "bluebird";
 import LineChart from "../module/lineChart.js";
+import { setInterval } from "timers";
 
 export default {
   components: {
@@ -96,6 +97,29 @@ export default {
 
         console.debug(this.envs, this.co2);
       });
+      setInterval(() => {
+        Promise.all([
+          axios.get(`${this.$store.state.domain}/envs`),
+          axios.get(`${this.$store.state.domain}/co2`)
+        ]).then(([envs, co2]) => {
+          envs.data.map(env => {
+            this.envs.humidity.push({
+              humidity: env.hum,
+              timestamp: env.timestamp
+            });
+            this.envs.pressure.push({
+              pressure: env.pressure,
+              timestamp: env.timestamp
+            });
+            this.envs.temperature.push({
+              temperature: env.temp,
+              timestamp: env.timestamp
+            });
+          });
+          this.co2 = co2.data;
+          console.debug(this.envs, this.co2);
+        });
+      }, 60000);
     },
     makeChartData(dataType) {
       const labels = this.envs[dataType].map(data => data.timestamp);
