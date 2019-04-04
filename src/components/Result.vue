@@ -71,6 +71,9 @@ export default {
   },
   created() {
     this.init();
+    setInterval(() => {
+      this.update();
+    }, 60000);
   },
   methods: {
     init() {
@@ -97,29 +100,30 @@ export default {
 
         console.debug(this.envs, this.co2);
       });
-      setInterval(() => {
-        Promise.all([
-          axios.get(`${this.$store.state.domain}/envs`),
-          axios.get(`${this.$store.state.domain}/co2`)
-        ]).then(([envs, co2]) => {
-          envs.data.map(env => {
-            this.envs.humidity.push({
-              humidity: env.hum,
-              timestamp: env.timestamp
-            });
-            this.envs.pressure.push({
-              pressure: env.pressure,
-              timestamp: env.timestamp
-            });
-            this.envs.temperature.push({
-              temperature: env.temp,
-              timestamp: env.timestamp
-            });
-          });
-          this.co2 = co2.data;
-          console.debug(this.envs, this.co2);
+    },
+    update() {
+      Promise.all([
+        axios.get(`${this.$store.state.domain}/envs`),
+        axios.get(`${this.$store.state.domain}/co2`)
+      ]).then(([envs, co2]) => {
+        const latestEnv = envs.data[0];
+        this.envs.humidity.push({
+          humidity: latestEnv.hum,
+          timestamp: latestEnv.timestamp
         });
-      }, 60000);
+        this.envs.pressure.push({
+          pressure: latestEnv.pressure,
+          timestamp: latestEnv.timestamp
+        });
+        this.envs.temperature.push({
+          temperature: latestEnv.temp,
+          timestamp: latestEnv.timestamp
+        });
+        this.co2 = co2.data;
+        this.loaded = !this.loaded;
+
+        console.debug(this.envs, this.co2);
+      });
     },
     makeChartData(dataType) {
       const labels = this.envs[dataType].map(data => data.timestamp);
