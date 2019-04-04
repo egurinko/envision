@@ -1,20 +1,36 @@
 <template>
-  <v-layout justify-center class="primary">
-    <v-flex xs12 sm6 v-if="loaded">
-      <v-card class="secondary">
-        <line-chart :chart-data="humidityChartData"></line-chart>
-      </v-card>
-      <v-card class="secondary">
-        <line-chart :chart-data="pressureChartData"></line-chart>
-      </v-card>
-      <v-card class="secondary">
-        <line-chart :chart-data="tempChartData"></line-chart>
-      </v-card>
-      <v-card class="secondary">
-        <line-chart :chart-data="co2ChartData"></line-chart>
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <v-container fluid class="primary">
+    <v-layout class="primary" row>
+      <v-flex grow pa-1 xs6>
+        <v-card class="secondary">
+          <line-chart
+            v-if="loaded"
+            :chart-data="humidityChartData"
+          ></line-chart>
+        </v-card>
+      </v-flex>
+      <v-flex grow pa-1 xs6>
+        <v-card class="secondary">
+          <line-chart
+            v-if="loaded"
+            :chart-data="pressureChartData"
+          ></line-chart>
+        </v-card>
+      </v-flex>
+    </v-layout>
+    <v-layout class="primary" v-if="loaded" row>
+      <v-flex grow pa-1 xs6>
+        <v-card xs4 class="secondary">
+          <line-chart v-if="loaded" :chart-data="tempChartData"></line-chart>
+        </v-card>
+      </v-flex>
+      <v-flex grow pa-1 xs6>
+        <v-card xs4 class="secondary">
+          <line-chart v-if="loaded" :chart-data="co2ChartData"></line-chart>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -106,21 +122,41 @@ export default {
         axios.get(`${this.$store.state.domain}/envs`),
         axios.get(`${this.$store.state.domain}/co2`)
       ]).then(([envs, co2]) => {
-        const latestEnv = envs.data[0];
-        this.envs.humidity.push({
-          humidity: latestEnv.hum,
-          timestamp: latestEnv.timestamp
-        });
-        this.envs.pressure.push({
-          pressure: latestEnv.pressure,
-          timestamp: latestEnv.timestamp
-        });
-        this.envs.temperature.push({
-          temperature: latestEnv.temp,
-          timestamp: latestEnv.timestamp
+        let envDiffs;
+        let co2Diffs;
+        const envsLenDiff = this.envs.humidity.length - envs.data.length;
+        const co2LenDiff = this.co2.length - co2.data.length;
+
+        if (envsLenDiff !== 0) {
+          envDiffs = envs.data.slice(envsLenDiff);
+        }
+        if (co2LenDiff !== 0) {
+          co2Diffs = co2.data.slice(co2LenDiff);
+        }
+        console.log("ENVS", envsLenDiff, envDiffs);
+        console.log("CO2", envsLenDiff, co2Diffs);
+
+        this.envs = {
+          humidity: [],
+          pressure: [],
+          temperature: []
+        };
+        envs.data.map(env => {
+          this.envs.humidity.push({
+            humidity: env.hum,
+            timestamp: env.timestamp
+          });
+          this.envs.pressure.push({
+            pressure: env.pressure,
+            timestamp: env.timestamp
+          });
+          this.envs.temperature.push({
+            temperature: env.temp,
+            timestamp: env.timestamp
+          });
         });
         this.co2 = co2.data;
-        this.loaded = !this.loaded;
+        // this.loaded = !this.loaded;
 
         console.debug(this.envs, this.co2);
       });
@@ -144,3 +180,8 @@ export default {
   }
 };
 </script>
+<style>
+.charts {
+  padding: 20px;
+}
+</style>

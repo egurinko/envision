@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <div class="top-container">
+    <div class="top-container primary">
       <drawer class="drawer"></drawer>
       <result class="result"></result>
     </div>

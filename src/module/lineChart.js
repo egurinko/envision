@@ -1,5 +1,4 @@
 import { Line, mixins } from "vue-chartjs";
-import store from "../store";
 const { reactiveProp } = mixins;
 
 export default {
@@ -11,38 +10,38 @@ export default {
 };
 
 const options = {
-  scales: axisConfig,
+  scales: {
+    yAxes: [
+      {
+        scaleLabel: {
+          labelString: "ABC",
+          fontColor: "white"
+        },
+        ticks: {
+          beginAtZero: false
+        },
+        gridLines: {
+          display: true
+        }
+      }
+    ],
+    xAxes: [
+      {
+        gridLines: {
+          display: false
+        }
+      }
+    ]
+  },
   legend: {
     display: false
   },
+  title: {
+    display: true,
+    fontSize: 18,
+    text: "タイトル"
+  },
   annotation: annotationConfig
-};
-
-const fontSize = store.state.isPhone ? 10 : 18;
-const maxTicksLimit = store.state.isPhone ? 10 : 30;
-
-const axisConfig = {
-  yAxes: [
-    {
-      ticks: { beginAtZero: true, fontSize },
-      scaleLabel: { display: false }
-    }
-  ],
-  xAxes: [
-    {
-      stacked: false,
-      gridLines: {
-        display: false
-      },
-      ticks: {
-        fontSize,
-        autoSkip: true,
-        maxTicksLimit,
-        maxRotation: 0,
-        minRotation: 0
-      }
-    }
-  ]
 };
 
 const annotationConfig = {
