@@ -10,7 +10,7 @@
         v-for="(data, i) in chartData"
         :key="i"
       >
-        <v-card class="secondary">
+        <v-card class="secondary" flat>
           <line-chart
             :chart-data="data"
             :title="data.datasets[0].label"
@@ -155,7 +155,7 @@ export default {
       let data = [];
       const id = this.envs[dataType][0][dataType].unit;
       this.envs[dataType].map(env => {
-        labels.push(convertTime(env.timestamp));
+        labels.push(env.timestamp);
         data.push(env[dataType].value);
       });
       return {
