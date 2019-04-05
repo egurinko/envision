@@ -7,7 +7,6 @@ const parser = { useNewUrlParser: true };
 // TIMESTAMP
 let date = new Date();
 let a = date.getTime();
-let b = Math.floor(a / 1000);
 
 module.exports = async (method, endpoint, postData = null) => {
   const client = MongoClient(domain, parser);
@@ -17,7 +16,7 @@ module.exports = async (method, endpoint, postData = null) => {
     console.log("Connected successfully to MONGODB");
 
     if (method === "POST") {
-      postData.timestamp = b;
+      postData.timestamp = a;
       await db.collection(endpoint).insertOne(postData);
 
       client.close();

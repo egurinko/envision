@@ -1,34 +1,35 @@
 <template>
-  <v-container fluid class="primary">
-    <v-layout class="primary" row>
-      <v-flex grow pa-1 xs6>
-        <v-card class="secondary">
+  <v-container class="primary my-5">
+    <v-layout class="primary" row wrap justify-space-around v-if="loaded">
+      <v-card class="secondary pa-3 my-3">
+        <v-flex xs12 md12>
           <line-chart
-            v-if="loaded"
             :chart-data="humidityChartData"
+            title="Humidity"
           ></line-chart>
-        </v-card>
-      </v-flex>
-      <v-flex grow pa-1 xs6>
-        <v-card class="secondary">
+        </v-flex>
+      </v-card>
+      <v-card class="secondary pa-3 my-3">
+        <v-flex xs12 md12>
           <line-chart
-            v-if="loaded"
             :chart-data="pressureChartData"
+            title="Pressure"
           ></line-chart>
-        </v-card>
-      </v-flex>
-    </v-layout>
-    <v-layout class="primary" v-if="loaded" row>
-      <v-flex grow pa-1 xs6>
-        <v-card xs4 class="secondary">
-          <line-chart v-if="loaded" :chart-data="tempChartData"></line-chart>
-        </v-card>
-      </v-flex>
-      <v-flex grow pa-1 xs6>
-        <v-card xs4 class="secondary">
-          <line-chart v-if="loaded" :chart-data="co2ChartData"></line-chart>
-        </v-card>
-      </v-flex>
+        </v-flex>
+      </v-card>
+      <v-card class="secondary pa-3 my-3">
+        <v-flex xs12 md12>
+          <line-chart
+            :chart-data="tempChartData"
+            title="Temperature"
+          ></line-chart>
+        </v-flex>
+      </v-card>
+      <v-card class="secondary pa-3 my-3">
+        <v-flex xs12 md12>
+          <line-chart :chart-data="co2ChartData" title="CO2"></line-chart>
+        </v-flex>
+      </v-card>
     </v-layout>
   </v-container>
 </template>
