@@ -5,6 +5,9 @@ const fontColor = "white";
 
 const options = {
   scales: {
+    afterBuildTicks: function(value) {
+      console.log(value);
+    },
     yAxes: [
       {
         scaleLabel: {
@@ -26,8 +29,8 @@ const options = {
           display: false
         },
         ticks: {
-          autoSkip: true,
-          fontColor
+          fontColor,
+          autoSkip: true
         }
       }
     ]

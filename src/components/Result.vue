@@ -25,6 +25,7 @@
 <script>
 import axios from "axios";
 import LineChart from "../module/lineChart.js";
+import convertTime from "../module/convertTime.js";
 
 export default {
   components: {
@@ -88,18 +89,23 @@ export default {
         envs.data.map(env => {
           this.envs.humidity.push({
             humidity: env.hum,
-            timestamp: env.timestamp
+            timestamp: convertTime(env.timestamp)
           });
           this.envs.pressure.push({
             pressure: env.pressure,
-            timestamp: env.timestamp
+            timestamp: convertTime(env.timestamp)
           });
           this.envs.temperature.push({
             temperature: env.temp,
-            timestamp: env.timestamp
+            timestamp: convertTime(env.timestamp)
           });
         });
-        this.co2 = co2.data;
+        this.co2 = co2.data.map(data => {
+          return {
+            co2: data.co2,
+            timestamp: convertTime(data.timestamp)
+          };
+        });
         this.loaded = !this.loaded;
 
         console.debug(this.envs, this.co2);
@@ -138,9 +144,6 @@ export default {
             this.co2.push(diff);
           });
         }
-        console.log("ENVS", envsLenDiff, envDiffs);
-        console.log("CO2", envsLenDiff, co2Diffs);
-
         console.debug(this.envs, this.co2);
       });
     },

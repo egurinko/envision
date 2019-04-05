@@ -22,9 +22,10 @@ module.exports = async (method, endpoint, postData = null) => {
       client.close();
       return;
     } else if (method === "GET") {
+      const oneHourAgo = a - 3600000;
       const data = await db
         .collection(endpoint)
-        .find({})
+        .find({ timestamp: { $gt: oneHourAgo } })
         .toArray();
 
       client.close();
