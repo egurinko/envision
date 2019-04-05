@@ -126,22 +126,25 @@ export default {
           envDiffs.map(diff => {
             this.envs.humidity.push({
               humidity: diff.hum,
-              timestamp: diff.timestamp
+              timestamp: convertTime(diff.timestamp)
             });
             this.envs.pressure.push({
               pressure: diff.pressure,
-              timestamp: diff.timestamp
+              timestamp: convertTime(diff.timestamp)
             });
             this.envs.temperature.push({
               temperature: diff.temp,
-              timestamp: diff.timestamp
+              timestamp: convertTime(diff.timestamp)
             });
           });
         }
         if (co2LenDiff !== 0) {
           co2Diffs = co2.data.slice(co2LenDiff);
           co2Diffs.map(diff => {
-            this.co2.push(diff);
+            this.co2.push({
+              co2: diff.co2,
+              timestamp: convertTime(diff.timestamp)
+            });
           });
         }
         console.debug(this.envs, this.co2);
@@ -152,7 +155,7 @@ export default {
       let data = [];
       const id = this.envs[dataType][0][dataType].unit;
       this.envs[dataType].map(env => {
-        labels.push(env.timestamp);
+        labels.push(convertTime(env.timestamp));
         data.push(env[dataType].value);
       });
       return {
