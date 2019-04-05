@@ -1,35 +1,38 @@
 <template>
-  <v-container class="primary my-5">
+  <v-container class="primary my-1">
     <v-layout class="primary" row wrap justify-space-around v-if="loaded">
-      <v-card class="secondary pa-3 my-3">
-        <v-flex xs12 md12>
+      <v-flex xs12 md6 grow shrink class="pa-3 my-3">
+        <v-card class="secondary">
           <line-chart
             :chart-data="humidityChartData"
             title="Humidity"
           ></line-chart>
-        </v-flex>
-      </v-card>
-      <v-card class="secondary pa-3 my-3">
-        <v-flex xs12 md12>
+        </v-card>
+      </v-flex>
+
+      <v-flex xs12 md6 grow shrink class="pa-3 my-3">
+        <v-card class="secondary">
           <line-chart
             :chart-data="pressureChartData"
             title="Pressure"
           ></line-chart>
-        </v-flex>
-      </v-card>
-      <v-card class="secondary pa-3 my-3">
-        <v-flex xs12 md12>
+        </v-card>
+      </v-flex>
+
+      <v-flex xs12 md6 grow shrink class="pa-3 my-3">
+        <v-card class="secondary">
           <line-chart
             :chart-data="tempChartData"
             title="Temperature"
           ></line-chart>
-        </v-flex>
-      </v-card>
-      <v-card class="secondary pa-3 my-3">
-        <v-flex xs12 md12>
+        </v-card>
+      </v-flex>
+
+      <v-flex xs12 md6 grow shrink class="pa-3 my-3">
+        <v-card class="secondary">
           <line-chart :chart-data="co2ChartData" title="CO2"></line-chart>
-        </v-flex>
-      </v-card>
+        </v-card>
+      </v-flex>
     </v-layout>
   </v-container>
 </template>
