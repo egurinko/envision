@@ -4,12 +4,12 @@ const domain = process.env.MONGO_URL;
 const dbName = process.env.DB_NAME;
 const parser = { useNewUrlParser: true };
 
-// TIMESTAMP
-let date = new Date();
-let a = date.getTime();
-
 module.exports = async (method, endpoint, postData = null) => {
   const client = MongoClient(domain, parser);
+
+  // TIMESTAMP
+  const date = new Date();
+  const a = date.getTime();
   try {
     await client.connect();
     const db = client.db(dbName);
