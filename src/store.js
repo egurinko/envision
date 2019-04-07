@@ -13,8 +13,8 @@ export default new Vuex.Store({
         : "/api",
     colors,
     menus: [
-      { icon: "home", title: "HOME" },
-      { icon: "bar_chart", title: "CHARTS" }
+      { icon: "home", title: "Home" },
+      { icon: "bar_chart", title: "Graphs" }
     ]
   },
   mutations: {

@@ -47,8 +47,9 @@ export default {
   },
   methods: {
     init() {},
-    handleClick() {
-      console.log("HELLO");
+    handleClick(e) {
+      const route = this.items[e].title.toLowerCase();
+      this.$router.push(`/${route}`);
     }
   }
 };

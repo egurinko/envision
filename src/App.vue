@@ -1,9 +1,12 @@
 <template>
   <v-app dark>
+    <div class="tertiary" id="design-bar"></div>
     <tool-bar class="primary" v-if="state.isPhone"></tool-bar>
     <div class="top-container primary">
       <drawer class="drawer" v-if="!state.isPhone"></drawer>
-      <graphs class="result"></graphs>
+      <div>
+        <router-view></router-view>
+      </div>
     </div>
   </v-app>
 </template>
@@ -44,5 +47,8 @@ export default {
 }
 .drawer {
   flex: 0 0 auto;
+}
+#design-bar {
+  height: 20px;
 }
 </style>

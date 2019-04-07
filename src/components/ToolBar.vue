@@ -1,9 +1,9 @@
 <template>
-  <v-toolbar>
+  <v-toolbar flat>
     <v-spacer></v-spacer>
-    <v-toolbar-items v-for="item in items" :key="item.title">
+    <v-toolbar-items v-for="(item, i) in items" :key="item.title">
       <div class="spacer"></div>
-      <v-btn icon flat
+      <v-btn icon flat @click="handleClick(i)"
         ><v-icon size="25">{{ item.icon }}</v-icon></v-btn
       >
       <div class="spacer"></div>
@@ -19,7 +19,11 @@ export default {
     };
   },
   methods: {
-    init() {}
+    init() {},
+    handleClick(e) {
+      const route = this.items[e].title.toLowerCase();
+      this.$router.push(`/${route}`);
+    }
   }
 };
 </script>
