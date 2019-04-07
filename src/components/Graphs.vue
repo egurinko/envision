@@ -6,6 +6,7 @@
         sm12
         md6
         justify-space-around
+        shrink
         class="pa-3 my-3"
         v-for="(data, i) in chartData"
         :key="i"
@@ -116,38 +117,36 @@ export default {
         axios.get(`${this.$store.state.domain}/envs`),
         axios.get(`${this.$store.state.domain}/co2`)
       ]).then(([envs, co2]) => {
-        let envDiffs;
-        let co2Diffs;
-        const envsLenDiff = this.envs.humidity.length - envs.data.length;
-        const co2LenDiff = this.co2.length - co2.data.length;
+        const len = this.co2.length;
+        const newTimestamp = convertTime(envs.data[len - 1].timestamp);
+        const lastTimestamp = this.envs.humidity[len - 1].timestamp;
+        if (newTimestamp !== lastTimestamp) {
+          this.envs.humidity.push({
+            humidity: envs.data[len - 1].hum,
+            timestamp: newTimestamp
+          });
+          this.envs.pressure.push({
+            pressure: envs.data[len - 1].pressure,
+            timestamp: newTimestamp
+          });
+          this.envs.temperature.push({
+            temperature: envs.data[len - 1].temp,
+            timestamp: newTimestamp
+          });
+          this.envs.humidity.shift();
+          this.envs.pressure.shift();
+          this.envs.temperature.shift();
+        }
 
-        if (envsLenDiff !== 0) {
-          envDiffs = envs.data.slice(envsLenDiff);
-          envDiffs.map(diff => {
-            this.envs.humidity.push({
-              humidity: diff.hum,
-              timestamp: convertTime(diff.timestamp)
-            });
-            this.envs.pressure.push({
-              pressure: diff.pressure,
-              timestamp: convertTime(diff.timestamp)
-            });
-            this.envs.temperature.push({
-              temperature: diff.temp,
-              timestamp: convertTime(diff.timestamp)
-            });
+        const newCo2Timestamp = convertTime(co2.data[len - 1].timestamp);
+        const lastCo2Timestamp = this.co2.timestamp;
+        if (newCo2Timestamp !== lastCo2Timestamp) {
+          this.co2.push({
+            co2: co2.data[len - 1].co2,
+            timestamp: newCo2Timestamp
           });
+          this.co2.shift();
         }
-        if (co2LenDiff !== 0) {
-          co2Diffs = co2.data.slice(co2LenDiff);
-          co2Diffs.map(diff => {
-            this.co2.push({
-              co2: diff.co2,
-              timestamp: convertTime(diff.timestamp)
-            });
-          });
-        }
-        console.debug(this.envs, this.co2);
       });
     },
     makeChartData(dataType) {
@@ -175,8 +174,3 @@ export default {
   }
 };
 </script>
-<style>
-.charts {
-  padding: 20px;
-}
-</style>

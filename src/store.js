@@ -6,21 +6,21 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    isPhone: window.innerWidth < 726,
+    isPhone: window.innerWidth < 600,
     domain:
       process.env.NODE_ENV === "development"
         ? "https://prod-bot-staging.herokuapp.com/api"
         : "/api",
-    colors
+    colors,
+    menus: [
+      { icon: "home", title: "HOME" },
+      { icon: "question_answer", title: "ANSWER" }
+    ]
   },
   mutations: {
     judgeWindow(state, isPhone) {
       state.isPhone = isPhone;
     }
   },
-  actions: {
-    judgeWindow(context, isPhone) {
-      context.commit("judgeWindow", isPhone);
-    }
-  }
+  actions: {}
 });

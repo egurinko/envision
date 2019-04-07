@@ -1,20 +1,28 @@
 <template>
   <v-app dark>
+    <tool-bar class="primary" v-if="state.isPhone"></tool-bar>
     <div class="top-container primary">
-      <drawer class="drawer"></drawer>
-      <result class="result"></result>
+      <drawer class="drawer" v-if="!state.isPhone"></drawer>
+      <graphs class="result"></graphs>
     </div>
   </v-app>
 </template>
 
 <script>
 import Drawer from "./components/Drawer";
-import Result from "./components/Result";
+import Graphs from "./components/Graphs";
+import ToolBar from "./components/ToolBar";
 
 export default {
+  data() {
+    return {
+      state: this.$store.state
+    };
+  },
   components: {
     drawer: Drawer,
-    Result
+    Graphs,
+    ToolBar
   },
   created() {
     window.addEventListener("resize", this.handleWindowResize);
@@ -22,7 +30,7 @@ export default {
   methods: {
     handleWindowResize() {
       const width = window.innerWidth;
-      this.$store.dispatch("judgeWindow", width < 767);
+      this.$store.commit("judgeWindow", width < 600);
     }
   }
 };

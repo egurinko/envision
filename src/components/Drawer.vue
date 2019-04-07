@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer permanent height="100%" width="250" class="primary">
+  <v-navigation-drawer height="100%" width="250" class="primary" permanent>
     <v-toolbar flat class="primary mt-4 mb-2">
       <v-list>
         <v-list-tile>
@@ -39,10 +39,8 @@
 export default {
   data() {
     return {
-      items: [
-        { icon: "home", title: "HOME" },
-        { icon: "question_answer", title: "ANSWER" }
-      ],
+      drawer: !this.$store.state.isPhone,
+      items: this.$store.state.menus,
       right: null
     };
   },
