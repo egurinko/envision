@@ -86,8 +86,9 @@ export default {
     init() {
       Promise.all([
         axios.get(`${this.$store.state.domain}/envs`),
-        axios.get(`${this.$store.state.domain}/co2`)
-      ]).then(([envs, co2]) => {
+        axios.get(`${this.$store.state.domain}/co2`),
+        axios.get(`${this.$store.state.domain}/comfort`)
+      ]).then(([envs, co2, comfort]) => {
         envs.data.map(env => {
           this.envs.humidity.push({
             humidity: env.hum,
@@ -110,7 +111,7 @@ export default {
         });
         this.loaded = !this.loaded;
 
-        console.debug(this.envs, this.co2);
+        console.debug(this.envs, this.co2, comfort);
       });
     },
     update() {
