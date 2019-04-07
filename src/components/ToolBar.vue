@@ -2,10 +2,11 @@
   <v-toolbar>
     <v-spacer></v-spacer>
     <v-toolbar-items v-for="item in items" :key="item.title">
+      <div class="spacer"></div>
       <v-btn icon flat
         ><v-icon size="25">{{ item.icon }}</v-icon></v-btn
       >
-      <v-spacer></v-spacer>
+      <div class="spacer"></div>
     </v-toolbar-items>
     <v-spacer></v-spacer>
   </v-toolbar>
@@ -22,3 +23,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.spacer {
+  margin: 20px;
+}
+</style>
