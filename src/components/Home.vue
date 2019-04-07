@@ -1,7 +1,14 @@
 <template>
   <v-container class="primary my-1" v-if="loaded">
-    HOME
     <v-layout class="primary" row wrap justify-space-around>
+      <v-flex xs12 justify-space-around class="pa-5 mb-3 mx-5">
+        <v-spacer></v-spacer>
+        <doughnut-chart
+          :chart-data="comfortChartData"
+          title="COMFORT INDEX"
+        ></doughnut-chart>
+        <v-spacer></v-spacer>
+      </v-flex>
       <v-flex
         xs12
         sm12
@@ -13,11 +20,11 @@
         :key="i"
       >
         <v-card class="secondary" flat>
-          <line-chart
+          <doughnut-chart
             :chart-data="data"
             :title="data.datasets[0].label"
             :id="data.datasets[0].id"
-          ></line-chart>
+          ></doughnut-chart>
         </v-card>
       </v-flex>
     </v-layout>
@@ -26,12 +33,12 @@
 
 <script>
 import axios from "axios";
-import LineChart from "../module/lineChart.js";
 import convertTime from "../module/convertTime.js";
+import doughnutChart from "../module/doughnutChart.js";
 
 export default {
   components: {
-    LineChart
+    doughnutChart
   },
   data() {
     return {
@@ -41,39 +48,51 @@ export default {
         pressure: [],
         temperature: []
       },
-      co2: null
+      co2: null,
+      comfort: null
     };
   },
   computed: {
     chartData: function() {
       if (!this.loaded) return;
       const chartData = [];
-      chartData.push(this.makeChartData("humidity"));
-      chartData.push(this.makeChartData("pressure"));
-      chartData.push(this.makeChartData("temperature"));
-
-      let labels = [];
-      let data = [];
-      const id = this.co2[0].co2.unit;
-      this.co2.map(co2 => {
-        labels.push(co2.timestamp);
-        data.push(co2.co2.value);
-      });
-      const co2ChartData = {
-        labels,
+      const latest = this.comfort[this.comfort.length - 1];
+      for (let key in latest.detail) {
+        const data = [latest.detail[key] * 4, 100 - latest.detail[key] * 4];
+        chartData.push({
+          datasets: [
+            {
+              label: key.toUpperCase(),
+              backgroundColor: [
+                this.$store.state.colors.lightGreen,
+                this.$store.state.colors.deepGreen
+              ],
+              borderWidth: 0,
+              borderColor: this.$store.state.colors.lightGreen,
+              data
+            }
+          ]
+        });
+      }
+      return chartData;
+    },
+    comfortChartData: function() {
+      if (!this.loaded) return;
+      const comfort = this.comfort[this.comfort.length - 1].comfortIndex;
+      const data = [comfort, 100 - comfort];
+      return {
         datasets: [
           {
-            label: "CO2",
-            backgroundColor: this.$store.state.colors.primary,
+            backgroundColor: [
+              this.$store.state.colors.lightGreen,
+              this.$store.state.colors.deepGreen
+            ],
+            borderWidth: 0,
             borderColor: this.$store.state.colors.lightGreen,
-            radius: 0,
-            data,
-            id
+            data
           }
         ]
       };
-      chartData.push(co2ChartData);
-      return chartData;
     }
   },
   created() {
@@ -109,9 +128,11 @@ export default {
             timestamp: convertTime(data.timestamp)
           };
         });
+
+        this.comfort = comfort.data;
         this.loaded = !this.loaded;
 
-        console.debug(this.envs, this.co2, comfort);
+        console.debug(this.envs, this.co2, this.comfort);
       });
     },
     update() {
@@ -150,28 +171,6 @@ export default {
           this.co2.shift();
         }
       });
-    },
-    makeChartData(dataType) {
-      let labels = [];
-      let data = [];
-      const id = this.envs[dataType][0][dataType].unit;
-      this.envs[dataType].map(env => {
-        labels.push(env.timestamp);
-        data.push(env[dataType].value);
-      });
-      return {
-        labels,
-        datasets: [
-          {
-            label: dataType.toUpperCase(),
-            backgroundColor: this.$store.state.colors.primary,
-            borderColor: this.$store.state.colors.lightGreen,
-            radius: 0,
-            data,
-            id
-          }
-        ]
-      };
     }
   }
 };
