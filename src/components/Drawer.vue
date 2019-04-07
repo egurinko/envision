@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer height="100%" width="250" class="primary" permanent>
-    <v-toolbar flat class="primary mt-4 mb-2">
+    <v-toolbar flat class="primary mt-3 mb-2">
       <v-list>
         <v-list-tile>
           <v-list-tile-title class="drawer-title">
@@ -61,8 +61,5 @@ export default {
 }
 .list-icon {
   width: 250px;
-}
-.list-icon:hover {
-  background-color: aqua;
 }
 </style>

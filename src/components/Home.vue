@@ -1,6 +1,6 @@
 <template>
   <v-container class="primary my-1" v-if="loaded">
-    HOOOOOOOOOOOOOME
+    HOME
     <v-layout class="primary" row wrap justify-space-around>
       <v-flex
         xs12

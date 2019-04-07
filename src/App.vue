@@ -1,19 +1,16 @@
 <template>
-  <v-app dark>
+  <v-app dark class="primary">
     <div class="tertiary" id="design-bar"></div>
     <tool-bar class="primary" v-if="state.isPhone"></tool-bar>
     <div class="top-container primary">
       <drawer class="drawer" v-if="!state.isPhone"></drawer>
-      <div>
-        <router-view></router-view>
-      </div>
+      <router-view></router-view>
     </div>
   </v-app>
 </template>
 
 <script>
 import Drawer from "./components/Drawer";
-import Graphs from "./components/Graphs";
 import ToolBar from "./components/ToolBar";
 
 export default {
@@ -24,7 +21,6 @@ export default {
   },
   components: {
     drawer: Drawer,
-    Graphs,
     ToolBar
   },
   created() {
