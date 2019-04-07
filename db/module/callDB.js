@@ -4,7 +4,7 @@ const domain = process.env.MONGO_URL;
 const dbName = process.env.DB_NAME;
 const parser = { useNewUrlParser: true };
 
-module.exports = async (method, endpoint, postData = null) => {
+module.exports = async (method, endpoint, options = null) => {
   const client = MongoClient(domain, parser);
 
   // TIMESTAMP
@@ -16,19 +16,32 @@ module.exports = async (method, endpoint, postData = null) => {
     console.log("Connected successfully to MONGODB");
 
     if (method === "POST") {
-      postData.timestamp = a;
-      await db.collection(endpoint).insertOne(postData);
+      options.timestamp = a;
+      await db.collection(endpoint).insertOne(options);
 
       client.close();
       return;
     } else if (method === "GET") {
-      const oneHourAgo = a - 3600000;
-      const data = await db
-        .collection(endpoint)
-        .find({ timestamp: { $gt: oneHourAgo } })
-        .toArray();
+      let data;
+      if (options === null) {
+        const oneHourAgo = a - 3600000;
+        data = await db
+          .collection(endpoint)
+          .find({ timestamp: { $gt: oneHourAgo } })
+          .toArray();
 
-      client.close();
+        client.close();
+      } else if (options === "latest") {
+        data = await db
+          .collection(endpoint)
+          .find()
+          .limit(1)
+          .sort({ $natural: -1 })
+          .toArray();
+
+        client.close();
+      }
+
       return data;
     }
   } catch (err) {

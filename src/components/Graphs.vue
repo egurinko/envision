@@ -47,10 +47,6 @@ export default {
     chartData: function() {
       if (!this.loaded) return;
       const chartData = [];
-      chartData.push(this.makeChartData("humidity"));
-      chartData.push(this.makeChartData("pressure"));
-      chartData.push(this.makeChartData("temperature"));
-
       let labels = [];
       let data = [];
       const id = this.co2[0].co2.unit;
@@ -72,6 +68,10 @@ export default {
         ]
       };
       chartData.push(co2ChartData);
+      chartData.push(this.makeChartData("temperature"));
+      chartData.push(this.makeChartData("humidity"));
+      chartData.push(this.makeChartData("pressure"));
+
       return chartData;
     }
   },

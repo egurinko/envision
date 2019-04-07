@@ -24,6 +24,7 @@
     "moment-timezone": "^0.5.23",
     "mongodb": "^3.2.2",
     "morgan": "^1.9.1",
+    "node-cron": "^2.0.3",
     "vue": "^2.6.6",
     "vue-chartjs": "^3.4.2",
     "vue-router": "^3.0.1",

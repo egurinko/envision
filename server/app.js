@@ -8,6 +8,14 @@ const morgan = require("morgan");
 const services = require("../db/index")();
 const apiRouter = require("./api")(services);
 
+const cron = require("node-cron");
+const makeComfortIndex = require("./cron/makeComfortIndex");
+
+cron.schedule("* * * * *", () => {
+  makeComfortIndex(services);
+  console.log("running a task every minute");
+});
+
 const app = express();
 
 // LOGGING SETTINGs
