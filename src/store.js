@@ -14,7 +14,7 @@ export default new Vuex.Store({
     colors,
     menus: [
       { icon: "home", title: "HOME" },
-      { icon: "question_answer", title: "ANSWER" }
+      { icon: "bar_chart", title: "CHARTS" }
     ]
   },
   mutations: {

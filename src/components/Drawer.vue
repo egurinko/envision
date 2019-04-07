@@ -15,20 +15,21 @@
         class="primary"
         column
         align-center
-        justify-center
-        v-for="item in items"
+        v-for="(item, i) in items"
         :key="item.title"
       >
-        <v-flex xs12 class="mt-1">
-          <v-list-tile-action class="list-icon">
-            <v-icon x-large>{{ item.icon }}</v-icon>
-          </v-list-tile-action>
-        </v-flex>
-        <v-flex xs12 class="mb-5 mr-3">
-          <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-          </v-list-tile-content>
-        </v-flex>
+        <v-btn @click="handleClick(i)" class="ma-4" icon large>
+          <v-flex xs12>
+            <v-list-tile-action>
+              <v-icon x-large>{{ item.icon }}</v-icon>
+            </v-list-tile-action>
+          </v-flex>
+        </v-btn>
+        <!-- <v-flex xs12 class="pa-2">
+            <v-list-tile-content>
+              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            </v-list-tile-content>
+          </v-flex> -->
       </v-layout>
     </v-container>
     <div class="space-fill"></div>
@@ -45,7 +46,10 @@ export default {
     };
   },
   methods: {
-    init() {}
+    init() {},
+    handleClick() {
+      console.log("HELLO");
+    }
   }
 };
 </script>
@@ -53,5 +57,11 @@ export default {
 <style scoped>
 .space-fill {
   min-height: 100vh;
+}
+.list-icon {
+  width: 250px;
+}
+.list-icon:hover {
+  background-color: aqua;
 }
 </style>
