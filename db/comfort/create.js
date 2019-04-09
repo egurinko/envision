@@ -5,16 +5,16 @@ module.exports = () => {
     const envData = await callDB("GET", "envs", "latest");
     const co2Data = await callDB("GET", "co2", "latest");
 
-    const initialPoint = 25;
+    const initialPoint = 1;
 
     const maxGoodTemp = 24;
     const minGoodTemp = 22;
     const currentTemp = Number(envData[0].temp.value);
     const tempIndex =
       currentTemp > maxGoodTemp
-        ? initialPoint - (currentTemp - maxGoodTemp) * 2
+        ? initialPoint - (currentTemp - maxGoodTemp) / 10
         : currentTemp < minGoodTemp
-        ? initialPoint - (minGoodTemp - currentTemp) * 2
+        ? initialPoint - (minGoodTemp - currentTemp) / 10
         : initialPoint;
 
     const maxGoodHum = 60;
@@ -22,28 +22,28 @@ module.exports = () => {
     const currentHum = Number(envData[0].hum.value);
     const humIndex =
       currentHum > maxGoodHum
-        ? initialPoint - (currentHum - maxGoodHum)
+        ? initialPoint - (currentHum - maxGoodHum) / 20
         : currentHum < minGoodHum
-        ? initialPoint - (minGoodHum - currentHum)
+        ? initialPoint - (minGoodHum - currentHum) / 20
         : initialPoint;
 
     const maxGoodPressure = 990;
     const currentPressure = Number(envData[0].pressure.value);
     const pressureIndex =
       currentPressure < maxGoodPressure
-        ? initialPoint - (maxGoodPressure - currentPressure) / 10
+        ? initialPoint - (maxGoodPressure - currentPressure) / 5
         : initialPoint;
 
     const maxGoodCo2 = 700;
     const currentCo2 = Number(co2Data[0].co2.value);
     const co2Index =
       currentCo2 > maxGoodCo2
-        ? initialPoint - (currentCo2 - maxGoodCo2) / 50
+        ? initialPoint - (currentCo2 - maxGoodCo2) / 1800
         : initialPoint;
 
     const data = {
       timestamp: co2Data[0].timestamp,
-      comfortIndex: tempIndex + humIndex + pressureIndex + co2Index,
+      comfortIndex: tempIndex * humIndex * pressureIndex * co2Index,
       detail: {
         tempIndex,
         humIndex,

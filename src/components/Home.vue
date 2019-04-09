@@ -15,7 +15,7 @@
         md6
         justify-space-around
         shrink
-        class="pa-3 my-3"
+        class="pa-5 my-3"
         v-for="(data, i) in chartData"
         :key="i"
       >
