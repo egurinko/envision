@@ -12,9 +12,9 @@ module.exports = () => {
     const currentTemp = Number(envData[0].temp.value);
     const tempIndex =
       currentTemp > maxGoodTemp
-        ? initialPoint - (currentTemp - maxGoodTemp) / 10
+        ? initialPoint - (currentTemp - maxGoodTemp) / 13
         : currentTemp < minGoodTemp
-        ? initialPoint - (minGoodTemp - currentTemp) / 10
+        ? initialPoint - (minGoodTemp - currentTemp) / 13
         : initialPoint;
 
     const maxGoodHum = 60;
@@ -22,9 +22,9 @@ module.exports = () => {
     const currentHum = Number(envData[0].hum.value);
     const humIndex =
       currentHum > maxGoodHum
-        ? initialPoint - (currentHum - maxGoodHum) / 20
+        ? initialPoint - (currentHum - maxGoodHum) / 25
         : currentHum < minGoodHum
-        ? initialPoint - (minGoodHum - currentHum) / 20
+        ? initialPoint - (minGoodHum - currentHum) / 25
         : initialPoint;
 
     const maxGoodPressure = 990;
@@ -38,7 +38,7 @@ module.exports = () => {
     const currentCo2 = Number(co2Data[0].co2.value);
     const co2Index =
       currentCo2 > maxGoodCo2
-        ? initialPoint - (currentCo2 - maxGoodCo2) / 1800
+        ? initialPoint - (currentCo2 - maxGoodCo2) / 2300
         : initialPoint;
 
     const data = {
