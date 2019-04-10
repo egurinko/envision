@@ -37,6 +37,7 @@ export default {
       loaded: false,
       envs: {
         humidity: [],
+        lux: [],
         pressure: [],
         temperature: []
       },
@@ -69,6 +70,7 @@ export default {
       };
       chartData.push(co2ChartData);
       chartData.push(this.makeChartData("temperature"));
+      chartData.push(this.makeChartData("lux"));
       chartData.push(this.makeChartData("humidity"));
       chartData.push(this.makeChartData("pressure"));
 
@@ -90,6 +92,10 @@ export default {
         envs.data.map(env => {
           this.envs.humidity.push({
             humidity: env.hum,
+            timestamp: convertTime(env.timestamp)
+          });
+          this.envs.lux.push({
+            lux: env.lux,
             timestamp: convertTime(env.timestamp)
           });
           this.envs.pressure.push({
@@ -133,7 +139,12 @@ export default {
             temperature: envs.data[len - 1].temp,
             timestamp: newTimestamp
           });
+          this.envs.lux.push({
+            lux: envs.data[len - 1].lux,
+            timestamp: newTimestamp
+          });
           this.envs.humidity.shift();
+          this.envs.lux.shift();
           this.envs.pressure.shift();
           this.envs.temperature.shift();
         }
