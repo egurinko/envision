@@ -25,16 +25,17 @@
           wrap
           justify-space-between
           align-center
+          class="pa-3"
           v-for="(data, i) in detailData"
           :key="i"
         >
-          <v-flex xs3 class="pa-3">
+          <v-flex xs3>
             <div class="detail-left">{{ data.label }}</div>
           </v-flex>
-          <v-flex xs3 class="pa-3">
+          <v-flex xs3>
             <div class="detail-center">・・・・・・・・></div>
           </v-flex>
-          <v-flex xs3 class="pa-3">
+          <v-flex xs3>
             <div class="detail-right">{{ data.value }}</div>
           </v-flex>
         </v-layout>
@@ -62,23 +63,13 @@ export default {
   computed: {
     detailData: function() {
       if (!this.loaded) return;
-      const data = [];
       const latest = this.comfort[this.comfort.length - 1];
-      for (let key in latest.detail) {
-        const label =
-          key === "co2Index"
-            ? "CO2快適度"
-            : key === "humIndex"
-            ? "湿度快適度"
-            : key === "pressureIndex"
-            ? "気圧快適度"
-            : "室温快適度";
-        data.push({
-          label,
-          value: `${Math.floor(latest.detail[key] * 100 * 100) / 100}%`
-        });
-      }
-      return data;
+      return latest.detail.map(data => {
+        return {
+          label: data.label,
+          value: `${Math.floor(data.value * 100 * 100) / 100}%`
+        };
+      });
     },
     comfortChartData: function() {
       if (!this.loaded) return;
