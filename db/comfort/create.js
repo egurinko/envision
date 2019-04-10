@@ -12,9 +12,9 @@ module.exports = () => {
     const currentTemp = Number(envData[0].temp.value);
     const tempIndex =
       currentTemp > maxGoodTemp
-        ? initialPoint - (currentTemp - maxGoodTemp) / 13
+        ? initialPoint - (currentTemp - maxGoodTemp) / 15
         : currentTemp < minGoodTemp
-        ? initialPoint - (minGoodTemp - currentTemp) / 13
+        ? initialPoint - (minGoodTemp - currentTemp) / 15
         : initialPoint;
 
     const maxGoodHum = 60;
@@ -38,18 +38,29 @@ module.exports = () => {
     const currentCo2 = Number(co2Data[0].co2.value);
     const co2Index =
       currentCo2 > maxGoodCo2
-        ? initialPoint - (currentCo2 - maxGoodCo2) / 2300
+        ? initialPoint - (currentCo2 - maxGoodCo2) / 2500
+        : initialPoint;
+
+    const maxGoodLux = 800;
+    const minGoodLux = 700;
+    const currentLux = Number(envData[0].lux.value);
+    const luxIndex =
+      currentLux > maxGoodLux
+        ? initialPoint - (currentLux - maxGoodLux) / 500
+        : currentLux < minGoodLux
+        ? initialPoint - (minGoodLux - currentLux) / 500
         : initialPoint;
 
     const data = {
       timestamp: co2Data[0].timestamp,
-      comfortIndex: tempIndex * humIndex * pressureIndex * co2Index,
-      detail: {
-        tempIndex,
-        humIndex,
-        pressureIndex,
-        co2Index
-      }
+      comfortIndex: tempIndex * humIndex * pressureIndex * co2Index * luxIndex,
+      detail: [
+        { label: "室温快適度", value: tempIndex },
+        { label: "CO2快適度", value: co2Index },
+        { label: "照度快適度", value: luxIndex },
+        { label: "湿度快適度", value: humIndex },
+        { label: "気圧快適度", value: pressureIndex }
+      ]
     };
     await callDB("POST", "comfort", data);
 

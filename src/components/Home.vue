@@ -1,39 +1,50 @@
 <template>
-  <v-container class="primary my-1" v-if="loaded">
-    <v-layout class="primary" row wrap justify-space-around>
-      <v-flex xs12 justify-space-around class="pa-5 mb-3 mx-5">
-        <v-spacer></v-spacer>
-        <doughnut-chart
-          :chart-data="comfortChartData"
-          title="COMFORT INDEX"
-        ></doughnut-chart>
-        <v-spacer></v-spacer>
-      </v-flex>
-      <v-flex
-        xs12
-        sm12
-        md6
-        justify-space-around
-        shrink
-        class="pa-5 my-3"
-        v-for="(data, i) in chartData"
-        :key="i"
-      >
-        <v-card class="secondary" flat>
+  <div v-if="loaded" class="px-5 primary home">
+    <v-container>
+      <v-layout row wrap justify-space-between align-center>
+        <v-flex xs3 grow class="px-3">
+          <div></div>
+        </v-flex>
+        <v-flex xs6 class="px-3">
           <doughnut-chart
-            :chart-data="data"
-            :title="data.datasets[0].label"
-            :id="data.datasets[0].id"
+            :chart-data="comfortChartData"
+            class="px-5 prod-chart"
+            title="総合快適度指数"
           ></doughnut-chart>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+        </v-flex>
+        <v-flex xs3 grow class="px-3">
+          <div></div>
+        </v-flex>
+      </v-layout>
+    </v-container>
+
+    <v-card class="secondary details" flat>
+      <v-container class="my-1">
+        <v-layout
+          row
+          wrap
+          justify-space-between
+          align-center
+          v-for="(data, i) in detailData"
+          :key="i"
+        >
+          <v-flex xs3 class="pa-3">
+            <div class="detail-left">{{ data.label }}</div>
+          </v-flex>
+          <v-flex xs3 class="pa-3">
+            <div class="detail-center">・・・・・・・・></div>
+          </v-flex>
+          <v-flex xs3 class="pa-3">
+            <div class="detail-right">{{ data.value }}</div>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-card>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
-import convertTime from "../module/convertTime.js";
 import doughnutChart from "../module/doughnutChart.js";
 
 export default {
@@ -43,43 +54,36 @@ export default {
   data() {
     return {
       loaded: false,
-      envs: {
-        humidity: [],
-        pressure: [],
-        temperature: []
-      },
-      co2: null,
+      latestEnv: null,
+      latestCo2: null,
       comfort: null
     };
   },
   computed: {
-    chartData: function() {
+    detailData: function() {
       if (!this.loaded) return;
-      const chartData = [];
+      const data = [];
       const latest = this.comfort[this.comfort.length - 1];
       for (let key in latest.detail) {
-        const data = [latest.detail[key] * 4, 100 - latest.detail[key] * 4];
-        chartData.push({
-          datasets: [
-            {
-              label: key.toUpperCase(),
-              backgroundColor: [
-                this.$store.state.colors.lightGreen,
-                this.$store.state.colors.deepGreen
-              ],
-              borderWidth: 0,
-              borderColor: this.$store.state.colors.lightGreen,
-              data
-            }
-          ]
+        const label =
+          key === "co2Index"
+            ? "CO2快適度"
+            : key === "humIndex"
+            ? "湿度快適度"
+            : key === "pressureIndex"
+            ? "気圧快適度"
+            : "室温快適度";
+        data.push({
+          label,
+          value: `${Math.floor(latest.detail[key] * 100 * 100) / 100}%`
         });
       }
-      return chartData;
+      return data;
     },
     comfortChartData: function() {
       if (!this.loaded) return;
       const comfort = this.comfort[this.comfort.length - 1].comfortIndex;
-      const data = [comfort, 100 - comfort];
+      const data = [comfort, 1 - comfort];
       return {
         datasets: [
           {
@@ -104,74 +108,44 @@ export default {
   methods: {
     init() {
       Promise.all([
+        axios.get(`${this.$store.state.domain}/comfort`),
         axios.get(`${this.$store.state.domain}/envs`),
-        axios.get(`${this.$store.state.domain}/co2`),
-        axios.get(`${this.$store.state.domain}/comfort`)
-      ]).then(([envs, co2, comfort]) => {
-        envs.data.map(env => {
-          this.envs.humidity.push({
-            humidity: env.hum,
-            timestamp: convertTime(env.timestamp)
-          });
-          this.envs.pressure.push({
-            pressure: env.pressure,
-            timestamp: convertTime(env.timestamp)
-          });
-          this.envs.temperature.push({
-            temperature: env.temp,
-            timestamp: convertTime(env.timestamp)
-          });
-        });
-        this.co2 = co2.data.map(data => {
-          return {
-            co2: data.co2,
-            timestamp: convertTime(data.timestamp)
-          };
-        });
-
+        axios.get(`${this.$store.state.domain}/co2`)
+      ]).then(([comfort, envs, co2]) => {
         this.comfort = comfort.data;
-        this.loaded = !this.loaded;
-
-        console.debug(this.envs, this.co2, this.comfort);
+        this.latestEnv = envs.data[envs.data.length - 1];
+        this.latestCo2 = co2.data[co2.data.length - 1];
+        this.loaded = true;
       });
     },
     update() {
-      Promise.all([
-        axios.get(`${this.$store.state.domain}/envs`),
-        axios.get(`${this.$store.state.domain}/co2`)
-      ]).then(([envs, co2]) => {
-        const len = this.co2.length;
-        const newTimestamp = convertTime(envs.data[len - 1].timestamp);
-        const lastTimestamp = this.envs.humidity[len - 1].timestamp;
-        if (newTimestamp !== lastTimestamp) {
-          this.envs.humidity.push({
-            humidity: envs.data[len - 1].hum,
-            timestamp: newTimestamp
-          });
-          this.envs.pressure.push({
-            pressure: envs.data[len - 1].pressure,
-            timestamp: newTimestamp
-          });
-          this.envs.temperature.push({
-            temperature: envs.data[len - 1].temp,
-            timestamp: newTimestamp
-          });
-          this.envs.humidity.shift();
-          this.envs.pressure.shift();
-          this.envs.temperature.shift();
-        }
-
-        const newCo2Timestamp = convertTime(co2.data[len - 1].timestamp);
-        const lastCo2Timestamp = this.co2.timestamp;
-        if (newCo2Timestamp !== lastCo2Timestamp) {
-          this.co2.push({
-            co2: co2.data[len - 1].co2,
-            timestamp: newCo2Timestamp
-          });
-          this.co2.shift();
-        }
-      });
+      this.init();
     }
   }
 };
 </script>
+<style scoped>
+.home {
+  width: 100%;
+}
+.prod-chart {
+  max-width: 400px;
+}
+.details {
+  width: 100%;
+  font-size: 18px;
+}
+.detail-left {
+  border-left: solid 7px #08b97f;
+  padding: 10px;
+  padding-left: 30px;
+  margin-left: 20px;
+}
+.detail-center {
+  color: gray;
+}
+.detail-right {
+  margin: 0 auto 0 auto;
+  font-size: 22px;
+}
+</style>
