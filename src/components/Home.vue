@@ -1,20 +1,28 @@
 <template>
-  <div v-if="loaded" class="px-5 primary home">
+  <div
+    v-if="loaded"
+    class="primary home"
+    :class="{
+      'py-0': state.isPhone,
+      'ma-3': state.isPhone,
+      'pa-5': !state.isPhone
+    }"
+  >
     <v-container>
-      <v-layout row wrap justify-space-between align-center>
-        <v-flex xs3 v-if="!state.isPhone">
+      <v-layout row wrap justify-center align-center>
+        <!-- <v-flex xs3 v-if="!state.isPhone">
           <div></div>
-        </v-flex>
-        <v-flex xs6 class="px-3">
+        </v-flex> -->
+        <v-flex xs8 class="px-3">
           <doughnut-chart
             :chart-data="comfortChartData"
-            class="px-5 prod-chart"
+            class="px-1 prod-chart"
             title="総合快適度指数"
           ></doughnut-chart>
         </v-flex>
-        <v-flex xs3 v-if="!state.isPhone">
+        <!-- <v-flex xs3 v-if="!state.isPhone">
           <div></div>
-        </v-flex>
+        </v-flex> -->
       </v-layout>
     </v-container>
 
@@ -25,7 +33,11 @@
           wrap
           justify-space-between
           align-center
-          class="pa-3"
+          :class="{
+            'detail-phone': state.isPhone,
+            'py-2': state.isPhone,
+            'pa-3': !state.isPhone
+          }"
           v-for="(data, i) in detailData"
           :key="i"
         >
@@ -33,7 +45,7 @@
             <div class="detail-left">{{ data.label }}</div>
           </v-flex>
           <v-flex xs0 sm3 v-if="!state.isPhone">
-            <div class="detail-center">・・・・・・・・></div>
+            <div class="detail-center">・・・・・・></div>
           </v-flex>
           <v-flex xs6 sm3>
             <div class="detail-right">{{ data.value }}</div>
@@ -121,11 +133,14 @@ export default {
   width: 100%;
 }
 .prod-chart {
-  width: 400px;
+  max-width: 400px;
+  min-width: 250px;
+  margin: 0 auto 0 auto;
 }
 .details {
   width: 100%;
   font-size: 18px;
+  text-align: center;
 }
 .detail-left {
   border-left: solid 7px #08b97f;
@@ -138,6 +153,8 @@ export default {
 }
 .detail-right {
   margin: 0 auto 0 auto;
-  font-size: 22px;
+}
+.detail-phone {
+  font-size: 14px;
 }
 </style>
