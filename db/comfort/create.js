@@ -41,14 +41,14 @@ module.exports = () => {
         ? initialPoint - (currentCo2 - maxGoodCo2) / 2500
         : initialPoint;
 
-    const maxGoodLux = 800;
-    const minGoodLux = 700;
+    const maxGoodLux = 1800;
+    const minGoodLux = 1300;
     const currentLux = Number(envData[0].lux.value);
     const luxIndex =
       currentLux > maxGoodLux
-        ? initialPoint - (currentLux - maxGoodLux) / 500
+        ? initialPoint - (currentLux - maxGoodLux) / 2000
         : currentLux < minGoodLux
-        ? initialPoint - (minGoodLux - currentLux) / 500
+        ? initialPoint - (minGoodLux - currentLux) / 2000
         : initialPoint;
 
     const data = {
