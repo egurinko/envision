@@ -2,7 +2,7 @@
   <div v-if="loaded" class="px-5 primary home">
     <v-container>
       <v-layout row wrap justify-space-between align-center>
-        <v-flex xs3 grow class="px-3">
+        <v-flex xs3 v-if="!state.isPhone">
           <div></div>
         </v-flex>
         <v-flex xs6 class="px-3">
@@ -12,7 +12,7 @@
             title="総合快適度指数"
           ></doughnut-chart>
         </v-flex>
-        <v-flex xs3 grow class="px-3">
+        <v-flex xs3 v-if="!state.isPhone">
           <div></div>
         </v-flex>
       </v-layout>
@@ -29,13 +29,13 @@
           v-for="(data, i) in detailData"
           :key="i"
         >
-          <v-flex xs3>
+          <v-flex xs6 sm3>
             <div class="detail-left">{{ data.label }}</div>
           </v-flex>
-          <v-flex xs3>
+          <v-flex xs0 sm3 v-if="!state.isPhone">
             <div class="detail-center">・・・・・・・・></div>
           </v-flex>
-          <v-flex xs3>
+          <v-flex xs6 sm3>
             <div class="detail-right">{{ data.value }}</div>
           </v-flex>
         </v-layout>
@@ -57,7 +57,8 @@ export default {
       loaded: false,
       latestEnv: null,
       latestCo2: null,
-      comfort: null
+      comfort: null,
+      state: this.$store.state
     };
   },
   computed: {
@@ -120,7 +121,7 @@ export default {
   width: 100%;
 }
 .prod-chart {
-  max-width: 400px;
+  width: 400px;
 }
 .details {
   width: 100%;
