@@ -29,7 +29,8 @@ export default {
   methods: {
     handleWindowResize() {
       const width = window.innerWidth;
-      this.$store.commit("judgeWindow", width < 600);
+      this.$store.commit("isPhone", width < 600);
+      this.$store.commit("isTablet", width < 960);
     }
   }
 };

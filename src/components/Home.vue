@@ -5,14 +5,11 @@
     :class="{
       'py-0': state.isPhone,
       'ma-3': state.isPhone,
-      'pa-5': !state.isPhone
+      'pa-4': !state.isPhone
     }"
   >
     <v-container>
       <v-layout row wrap justify-center align-center>
-        <!-- <v-flex xs3 v-if="!state.isPhone">
-          <div></div>
-        </v-flex> -->
         <v-flex xs8 class="px-3">
           <doughnut-chart
             :chart-data="comfortChartData"
@@ -20,14 +17,11 @@
             title="総合快適度指数"
           ></doughnut-chart>
         </v-flex>
-        <!-- <v-flex xs3 v-if="!state.isPhone">
-          <div></div>
-        </v-flex> -->
       </v-layout>
     </v-container>
 
     <v-card class="secondary details" flat>
-      <v-container class="my-1">
+      <v-container>
         <v-layout
           row
           wrap
@@ -41,13 +35,13 @@
           v-for="(data, i) in detailData"
           :key="i"
         >
-          <v-flex xs6 sm3>
+          <v-flex xs6 sm6 md4>
             <div class="detail-left">{{ data.label }}</div>
           </v-flex>
-          <v-flex xs0 sm3 v-if="!state.isPhone">
+          <v-flex xs0 sm0 md3 v-if="!state.isTablet">
             <div class="detail-center">・・・・・・></div>
           </v-flex>
-          <v-flex xs6 sm3>
+          <v-flex xs6 sm6 md4>
             <div class="detail-right">{{ data.value }}</div>
           </v-flex>
         </v-layout>
@@ -144,15 +138,18 @@ export default {
 }
 .detail-left {
   border-left: solid 7px #08b97f;
-  padding: 10px;
+  float: left;
+  padding: 10px 0;
   padding-left: 30px;
   margin-left: 20px;
 }
 .detail-center {
   color: gray;
+  font-size: 1.3vw;
 }
 .detail-right {
-  margin: 0 auto 0 auto;
+  margin: 0 20px 0 0;
+  float: right;
 }
 .detail-phone {
   font-size: 14px;

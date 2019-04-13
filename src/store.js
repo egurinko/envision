@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isPhone: window.innerWidth < 600,
+    isTablet: window.innerWidth < 960,
     domain:
       process.env.NODE_ENV === "development"
         ? "https://prod-bot-staging.herokuapp.com/api"
@@ -18,8 +19,11 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
-    judgeWindow(state, isPhone) {
+    isPhone(state, isPhone) {
       state.isPhone = isPhone;
+    },
+    isTablet(state, isTablet) {
+      state.isTablet = isTablet;
     }
   },
   actions: {}
