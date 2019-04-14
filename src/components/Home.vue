@@ -14,7 +14,7 @@
           <doughnut-chart
             :chart-data="comfortChartData"
             class="px-1 prod-chart"
-            title="総合快適度指数"
+            title="総合快適指数"
           ></doughnut-chart>
         </v-flex>
       </v-layout>
@@ -81,7 +81,6 @@ export default {
     comfortChartData: function() {
       if (!this.loaded) return;
       const comfort = this.comfort[this.comfort.length - 1].comfortIndex;
-      const data = [comfort, 1 - comfort];
       return {
         datasets: [
           {
@@ -91,7 +90,7 @@ export default {
             ],
             borderWidth: 0,
             borderColor: this.$store.state.colors.lightGreen,
-            data
+            data: [comfort, 1 - comfort]
           }
         ]
       };

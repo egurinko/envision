@@ -4,5 +4,7 @@ export default {
   tertiary: "#27272f",
   deepGreen: "#005c57",
   middleGreen: "#08b97f",
-  lightGreen: "#38efba"
+  lightGreen: "#38efba",
+  warning: "#ffdc77",
+  critical: "#ff6851"
 };

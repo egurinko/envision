@@ -15,6 +15,7 @@
           <line-chart
             :chart-data="data"
             :title="data.datasets[0].label"
+            :annotation="$store.state.annotations[data.datasets[0].label]"
             :id="data.datasets[0].id"
           ></line-chart>
         </v-card>
