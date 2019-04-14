@@ -49,27 +49,8 @@ export default {
     chartData: function() {
       if (!this.loaded) return;
       const chartData = [];
-      let labels = [];
-      let data = [];
-      const id = this.co2[0].co2.unit;
-      this.co2.map(co2 => {
-        labels.push(co2.timestamp);
-        data.push(co2.co2.value);
-      });
-      const co2ChartData = {
-        labels,
-        datasets: [
-          {
-            label: "CO2",
-            backgroundColor: this.$store.state.colors.primary,
-            borderColor: this.$store.state.colors.lightGreen,
-            radius: 0,
-            data,
-            id
-          }
-        ]
-      };
-      chartData.push(co2ChartData);
+
+      chartData.push(this.makeCo2ChartData());
       chartData.push(this.makeChartData("temperature"));
       chartData.push(this.makeChartData("lux"));
       chartData.push(this.makeChartData("humidity"));
@@ -162,23 +143,31 @@ export default {
       });
     },
     makeChartData(dataType) {
-      let labels = [];
-      let data = [];
-      const id = this.envs[dataType][0][dataType].unit;
-      this.envs[dataType].map(env => {
-        labels.push(env.timestamp);
-        data.push(env[dataType].value);
-      });
       return {
-        labels,
+        labels: this.envs[dataType].map(env => env.timestamp),
         datasets: [
           {
             label: dataType.toUpperCase(),
             backgroundColor: this.$store.state.colors.primary,
             borderColor: this.$store.state.colors.lightGreen,
             radius: 0,
-            data,
-            id
+            data: this.envs[dataType].map(env => env[dataType].value),
+            id: this.envs[dataType][0][dataType].unit
+          }
+        ]
+      };
+    },
+    makeCo2ChartData() {
+      return {
+        labels: this.co2.map(co2 => co2.timestamp),
+        datasets: [
+          {
+            label: "CO2",
+            backgroundColor: this.$store.state.colors.primary,
+            borderColor: this.$store.state.colors.lightGreen,
+            radius: 0,
+            data: this.co2.map(co2 => co2.co2.value),
+            id: this.co2[0].co2.unit
           }
         ]
       };

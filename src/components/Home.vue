@@ -10,9 +10,9 @@
   >
     <v-container>
       <v-layout row wrap justify-center align-center>
-        <v-flex xs8 class="px-3">
+        <v-flex xs10 class="px-3">
           <doughnut-chart
-            :chart-data="comfortChartData"
+            :chart-data="doughnutData"
             class="px-1 prod-chart"
             title="総合快適指数"
           ></doughnut-chart>
@@ -47,16 +47,33 @@
         </v-layout>
       </v-container>
     </v-card>
+
+    <v-card class="secondary" flat>
+      <v-container class="pa-3 my-3">
+        <v-layout justify-center align-center>
+          <v-flex xs11>
+            <line-chart
+              :chart-data="lineData"
+              :title="lineData.datasets[0].label"
+              :id="lineData.datasets[0].id"
+            ></line-chart>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-card>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import doughnutChart from "../module/doughnutChart.js";
+import LineChart from "../module/lineChart.js";
+import convertTime from "../module/convertTime.js";
 
 export default {
   components: {
-    doughnutChart
+    doughnutChart,
+    LineChart
   },
   data() {
     return {
@@ -78,7 +95,7 @@ export default {
         };
       });
     },
-    comfortChartData: function() {
+    doughnutData: function() {
       if (!this.loaded) return;
       const comfort = this.comfort[this.comfort.length - 1].comfortIndex;
       return {
@@ -91,6 +108,22 @@ export default {
             borderWidth: 0,
             borderColor: this.$store.state.colors.lightGreen,
             data: [comfort, 1 - comfort]
+          }
+        ]
+      };
+    },
+    lineData: function() {
+      if (!this.loaded) return;
+      return {
+        labels: this.comfort.map(shot => convertTime(shot.timestamp)),
+        datasets: [
+          {
+            label: "快適指数",
+            backgroundColor: this.$store.state.colors.primary,
+            borderColor: this.$store.state.colors.lightGreen,
+            radius: 0,
+            data: this.comfort.map(shot => shot.comfortIndex * 100),
+            id: "%"
           }
         ]
       };
