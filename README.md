@@ -2,7 +2,7 @@
 
 ENVISION is a web application for visualizing your working environment. It gets environmental data like CO2, temperature, humidity, lux and so on by using Raspberry pi 3 and some sensors.
 
-[![JECT UI](https://user-images.githubusercontent.com/23233648/50395178-bccc1380-07a5-11e9-8b00-ead2f3fe7da6.png)](https://ject.netlify.com/)
+[![ENVISION UI](https://user-images.githubusercontent.com/23233648/50395178-bccc1380-07a5-11e9-8b00-ead2f3fe7da6.png)](https://ject.netlify.com/)
 
 ## Table of content
 
@@ -15,44 +15,29 @@ ENVISION is a web application for visualizing your working environment. It gets 
 
 ## Features
 
-JECT provides four features,
+ENVISION provides two features,
 
-1. Projection Practice to build a strong voice
-   - Judge if your public speaking voice is loud enough for the audience.
-   - Get real-time decibel information while rehearsing public speaking.
+1. Data visualization of your working environment
+   - Get sensing data of CO2, temperature, humidity, lux, pressure
+   - Provide real time visualization (update every mintue)
+   - You can analyze and improve your working environment
      <br>
      <br>
      <img src="https://user-images.githubusercontent.com/23233648/50395465-7d9ec200-07a7-11e9-9792-e76ec8951c0c.png" height="60%" width="60%">
      <br>
      <br>
-2. Tongue Twister Practice for good pronunciation
-   - Judge if your pronunciation can be understood by the audience
-   - Please practice tongue twisters 10 times. You can get immediate results.
+2. Provide comfort index from data
+   - Show overall working comfort index
+   - Show comfort index of each sensing data
      <br>
      <br>
      <img src="https://user-images.githubusercontent.com/23233648/50395656-cefb8100-07a8-11e9-97ab-3231dc61d21f.png" height="40%" width="40%">
      <br>
      <br>
-3. Karaoke Mode for building confidence
-   - Learn to think on your feet and keep talking! <br>Even if you prepare well, sometimes things go wrong. Don't be upset.
-   - First you get a random topic and then be shown five random pictures continuously. You should keep talking for five minutes while you follow the topic.
-     <br>
-     <br>
-     <img src="https://user-images.githubusercontent.com/23233648/50395687-0702c400-07a9-11e9-9c72-be07fcd96658.png" height="60%" width="60%">
-     <br>
-     <br>
-4. Statistics
-   - Analyze data to see where you can improve.
-   - You can check each session or daily average.
-     <br>
-     <br>
-     <img src="https://user-images.githubusercontent.com/23233648/50395723-3adde980-07a9-11e9-823f-95d88f96b890.png" height="80%" width="80%">
-     <br>
-     <br>
 
 ## Demo Page
 
-[Demo Page](https://ject.netlify.com/) is here! You can practice public speaking!
+[Demo Page](https://prod-bot-staging.herokuapp.com/) is here! You can check demo IoT project!
 
 ## Setup
 

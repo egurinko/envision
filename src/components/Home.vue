@@ -1,5 +1,4 @@
 <template>
-  {{ loaded }}
   <div
     v-if="loaded"
     class="primary home"
@@ -15,7 +14,7 @@
           <doughnut-chart
             :chart-data="doughnutData"
             class="px-1 prod-chart"
-            title="総合快適指数"
+            title="COMFORT INDEX"
           ></doughnut-chart>
         </v-flex>
       </v-layout>
@@ -97,7 +96,6 @@ export default {
       });
     },
     doughnutData: function() {
-      console.log(this.loaded);
       if (!this.loaded) return;
       const comfort = this.comfort[this.comfort.length - 1].comfortIndex;
       return {
@@ -144,13 +142,18 @@ export default {
         axios.get(`${this.$store.state.domain}/envs`),
         axios.get(`${this.$store.state.domain}/co2`)
       ]).then(([comfort, envs, co2]) => {
-        if (comfort === undefined || envs === undefined || co2 === undefined) {
+        if (
+          comfort.data.length === 0 ||
+          envs.data.length === 0 ||
+          co2.data.length === 0
+        ) {
           return;
+        } else {
+          this.comfort = comfort.data;
+          this.latestEnv = envs.data[envs.data.length - 1];
+          this.latestCo2 = co2.data[co2.data.length - 1];
+          this.loaded = true;
         }
-        this.comfort = comfort.data;
-        this.latestEnv = envs.data[envs.data.length - 1];
-        this.latestCo2 = co2.data[co2.data.length - 1];
-        this.loaded = true;
       });
     },
     update() {

@@ -1,15 +1,17 @@
 <template>
   <v-navigation-drawer height="100%" width="250" class="primary" permanent>
-    <v-toolbar flat class="primary mt-3 mb-2">
-      <v-list>
-        <v-list-tile>
+    <v-container class="primary">
+      <v-layout class="primary" row align-center>
+        <v-flex xs4 class="ma-2">
+          <v-img width="50" height="50" :src="require('../assets/logo2.png')" />
+        </v-flex>
+        <v-flex xs8>
           <v-list-tile-title class="drawer-title">
-            <img :src="logoSrc.src" />
             ENVISION
           </v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-toolbar>
+        </v-flex>
+      </v-layout>
+    </v-container>
 
     <v-container class="primary">
       <v-layout
@@ -58,5 +60,8 @@ export default {
 }
 .list-icon {
   width: 250px;
+}
+.drawer-title {
+  font-size: 20px;
 }
 </style>
