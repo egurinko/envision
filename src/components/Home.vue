@@ -1,4 +1,5 @@
 <template>
+  {{ loaded }}
   <div
     v-if="loaded"
     class="primary home"
@@ -96,6 +97,7 @@ export default {
       });
     },
     doughnutData: function() {
+      console.log(this.loaded);
       if (!this.loaded) return;
       const comfort = this.comfort[this.comfort.length - 1].comfortIndex;
       return {
@@ -142,6 +144,9 @@ export default {
         axios.get(`${this.$store.state.domain}/envs`),
         axios.get(`${this.$store.state.domain}/co2`)
       ]).then(([comfort, envs, co2]) => {
+        if (comfort === undefined || envs === undefined || co2 === undefined) {
+          return;
+        }
         this.comfort = comfort.data;
         this.latestEnv = envs.data[envs.data.length - 1];
         this.latestCo2 = co2.data[co2.data.length - 1];

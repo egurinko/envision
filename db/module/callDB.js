@@ -17,7 +17,13 @@ module.exports = async (method, endpoint, options = null) => {
 
     if (method === "POST") {
       options.timestamp = a;
-      await db.collection(endpoint).insertOne(options);
+      let counter = 0;
+      for (let key in options) {
+        counter++;
+      }
+      if (counter > 1) {
+        await db.collection(endpoint).insertOne(options);
+      }
 
       client.close();
       return;

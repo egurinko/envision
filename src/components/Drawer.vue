@@ -4,7 +4,8 @@
       <v-list>
         <v-list-tile>
           <v-list-tile-title class="drawer-title">
-            PRODUCTIVITY CHECKER
+            <img :src="logoSrc.src" />
+            ENVISION
           </v-list-tile-title>
         </v-list-tile>
       </v-list>
@@ -25,11 +26,6 @@
             </v-list-tile-action>
           </v-flex>
         </v-btn>
-        <!-- <v-flex xs12 class="pa-2">
-            <v-list-tile-content>
-              <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-            </v-list-tile-content>
-          </v-flex> -->
       </v-layout>
     </v-container>
     <div class="space-fill"></div>
@@ -42,7 +38,8 @@ export default {
     return {
       drawer: !this.$store.state.isPhone,
       items: this.$store.state.menus,
-      right: null
+      right: null,
+      logoSrc: { src: "./assets/logo2.png" }
     };
   },
   methods: {
