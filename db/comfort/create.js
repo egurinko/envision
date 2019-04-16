@@ -7,49 +7,64 @@ module.exports = () => {
 
     const initialPoint = 1;
 
-    const maxGoodTemp = 24;
-    const minGoodTemp = 22;
-    const currentTemp = Number(envData[0].temp.value);
-    const tempIndex =
-      currentTemp > maxGoodTemp
-        ? initialPoint - (currentTemp - maxGoodTemp) / 15
-        : currentTemp < minGoodTemp
-        ? initialPoint - (minGoodTemp - currentTemp) / 15
-        : initialPoint;
+    let tempIndex = 1;
+    if (envData[0].temp) {
+      const maxGoodTemp = 24;
+      const minGoodTemp = 22;
+      const currentTemp = Number(envData[0].temp.value);
+      tempIndex =
+        currentTemp > maxGoodTemp
+          ? initialPoint - (currentTemp - maxGoodTemp) / 15
+          : currentTemp < minGoodTemp
+          ? initialPoint - (minGoodTemp - currentTemp) / 15
+          : initialPoint;
+    }
 
-    const maxGoodHum = 60;
-    const minGoodHum = 40;
-    const currentHum = Number(envData[0].hum.value);
-    const humIndex =
-      currentHum > maxGoodHum
-        ? initialPoint - (currentHum - maxGoodHum) / 25
-        : currentHum < minGoodHum
-        ? initialPoint - (minGoodHum - currentHum) / 25
-        : initialPoint;
+    let humIndex = 1;
+    if (envData[0].hum) {
+      const maxGoodHum = 60;
+      const minGoodHum = 40;
+      const currentHum = Number(envData[0].hum.value);
+      humIndex =
+        currentHum > maxGoodHum
+          ? initialPoint - (currentHum - maxGoodHum) / 25
+          : currentHum < minGoodHum
+          ? initialPoint - (minGoodHum - currentHum) / 25
+          : initialPoint;
+    }
 
-    const maxGoodPressure = 990;
-    const currentPressure = Number(envData[0].pressure.value);
-    const pressureIndex =
-      currentPressure < maxGoodPressure
-        ? initialPoint - (maxGoodPressure - currentPressure) / 5
-        : initialPoint;
+    let pressureIndex = 1;
+    if (envData[0].pressure) {
+      const maxGoodPressure = 990;
+      const currentPressure = Number(envData[0].pressure.value);
+      pressureIndex =
+        currentPressure < maxGoodPressure
+          ? initialPoint - (maxGoodPressure - currentPressure) / 5
+          : initialPoint;
+    }
 
-    const maxGoodCo2 = 700;
-    const currentCo2 = Number(co2Data[0].co2.value);
-    const co2Index =
-      currentCo2 > maxGoodCo2
-        ? initialPoint - (currentCo2 - maxGoodCo2) / 2500
-        : initialPoint;
+    let co2Index = 1;
+    if (co2Data[0].co2) {
+      const maxGoodCo2 = 700;
+      const currentCo2 = Number(co2Data[0].co2.value);
+      co2Index =
+        currentCo2 > maxGoodCo2
+          ? initialPoint - (currentCo2 - maxGoodCo2) / 2500
+          : initialPoint;
+    }
 
-    const maxGoodLux = 1800;
-    const minGoodLux = 1300;
-    const currentLux = Number(envData[0].lux.value);
-    const luxIndex =
-      currentLux > maxGoodLux
-        ? initialPoint - (currentLux - maxGoodLux) / 2000
-        : currentLux < minGoodLux
-        ? initialPoint - (minGoodLux - currentLux) / 2000
-        : initialPoint;
+    let luxIndex = 1;
+    if (envData[0].lux) {
+      const maxGoodLux = 1800;
+      const minGoodLux = 1300;
+      const currentLux = Number(envData[0].lux.value);
+      luxIndex =
+        currentLux > maxGoodLux
+          ? initialPoint - (currentLux - maxGoodLux) / 2000
+          : currentLux < minGoodLux
+          ? initialPoint - (minGoodLux - currentLux) / 2000
+          : initialPoint;
+    }
 
     const data = {
       timestamp: co2Data[0].timestamp,
