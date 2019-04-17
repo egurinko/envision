@@ -5,6 +5,7 @@
         xs12
         sm12
         md6
+        lg4
         justify-space-around
         shrink
         class="pa-3 my-3"
@@ -53,22 +54,25 @@ export default {
     this.init();
     setInterval(() => {
       this.update();
-    }, 60000);
+    }, 15000);
   },
   methods: {
     init() {
       Promise.all([axios.get(`${this.$store.state.domain}/envs`)]).then(
         ([envs]) => {
           this.envs = envs.data.map(env => {
-            const data = env.data.map(each => {
-              return {
-                value: each.value,
-                time: convertTime(each.timestamp)
-              };
-            });
+            let timeConvetedData = env.data;
+            if (env.data.length !== 0) {
+              timeConvetedData = env.data.map(each => {
+                return {
+                  value: each.value,
+                  time: convertTime(each.timestamp)
+                };
+              });
+            }
             return {
               key: env.key,
-              data
+              data: timeConvetedData
             };
           });
           this.loaded = !this.loaded;
@@ -76,46 +80,26 @@ export default {
       );
     },
     update() {
-      Promise.all([
-        axios.get(`${this.$store.state.domain}/envs`),
-        axios.get(`${this.$store.state.domain}/co2`)
-      ]).then(([envs, co2]) => {
-        const len = this.co2.length;
-        const newTimestamp = convertTime(envs.data[len - 1].timestamp);
-        const lastTimestamp = this.envs.humidity[len - 1].timestamp;
-        if (newTimestamp !== lastTimestamp) {
-          this.envs.humidity.push({
-            humidity: envs.data[len - 1].hum,
-            timestamp: newTimestamp
-          });
-          this.envs.pressure.push({
-            pressure: envs.data[len - 1].pressure,
-            timestamp: newTimestamp
-          });
-          this.envs.temperature.push({
-            temperature: envs.data[len - 1].temp,
-            timestamp: newTimestamp
-          });
-          this.envs.lux.push({
-            lux: envs.data[len - 1].lux,
-            timestamp: newTimestamp
-          });
-          this.envs.humidity.shift();
-          this.envs.lux.shift();
-          this.envs.pressure.shift();
-          this.envs.temperature.shift();
-        }
+      Promise.all([axios.get(`${this.$store.state.domain}/envs`)]).then(
+        ([envs]) => {
+          envs.data.map((env, i) => {
+            const newLen = env.data.length;
+            if (newLen !== 0) {
+              const newTimestamp = convertTime(env.data[newLen - 1].timestamp);
 
-        const newCo2Timestamp = convertTime(co2.data[len - 1].timestamp);
-        const lastCo2Timestamp = this.co2.timestamp;
-        if (newCo2Timestamp !== lastCo2Timestamp) {
-          this.co2.push({
-            co2: co2.data[len - 1].co2,
-            timestamp: newCo2Timestamp
+              const oldLen = this.envs[i].data.length;
+              const oldTimestamp = this.envs[i].data[oldLen - 1].time;
+              if (newTimestamp !== oldTimestamp) {
+                this.envs[i].data.push({
+                  value: env.data[newLen - 1].value,
+                  time: convertTime(env.data[newLen - 1].timestamp)
+                });
+                this.envs[i].data.shift();
+              }
+            }
           });
-          this.co2.shift();
         }
-      });
+      );
     },
     makeChartData(data, key) {
       return {

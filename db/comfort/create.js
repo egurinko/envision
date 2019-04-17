@@ -8,12 +8,12 @@ module.exports = () => {
     const lux = await callDB("GET", "lux", "latest");
     const colorTemperature = await callDB("GET", "color_temp", "latest");
     const snack = await callDB("GET", "weight", "latest");
-    const co2Data = await callDB("GET", "co2", "latest");
+    const co2 = await callDB("GET", "co2", "latest");
 
     const initialPoint = 1;
 
     let tempIndex = 1;
-    if (temperature[0].value) {
+    if (temperature.length !== 0) {
       const maxGoodTemp = 24;
       const minGoodTemp = 22;
       const currentTemp = Number(temperature[0].value);
@@ -26,7 +26,7 @@ module.exports = () => {
     }
 
     let humIndex = 1;
-    if (humididy[0].value) {
+    if (humididy.length !== 0) {
       const maxGoodHum = 60;
       const minGoodHum = 40;
       const currentHum = Number(humididy[0].value);
@@ -39,7 +39,7 @@ module.exports = () => {
     }
 
     let pressureIndex = 1;
-    if (pressure[0].value) {
+    if (pressure.length !== 0) {
       const maxGoodPressure = 1000;
       const currentPressure = Number(pressure[0].value);
       pressureIndex =
@@ -49,9 +49,9 @@ module.exports = () => {
     }
 
     let co2Index = 1;
-    if (co2Data[0].co2) {
+    if (co2.length !== 0) {
       const maxGoodCo2 = 700;
-      const currentCo2 = Number(co2Data[0].co2.value);
+      const currentCo2 = Number(co2[0].value);
       co2Index =
         currentCo2 > maxGoodCo2
           ? initialPoint - (currentCo2 - maxGoodCo2) / 2800
@@ -59,7 +59,7 @@ module.exports = () => {
     }
 
     let luxIndex = 1;
-    if (lux[0].value) {
+    if (lux.length !== 0) {
       const maxGoodLux = 1800;
       const minGoodLux = 1300;
       const currentLux = Number(lux[0].value);
@@ -72,7 +72,7 @@ module.exports = () => {
     }
 
     let snackIndex = 1;
-    if (snack[0].value) {
+    if (snack.length !== 0) {
       const minSnack = 1000;
       const currentSnack = Number(snack[0].value);
       snackIndex =
@@ -82,7 +82,7 @@ module.exports = () => {
     }
 
     const data = {
-      timestamp: co2Data[0].timestamp,
+      timestamp: co2[0].timestamp,
       comfortIndex:
         tempIndex * humIndex * pressureIndex * co2Index * luxIndex * snackIndex,
       detail: [

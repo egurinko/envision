@@ -9,14 +9,15 @@ module.exports = () => {
     const pressure = await callDB("GET", "pressure");
     const temperature = await callDB("GET", "temp");
     const snack = await callDB("GET", "weight");
+    console.log("COLOR", colorTemp, "LUX", lux);
     return [
       { key: "co2", data: co2 },
+      { key: "snack", data: snack },
+      { key: "temperature", data: temperature },
+      { key: "lux", data: lux },
       { key: "color temperature", data: colorTemp },
       { key: "humidity", data: humidity },
-      { key: "lux", data: lux },
-      { key: "pressure", data: pressure },
-      { key: "temperature", data: temperature },
-      { key: "snack", data: snack }
+      { key: "pressure", data: pressure }
     ];
   };
 };
