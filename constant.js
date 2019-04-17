@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   TEMP_UPPER_LIMIT: 24,
   TEMP_LOWER_LIMIT: 22,
   HUM_UPPER_LIMIT: 60,

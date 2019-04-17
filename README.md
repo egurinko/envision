@@ -1,6 +1,6 @@
 # ENVISION
 
-ENVISION is a web application for visualizing your working environment. It gets environmental data like CO2, temperature, humidity, lux and so on by using Raspberry pi 3 and some sensors.
+ENVISION is a web application for visualizing your working environment. It gets environmental data like CO2, temperature, the amount of snack by weight, humidity, lux and so on by using Raspberry pi 3 and some sensors.
 
 [![ENVISION UI](https://user-images.githubusercontent.com/23233648/50395178-bccc1380-07a5-11e9-8b00-ead2f3fe7da6.png)](https://ject.netlify.com/)
 
