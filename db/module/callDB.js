@@ -13,7 +13,7 @@ module.exports = async (method, endpoint, options = null) => {
   try {
     await client.connect();
     const db = client.db(dbName);
-    console.log("Connected successfully to MONGODB");
+    console.log("Connected successfully to MONGODB " + endpoint + " TABLE");
 
     if (method === "POST") {
       options.timestamp = a;
