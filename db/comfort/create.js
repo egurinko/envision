@@ -2,44 +2,49 @@ const callDB = require("../module/callDB");
 
 module.exports = () => {
   return async () => {
-    const envData = await callDB("GET", "envs", "latest");
+    const temperature = await callDB("GET", "temp", "latest");
+    const humididy = await callDB("GET", "hum", "latest");
+    const pressure = await callDB("GET", "pressure", "latest");
+    const lux = await callDB("GET", "lux", "latest");
+    const colorTemperature = await callDB("GET", "color_temp", "latest");
+    const snack = await callDB("GET", "weight", "latest");
     const co2Data = await callDB("GET", "co2", "latest");
 
     const initialPoint = 1;
 
     let tempIndex = 1;
-    if (envData[0].temp) {
+    if (temperature[0].value) {
       const maxGoodTemp = 24;
       const minGoodTemp = 22;
-      const currentTemp = Number(envData[0].temp.value);
+      const currentTemp = Number(temperature[0].value);
       tempIndex =
         currentTemp > maxGoodTemp
-          ? initialPoint - (currentTemp - maxGoodTemp) / 15
+          ? initialPoint - (currentTemp - maxGoodTemp) / 18
           : currentTemp < minGoodTemp
-          ? initialPoint - (minGoodTemp - currentTemp) / 15
+          ? initialPoint - (minGoodTemp - currentTemp) / 18
           : initialPoint;
     }
 
     let humIndex = 1;
-    if (envData[0].hum) {
+    if (humididy[0].value) {
       const maxGoodHum = 60;
       const minGoodHum = 40;
-      const currentHum = Number(envData[0].hum.value);
+      const currentHum = Number(humididy[0].value);
       humIndex =
         currentHum > maxGoodHum
-          ? initialPoint - (currentHum - maxGoodHum) / 25
+          ? initialPoint - (currentHum - maxGoodHum) / 28
           : currentHum < minGoodHum
-          ? initialPoint - (minGoodHum - currentHum) / 25
+          ? initialPoint - (minGoodHum - currentHum) / 28
           : initialPoint;
     }
 
     let pressureIndex = 1;
-    if (envData[0].pressure) {
-      const maxGoodPressure = 990;
-      const currentPressure = Number(envData[0].pressure.value);
+    if (pressure[0].value) {
+      const maxGoodPressure = 1000;
+      const currentPressure = Number(pressure[0].value);
       pressureIndex =
         currentPressure < maxGoodPressure
-          ? initialPoint - (maxGoodPressure - currentPressure) / 5
+          ? initialPoint - (maxGoodPressure - currentPressure) / 6
           : initialPoint;
     }
 
@@ -49,32 +54,44 @@ module.exports = () => {
       const currentCo2 = Number(co2Data[0].co2.value);
       co2Index =
         currentCo2 > maxGoodCo2
-          ? initialPoint - (currentCo2 - maxGoodCo2) / 2500
+          ? initialPoint - (currentCo2 - maxGoodCo2) / 2800
           : initialPoint;
     }
 
     let luxIndex = 1;
-    if (envData[0].lux) {
+    if (lux[0].value) {
       const maxGoodLux = 1800;
       const minGoodLux = 1300;
-      const currentLux = Number(envData[0].lux.value);
+      const currentLux = Number(lux[0].value);
       luxIndex =
         currentLux > maxGoodLux
-          ? initialPoint - (currentLux - maxGoodLux) / 2000
+          ? initialPoint - (currentLux - maxGoodLux) / 2300
           : currentLux < minGoodLux
-          ? initialPoint - (minGoodLux - currentLux) / 2000
+          ? initialPoint - (minGoodLux - currentLux) / 2300
+          : initialPoint;
+    }
+
+    let snackIndex = 1;
+    if (snack[0].value) {
+      const minSnack = 1000;
+      const currentSnack = Number(snack[0].value);
+      snackIndex =
+        currentSnack < minSnack
+          ? initialPoint - (minSnack - currentSnack) / 2000
           : initialPoint;
     }
 
     const data = {
       timestamp: co2Data[0].timestamp,
-      comfortIndex: tempIndex * humIndex * pressureIndex * co2Index * luxIndex,
+      comfortIndex:
+        tempIndex * humIndex * pressureIndex * co2Index * luxIndex * snackIndex,
       detail: [
-        { label: "室温快適度", value: tempIndex },
-        { label: "CO2快適度", value: co2Index },
-        { label: "照度快適度", value: luxIndex },
-        { label: "湿度快適度", value: humIndex },
-        { label: "気圧快適度", value: pressureIndex }
+        { key: "temperature", value: tempIndex },
+        { key: "co2", value: co2Index },
+        { key: "lux", value: luxIndex },
+        { key: "humidity", value: humIndex },
+        { key: "pressure", value: pressureIndex },
+        { key: "snack", value: snackIndex }
       ]
     };
     await callDB("POST", "comfort", data);
