@@ -36,26 +36,16 @@ export default {
   data() {
     return {
       loaded: false,
-      envs: {
-        humidity: [],
-        lux: [],
-        pressure: [],
-        temperature: []
-      },
-      co2: null
+      envs: null
     };
   },
   computed: {
     chartData: function() {
       if (!this.loaded) return;
       const chartData = [];
-
-      chartData.push(this.makeCo2ChartData());
-      chartData.push(this.makeChartData("temperature"));
-      chartData.push(this.makeChartData("lux"));
-      chartData.push(this.makeChartData("humidity"));
-      chartData.push(this.makeChartData("pressure"));
-
+      for (let i in this.envs) {
+        chartData.push(this.makeChartData(this.envs[i].data, this.envs[i].key));
+      }
       return chartData;
     }
   },
@@ -67,38 +57,23 @@ export default {
   },
   methods: {
     init() {
-      Promise.all([
-        axios.get(`${this.$store.state.domain}/envs`),
-        axios.get(`${this.$store.state.domain}/co2`)
-      ]).then(([envs, co2]) => {
-        envs.data.map(env => {
-          this.envs.humidity.push({
-            humidity: env.hum,
-            timestamp: convertTime(env.timestamp)
+      Promise.all([axios.get(`${this.$store.state.domain}/envs`)]).then(
+        ([envs]) => {
+          this.envs = envs.data.map(env => {
+            const data = env.data.map(each => {
+              return {
+                value: each.value,
+                time: convertTime(each.timestamp)
+              };
+            });
+            return {
+              key: env.key,
+              data
+            };
           });
-          this.envs.lux.push({
-            lux: env.lux,
-            timestamp: convertTime(env.timestamp)
-          });
-          this.envs.pressure.push({
-            pressure: env.pressure,
-            timestamp: convertTime(env.timestamp)
-          });
-          this.envs.temperature.push({
-            temperature: env.temp,
-            timestamp: convertTime(env.timestamp)
-          });
-        });
-        this.co2 = co2.data.map(data => {
-          return {
-            co2: data.co2,
-            timestamp: convertTime(data.timestamp)
-          };
-        });
-        this.loaded = !this.loaded;
-
-        console.debug(this.envs, this.co2);
-      });
+          this.loaded = !this.loaded;
+        }
+      );
     },
     update() {
       Promise.all([
@@ -142,32 +117,17 @@ export default {
         }
       });
     },
-    makeChartData(dataType) {
+    makeChartData(data, key) {
       return {
-        labels: this.envs[dataType].map(env => env.timestamp),
+        labels: data.map(each => each.time),
         datasets: [
           {
-            label: dataType.toUpperCase(),
+            label: key.toUpperCase(),
             backgroundColor: this.$store.state.colors.primary,
             borderColor: this.$store.state.colors.lightGreen,
             radius: 0,
-            data: this.envs[dataType].map(env => env[dataType].value),
-            id: this.envs[dataType][0][dataType].unit
-          }
-        ]
-      };
-    },
-    makeCo2ChartData() {
-      return {
-        labels: this.co2.map(co2 => co2.timestamp),
-        datasets: [
-          {
-            label: "CO2",
-            backgroundColor: this.$store.state.colors.primary,
-            borderColor: this.$store.state.colors.lightGreen,
-            radius: 0,
-            data: this.co2.map(co2 => co2.co2.value),
-            id: this.co2[0].co2.unit
+            data: data.map(env => env.value),
+            id: key
           }
         ]
       };

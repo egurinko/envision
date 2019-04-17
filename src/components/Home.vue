@@ -79,7 +79,6 @@ export default {
     return {
       loaded: false,
       latestEnv: null,
-      latestCo2: null,
       comfort: null,
       state: this.$store.state
     };

@@ -22,7 +22,9 @@ export default new Vuex.Store({
       HUMIDITY: { "LOWER LIMIT": 40, "UPPER LIMIT": 60 },
       CO2: { "UPPER LIMIT": 700 },
       LUX: { "LOWER LIMIT": 1300, "UPPER LIMIT": 1800 },
-      PRESSURE: { "LOWER LIMIT": 990 }
+      PRESSURE: { "LOWER LIMIT": 990 },
+      "COLOR TEMPERATURE": { "LOWER LIMIT": 4000, "UPPER LIMIT": 10000 },
+      SNACK: { "LOWER LIMIT": 1000 }
     }
   },
   mutations: {
