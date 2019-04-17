@@ -1,4 +1,5 @@
 const callDB = require("../module/callDB");
+const constant = require("../../constant");
 
 module.exports = () => {
   return async () => {
@@ -14,8 +15,8 @@ module.exports = () => {
 
     let tempIndex = 1;
     if (temperature.length !== 0) {
-      const maxGoodTemp = 24;
-      const minGoodTemp = 22;
+      const maxGoodTemp = constant.TEMP_UPPER_LIMIT;
+      const minGoodTemp = constant.TEMP_LOWER_LIMIT;
       const currentTemp = Number(temperature[0].value);
       tempIndex =
         currentTemp > maxGoodTemp
@@ -27,8 +28,8 @@ module.exports = () => {
 
     let humIndex = 1;
     if (humididy.length !== 0) {
-      const maxGoodHum = 60;
-      const minGoodHum = 40;
+      const maxGoodHum = constant.HUM_UPPER_LIMIT;
+      const minGoodHum = constant.HUM_LOWER_LIMIT;
       const currentHum = Number(humididy[0].value);
       humIndex =
         currentHum > maxGoodHum
@@ -40,7 +41,7 @@ module.exports = () => {
 
     let pressureIndex = 1;
     if (pressure.length !== 0) {
-      const maxGoodPressure = 1000;
+      const maxGoodPressure = constant.PRESSURE_LOWER_LIMIT;
       const currentPressure = Number(pressure[0].value);
       pressureIndex =
         currentPressure < maxGoodPressure
@@ -50,7 +51,7 @@ module.exports = () => {
 
     let co2Index = 1;
     if (co2.length !== 0) {
-      const maxGoodCo2 = 700;
+      const maxGoodCo2 = constant.CO2_UPPER_LIMIT;
       const currentCo2 = Number(co2[0].value);
       co2Index =
         currentCo2 > maxGoodCo2
@@ -60,24 +61,24 @@ module.exports = () => {
 
     let luxIndex = 1;
     if (lux.length !== 0) {
-      const maxGoodLux = 1800;
-      const minGoodLux = 1300;
+      const maxGoodLux = constant.LUX_UPPER_LIMIT;
+      const minGoodLux = constant.LUX_LOWER_LIMIT;
       const currentLux = Number(lux[0].value);
       luxIndex =
         currentLux > maxGoodLux
-          ? initialPoint - (currentLux - maxGoodLux) / 2300
+          ? initialPoint - (currentLux - maxGoodLux) / 1800
           : currentLux < minGoodLux
-          ? initialPoint - (minGoodLux - currentLux) / 2300
+          ? initialPoint - (minGoodLux - currentLux) / 1800
           : initialPoint;
     }
 
     let snackIndex = 1;
     if (snack.length !== 0) {
-      const minSnack = 1000;
+      const minSnack = constant.SNACK_LOWER_LIMIT;
       const currentSnack = Number(snack[0].value);
       snackIndex =
         currentSnack < minSnack
-          ? initialPoint - (minSnack - currentSnack) / 2000
+          ? initialPoint - (minSnack - currentSnack) / 1500
           : initialPoint;
     }
 
@@ -86,12 +87,12 @@ module.exports = () => {
       comfortIndex:
         tempIndex * humIndex * pressureIndex * co2Index * luxIndex * snackIndex,
       detail: [
-        { key: "temperature", value: tempIndex },
+        { key: "snack", value: snackIndex },
         { key: "co2", value: co2Index },
+        { key: "temperature", value: tempIndex },
         { key: "lux", value: luxIndex },
         { key: "humidity", value: humIndex },
-        { key: "pressure", value: pressureIndex },
-        { key: "snack", value: snackIndex }
+        { key: "pressure", value: pressureIndex }
       ]
     };
     await callDB("POST", "comfort", data);

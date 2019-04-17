@@ -1,13 +1,14 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import colors from "./module/colorTheme";
+import constant from "../constant";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    isPhone: window.innerWidth < 600,
-    isTablet: window.innerWidth < 960,
+    isPhone: window.innerWidth < constant.PHONE_SIZE,
+    isTablet: window.innerWidth < constant.TABLET_SIZE,
     domain:
       process.env.NODE_ENV === "development"
         ? "https://prod-bot-staging.herokuapp.com/api"
@@ -18,13 +19,25 @@ export default new Vuex.Store({
       { icon: "bar_chart", title: "Graphs" }
     ],
     annotations: {
-      TEMPERATURE: { "LOWER LIMIT": 22, "UPPER LIMIT": 24 },
-      HUMIDITY: { "LOWER LIMIT": 40, "UPPER LIMIT": 60 },
-      CO2: { "UPPER LIMIT": 700 },
-      LUX: { "LOWER LIMIT": 1300, "UPPER LIMIT": 1800 },
-      PRESSURE: { "LOWER LIMIT": 990 },
-      "COLOR TEMPERATURE": { "LOWER LIMIT": 4000, "UPPER LIMIT": 10000 },
-      SNACK: { "LOWER LIMIT": 1000 }
+      TEMPERATURE: {
+        "LOWER LIMIT": constant.TEMP_LOWER_LIMIT,
+        "UPPER LIMIT": constant.TEMP_UPPER_LIMIT
+      },
+      HUMIDITY: {
+        "LOWER LIMIT": constant.HUM_LOWER_LIMIT,
+        "UPPER LIMIT": constant.HUM_UPPER_LIMIT
+      },
+      CO2: { "UPPER LIMIT": constant.CO2_UPPER_LIMIT },
+      LUX: {
+        "LOWER LIMIT": constant.LUX_LOWER_LIMIT,
+        "UPPER LIMIT": constant.LUX_UPPER_LIMIT
+      },
+      PRESSURE: { "LOWER LIMIT": constant.PRESSURE_LOWER_LIMIT },
+      "COLOR TEMPERATURE": {
+        "LOWER LIMIT": constant.COLOR_TEMP_LOWER_LIMIT,
+        "UPPER LIMIT": constant.COLOR_TEMP_UPPER_LIMIT
+      },
+      SNACK: { "LOWER LIMIT": constant.SNACK_LOWER_LIMIT }
     }
   },
   mutations: {

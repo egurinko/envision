@@ -12,6 +12,7 @@
 <script>
 import Drawer from "./components/Drawer";
 import ToolBar from "./components/ToolBar";
+import constant from "../constant.js";
 
 export default {
   data() {
@@ -29,8 +30,8 @@ export default {
   methods: {
     handleWindowResize() {
       const width = window.innerWidth;
-      this.$store.commit("isPhone", width < 600);
-      this.$store.commit("isTablet", width < 960);
+      this.$store.commit("isPhone", width < constant.PHONE_SIZE);
+      this.$store.commit("isTablet", width < constant.TABLET_SIZE);
     }
   }
 };

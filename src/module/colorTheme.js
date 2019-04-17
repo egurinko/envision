@@ -5,6 +5,8 @@ export default {
   deepGreen: "#005c57",
   middleGreen: "#08b97f",
   lightGreen: "#38efba",
-  warning: "#ffdc77",
-  critical: "#ff6851"
+  lightWarning: "#ffdc77",
+  deepWarning: "#ffd7d0",
+  lightCritical: "#ff6851",
+  deepCritical: "#ff847c"
 };

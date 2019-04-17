@@ -30,19 +30,31 @@
           :class="{
             'detail-phone': state.isPhone,
             'py-2': state.isPhone,
-            'pa-3': !state.isPhone
+            'pa-3': !state.isPhone,
+            'detail-normal': data.value > $constant.WARNING_RATIO,
+            'detail-warning': data.value > $constant.CRITICAL_RATIO,
+            'detail-critical': data.value < $constant.CRITICAL_RATIO
           }"
           v-for="(data, i) in detailData"
           :key="i"
         >
           <v-flex xs6 sm6 md4>
-            <div class="detail-left">{{ data.label }}</div>
+            <div
+              class="detail-left"
+              :class="{
+                'detail-left-normal': data.value > $constant.WARNING_RATIO,
+                'detail-left-warning': data.value > $constant.CRITICAL_RATIO,
+                'detail-left-critical': data.value < $constant.CRITICAL_RATIO
+              }"
+            >
+              {{ data.label }}
+            </div>
           </v-flex>
           <v-flex xs0 sm0 md3 v-if="!state.isTablet">
             <div class="detail-center">・・・・・・></div>
           </v-flex>
           <v-flex xs6 sm6 md4>
-            <div class="detail-right">{{ data.value }}</div>
+            <div class="detail-right">{{ data.value }}{{ data.unit }}</div>
           </v-flex>
         </v-layout>
       </v-container>
@@ -90,20 +102,30 @@ export default {
       return latest.detail.map(data => {
         return {
           label: data.key.toUpperCase(),
-          value: `${Math.floor(data.value * 100 * 100) / 100}%`
+          value: Math.floor(data.value * 100 * 100) / 100,
+          unit: "%"
         };
       });
     },
     doughnutData: function() {
       if (!this.loaded) return;
       const comfort = this.comfort[this.comfort.length - 1].comfortIndex;
+      const firstColor =
+        comfort > this.$constant.WARNING_RATIO
+          ? this.state.colors.lightGreen
+          : comfort > this.$constant.CRITICAL_RATIO
+          ? this.state.colors.lightWarning
+          : this.state.colors.lightCritical;
+      const secondColor =
+        comfort > this.$constant.WARNING_RATIO
+          ? this.state.colors.deepGreen
+          : comfort > this.$constant.CRITICAL_RATIO
+          ? this.state.colors.deepWarning
+          : this.state.colors.lightWarning;
       return {
         datasets: [
           {
-            backgroundColor: [
-              this.$store.state.colors.lightGreen,
-              this.$store.state.colors.deepGreen
-            ],
+            backgroundColor: [firstColor, secondColor],
             borderWidth: 0,
             borderColor: this.$store.state.colors.lightGreen,
             data: [comfort, 1 - comfort]
@@ -170,11 +192,19 @@ export default {
   text-align: center;
 }
 .detail-left {
-  border-left: solid 7px #08b97f;
   float: left;
   padding: 10px 0;
   padding-left: 30px;
   margin-left: 20px;
+}
+.detail-left-warning {
+  border-left: solid 7px #ffdc77;
+}
+.detail-left-normal {
+  border-left: solid 7px #08b97f;
+}
+.detail-left-critical {
+  border-left: solid 7px #ff6851;
 }
 .detail-center {
   color: gray;
@@ -183,6 +213,15 @@ export default {
 .detail-right {
   margin: 0 20px 0 0;
   float: right;
+}
+.detail-warning {
+  color: #ffdc77;
+}
+.detail-normal {
+  color: white;
+}
+.detail-critical {
+  color: #ff6851;
 }
 .detail-phone {
   font-size: 14px;
