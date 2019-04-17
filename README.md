@@ -17,16 +17,7 @@ ENVISION is a web application for visualizing your working environment. It gets 
 
 ENVISION provides two features,
 
-1. Data visualization of your working environment
-   - Get sensing data of CO2, temperature, humidity, lux, pressure
-   - Provide real time visualization (update every mintue)
-   - You can analyze and improve your working environment
-     <br>
-     <br>
-     <img src="https://user-images.githubusercontent.com/23233648/50395465-7d9ec200-07a7-11e9-9792-e76ec8951c0c.png" height="60%" width="60%">
-     <br>
-     <br>
-2. Provide comfort index from data
+1. Provide comfort index from data
    - Show overall working comfort index
    - Show comfort index of each sensing data
      <br>
@@ -34,6 +25,17 @@ ENVISION provides two features,
      <img src="https://user-images.githubusercontent.com/23233648/50395656-cefb8100-07a8-11e9-97ab-3231dc61d21f.png" height="40%" width="40%">
      <br>
      <br>
+
+2. Data visualization of your working environment
+   - Get sensing data of CO2, the amount of snack by weight, temperature, humidity, lux, pressure, color temperature
+   - Provide real time visualization (update every mintue)
+   - You can analyze and improve your working environment
+     <br>
+     <br>
+     <img src="https://user-images.githubusercontent.com/23233648/56305853-05a43f80-617c-11e9-84ce-bf020ef9fc5a.png" height="100%" width="100%">
+     <br>
+     <br>
+
 
 ## Demo Page
 

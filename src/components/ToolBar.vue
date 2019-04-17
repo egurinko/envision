@@ -1,6 +1,11 @@
 <template>
   <v-toolbar flat>
-    <v-img width="30" height="30" :src="require('../assets/logo2.png')" />
+    <v-img
+      width="30"
+      height="30"
+      contain
+      :src="require('../assets/logo2.png')"
+    />
     <v-spacer></v-spacer>
     <v-toolbar-items v-for="(item, i) in items" :key="item.title">
       <div class="spacer"></div>
