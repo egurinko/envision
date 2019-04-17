@@ -90,7 +90,7 @@ export default {
       const latest = this.comfort[this.comfort.length - 1];
       return latest.detail.map(data => {
         return {
-          label: data.label,
+          label: data.key.toUpperCase(),
           value: `${Math.floor(data.value * 100 * 100) / 100}%`
         };
       });
@@ -118,7 +118,7 @@ export default {
         labels: this.comfort.map(shot => convertTime(shot.timestamp)),
         datasets: [
           {
-            label: "快適指数",
+            label: "COMFORT TRANSITION",
             backgroundColor: this.$store.state.colors.primary,
             borderColor: this.$store.state.colors.lightGreen,
             radius: 0,
@@ -139,19 +139,13 @@ export default {
     init() {
       Promise.all([
         axios.get(`${this.$store.state.domain}/comfort`),
-        axios.get(`${this.$store.state.domain}/envs`),
-        axios.get(`${this.$store.state.domain}/co2`)
-      ]).then(([comfort, envs, co2]) => {
-        if (
-          comfort.data.length === 0 ||
-          envs.data.length === 0 ||
-          co2.data.length === 0
-        ) {
+        axios.get(`${this.$store.state.domain}/envs`)
+      ]).then(([comfort, envs]) => {
+        if (comfort.data.length === 0 || envs.data.length === 0) {
           return;
         } else {
           this.comfort = comfort.data;
           this.latestEnv = envs.data[envs.data.length - 1];
-          this.latestCo2 = co2.data[co2.data.length - 1];
           this.loaded = true;
         }
       });
