@@ -111,15 +111,15 @@ export default {
       if (!this.loaded) return;
       const comfort = this.comfort[this.comfort.length - 1].comfortIndex;
       const firstColor =
-        comfort > this.$constant.WARNING_RATIO
+        comfort * 100 > this.$constant.WARNING_RATIO
           ? this.state.colors.lightGreen
-          : comfort > this.$constant.CRITICAL_RATIO
+          : comfort * 100 > this.$constant.CRITICAL_RATIO
           ? this.state.colors.lightWarning
           : this.state.colors.lightCritical;
       const secondColor =
-        comfort > this.$constant.WARNING_RATIO
+        comfort * 100 > this.$constant.WARNING_RATIO
           ? this.state.colors.deepGreen
-          : comfort > this.$constant.CRITICAL_RATIO
+          : comfort * 100 > this.$constant.CRITICAL_RATIO
           ? this.state.colors.deepWarning
           : this.state.colors.lightWarning;
       return {
