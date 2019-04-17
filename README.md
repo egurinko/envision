@@ -1,8 +1,10 @@
 # ENVISION
 
-ENVISION is a web application for visualizing your working environment. It gets environmental data like CO2, temperature, the amount of snack by weight, humidity, lux and so on by using Raspberry pi 3 and some sensors.
+ENVISION is a IoT web application for visualizing your working environment. It gets environmental data by using Raspberry pi 3 and some sensors.
 
-[![ENVISION UI](https://user-images.githubusercontent.com/23233648/50395178-bccc1380-07a5-11e9-8b00-ead2f3fe7da6.png)](https://ject.netlify.com/)
+<img src="https://user-images.githubusercontent.com/23233648/56307166-2de16d80-617f-11e9-81a7-19d25ef8ce67.png" height="60%" width="60%">
+<img src="https://user-images.githubusercontent.com/23233648/56307474-e27b8f00-617f-11e9-976d-04d9984c0423.png" height="35%" width="35%">
+
 
 ## Table of content
 
@@ -17,17 +19,17 @@ ENVISION is a web application for visualizing your working environment. It gets 
 
 ENVISION provides two features,
 
-1. Provide comfort index from data
+1. Provide comfort index from sensory data
    - Show overall working comfort index
    - Show comfort index of each sensing data
      <br>
      <br>
-     <img src="https://user-images.githubusercontent.com/23233648/50395656-cefb8100-07a8-11e9-97ab-3231dc61d21f.png" height="40%" width="40%">
+     <img src="https://user-images.githubusercontent.com/23233648/56307166-2de16d80-617f-11e9-81a7-19d25ef8ce67.png" height="100%" width="100%">
      <br>
      <br>
 
 2. Data visualization of your working environment
-   - Get sensing data of CO2, the amount of snack by weight, temperature, humidity, lux, pressure, color temperature
+   - Get sensory data of CO2, the amount of snack by weight, temperature, humidity, lux, pressure, color temperature
    - Provide real time visualization (update every mintue)
    - You can analyze and improve your working environment
      <br>
@@ -43,7 +45,7 @@ ENVISION provides two features,
 
 ## Setup
 
-If you want to try JECT on your local machine, follow the instructions below.
+If you want to try ENVISION on your local machine, follow the instructions below.
 
 1. Clone this repo
 
