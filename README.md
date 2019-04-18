@@ -32,7 +32,7 @@ ENVISION provides two features,
    - Show comfort index of each sensing data
      <br>
      <br>
-     <img src="https://user-images.githubusercontent.com/23233648/56332993-6b6ce780-61cd-11e9-9043-e304771c3d16.png" height="100%" width="100%">
+     <img src="https://user-images.githubusercontent.com/23233648/56305991-62075f00-617c-11e9-9f9b-8066d3e03be3.png" height="100%" width="100%">
      <br>
      <br>
 
