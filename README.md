@@ -42,7 +42,7 @@ ENVISION provides two features,
    - You can analyze and improve your working environment
      <br>
      <br>
-     <img src="https://user-images.githubusercontent.com/23233648/56305853-05a43f80-617c-11e9-84ce-bf020ef9fc5a.png" height="100%" width="100%">
+     <img src="https://user-images.githubusercontent.com/23233648/56332993-6b6ce780-61cd-11e9-9043-e304771c3d16.png" height="100%" width="100%">
      <br>
      <br>
 
