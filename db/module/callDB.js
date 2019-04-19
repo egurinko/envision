@@ -17,27 +17,13 @@ module.exports = async (method, endpoint, options = null) => {
 
     if (method === "POST") {
       options.timestamp = a;
-      let counter = 0;
-      for (let key in options) {
-        counter++;
-      }
-      if (counter > 1) {
-        await db.collection(endpoint).insertOne(options);
-      }
+      await db.collection(endpoint).insertOne(options);
 
       client.close();
       return;
     } else if (method === "GET") {
       let data;
-      if (options === null) {
-        const oneHourAgo = a - 3600000;
-        data = await db
-          .collection(endpoint)
-          .find({ timestamp: { $gt: oneHourAgo } })
-          .toArray();
-
-        client.close();
-      } else if (options === "latest") {
+      if (options === "latest") {
         data = await db
           .collection(endpoint)
           .find()
@@ -47,11 +33,13 @@ module.exports = async (method, endpoint, options = null) => {
 
         client.close();
       } else {
-        const timespan = a - options;
+        const timespan = options === null ? a - 3600000 : a - options;
         data = await db
           .collection(endpoint)
           .find({ timestamp: { $gt: timespan } })
           .toArray();
+
+        client.close();
       }
 
       return data;

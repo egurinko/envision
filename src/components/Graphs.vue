@@ -98,26 +98,24 @@ export default {
         });
     },
     update() {
-      Promise.all([axios.get(`${this.$store.state.domain}/envs`)]).then(
-        ([envs]) => {
-          envs.data.map((env, i) => {
-            const newLen = env.data.length;
-            if (newLen !== 0) {
-              const newTimestamp = convertTime(env.data[newLen - 1].timestamp);
+      axios.get(`${this.$store.state.domain}/envs`).then(envs => {
+        envs.data.map((env, i) => {
+          const newLen = env.data.length;
+          if (newLen !== 0) {
+            const newTimestamp = convertTime(env.data[newLen - 1].timestamp);
 
-              const oldLen = this.envs[i].data.length;
-              const oldTimestamp = this.envs[i].data[oldLen - 1].time;
-              if (newTimestamp !== oldTimestamp) {
-                this.envs[i].data.push({
-                  value: env.data[newLen - 1].value,
-                  time: convertTime(env.data[newLen - 1].timestamp)
-                });
-                this.envs[i].data.shift();
-              }
+            const oldLen = this.envs[i].data.length;
+            const oldTimestamp = this.envs[i].data[oldLen - 1].time;
+            if (newTimestamp !== oldTimestamp) {
+              this.envs[i].data.push({
+                value: env.data[newLen - 1].value,
+                time: convertTime(env.data[newLen - 1].timestamp)
+              });
+              this.envs[i].data.shift();
             }
-          });
-        }
-      );
+          }
+        });
+      });
     },
     onClick(index) {
       this.selectedTimespan = this.timespan[index];

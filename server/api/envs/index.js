@@ -2,8 +2,8 @@ const router = require("express").Router();
 
 module.exports = services => {
   router.get("/", async (req, res) => {
-    console.log("TIMESPAN BACKEND: ", req.query.timespan);
-    const data = await services.envs.list(req.params.timespan);
+    const timespan = req.query.timespan ? req.query.timespan : null;
+    const data = await services.envs.list(timespan);
     res.status(200).send(data);
   });
 
