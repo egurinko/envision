@@ -88,6 +88,7 @@ export default {
         .then(envs => {
           this.envs = envs.data.map(env => {
             let timeConvetedData = env.data;
+            console.log(env.data.length);
             if (env.data.length !== 0) {
               timeConvetedData = env.data.map(each => {
                 return { value: each.value, time: convertTime(each.timestamp) };
