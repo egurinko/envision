@@ -46,6 +46,12 @@ module.exports = async (method, endpoint, options = null) => {
           .toArray();
 
         client.close();
+      } else {
+        const timespan = a - options;
+        data = await db
+          .collection(endpoint)
+          .find({ timestamp: { $gt: timespan } })
+          .toArray();
       }
 
       return data;

@@ -1,6 +1,26 @@
 <template>
   <v-container class="primary my-1" v-if="loaded">
     <v-layout class="primary" row wrap justify-space-around>
+      <v-flex xs12 class="pa-3 my-3">
+        <div class="text-lg-center">
+          <v-menu offset-y>
+            <template v-slot:activator="{ on }">
+              <v-btn color="primary" dark v-on="on">
+                {{ selectedTimespan }}
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-tile
+                v-for="(item, index) in timespan"
+                :key="index"
+                @click="onClick(index)"
+              >
+                <v-list-tile-title>{{ item }}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+        </div>
+      </v-flex>
       <v-flex
         xs12
         sm12
@@ -37,7 +57,9 @@ export default {
   data() {
     return {
       loaded: false,
-      envs: null
+      envs: null,
+      timespan: ["AN HOUR", "3 HOURS", "DAILY"],
+      selectedTimespan: "AN HOUR"
     };
   },
   computed: {
@@ -54,30 +76,26 @@ export default {
     this.init();
     setInterval(() => {
       this.update();
-    }, 15000);
+    }, 60000);
   },
   methods: {
-    init() {
-      Promise.all([axios.get(`${this.$store.state.domain}/envs`)]).then(
-        ([envs]) => {
+    init(params = 3600000) {
+      axios
+        .get(`${this.$store.state.domain}/envs`, {
+          params: { timespan: params }
+        })
+        .then(envs => {
           this.envs = envs.data.map(env => {
             let timeConvetedData = env.data;
             if (env.data.length !== 0) {
               timeConvetedData = env.data.map(each => {
-                return {
-                  value: each.value,
-                  time: convertTime(each.timestamp)
-                };
+                return { value: each.value, time: convertTime(each.timestamp) };
               });
             }
-            return {
-              key: env.key,
-              data: timeConvetedData
-            };
+            return { key: env.key, data: timeConvetedData };
           });
           this.loaded = !this.loaded;
-        }
-      );
+        });
     },
     update() {
       Promise.all([axios.get(`${this.$store.state.domain}/envs`)]).then(
@@ -100,6 +118,12 @@ export default {
           });
         }
       );
+    },
+    onClick(index) {
+      this.selectedTimespan = this.timespan[index];
+      const unixTime =
+        index === 0 ? 3600000 : index === 1 ? 3600000 * 3 : 3600000 * 24;
+      this.init(unixTime);
     },
     makeChartData(data, key) {
       return {

@@ -31,8 +31,8 @@
             'detail-phone': state.isPhone,
             'py-2': state.isPhone,
             'pa-3': !state.isPhone,
-            'detail-normal': data.value > $constant.WARNING_RATIO,
-            'detail-warning': data.value > $constant.CRITICAL_RATIO,
+            'detail-normal': data.value >= $constant.WARNING_RATIO,
+            'detail-warning': data.value >= $constant.CRITICAL_RATIO,
             'detail-critical': data.value < $constant.CRITICAL_RATIO
           }"
           v-for="(data, i) in detailData"
@@ -42,8 +42,8 @@
             <div
               class="detail-left"
               :class="{
-                'detail-left-normal': data.value > $constant.WARNING_RATIO,
-                'detail-left-warning': data.value > $constant.CRITICAL_RATIO,
+                'detail-left-normal': data.value >= $constant.WARNING_RATIO,
+                'detail-left-warning': data.value >= $constant.CRITICAL_RATIO,
                 'detail-left-critical': data.value < $constant.CRITICAL_RATIO
               }"
             >
@@ -111,15 +111,15 @@ export default {
       if (!this.loaded) return;
       const comfort = this.comfort[this.comfort.length - 1].comfortIndex;
       const firstColor =
-        comfort * 100 > this.$constant.WARNING_RATIO
+        comfort * 100 >= this.$constant.WARNING_RATIO
           ? this.state.colors.lightGreen
-          : comfort * 100 > this.$constant.CRITICAL_RATIO
+          : comfort * 100 >= this.$constant.CRITICAL_RATIO
           ? this.state.colors.lightWarning
           : this.state.colors.lightCritical;
       const secondColor =
-        comfort * 100 > this.$constant.WARNING_RATIO
+        comfort * 100 >= this.$constant.WARNING_RATIO
           ? this.state.colors.deepGreen
-          : comfort * 100 > this.$constant.CRITICAL_RATIO
+          : comfort * 100 >= this.$constant.CRITICAL_RATIO
           ? this.state.colors.deepWarning
           : this.state.colors.lightWarning;
       return {
