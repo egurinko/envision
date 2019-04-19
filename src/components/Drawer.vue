@@ -15,13 +15,13 @@
 
     <v-container class="primary">
       <v-layout
+        v-for="(item, i) in items"
+        :key="item.title"
         class="primary"
         column
         align-center
-        v-for="(item, i) in items"
-        :key="item.title"
       >
-        <v-btn @click="handleClick(i)" class="ma-4" icon large>
+        <v-btn class="ma-4" icon large @click="handleClick(i)">
           <v-flex xs12>
             <v-list-tile-action>
               <v-icon x-large>{{ item.icon }}</v-icon>

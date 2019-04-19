@@ -23,6 +23,8 @@
     <v-card class="secondary details" flat>
       <v-container>
         <v-layout
+          v-for="(data, i) in detailData"
+          :key="i"
           row
           wrap
           justify-space-between
@@ -35,8 +37,6 @@
             'detail-warning': data.value >= $constant.CRITICAL_RATIO,
             'detail-critical': data.value < $constant.CRITICAL_RATIO
           }"
-          v-for="(data, i) in detailData"
-          :key="i"
         >
           <v-flex xs6 sm6 md4>
             <div
@@ -50,7 +50,7 @@
               {{ data.label }}
             </div>
           </v-flex>
-          <v-flex xs0 sm0 md3 v-if="!state.isTablet">
+          <v-flex v-if="!state.isTablet" xs0 sm0 md3>
             <div class="detail-center">・・・・・・></div>
           </v-flex>
           <v-flex xs6 sm6 md4>
@@ -65,9 +65,9 @@
         <v-layout justify-center align-center>
           <v-flex xs11>
             <line-chart
+              :id="lineData.datasets[0].id"
               :chart-data="lineData"
               :title="lineData.datasets[0].label"
-              :id="lineData.datasets[0].id"
             ></line-chart>
           </v-flex>
         </v-layout>

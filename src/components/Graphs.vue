@@ -1,5 +1,5 @@
 <template>
-  <v-container class="primary my-1" v-if="loaded">
+  <v-container v-if="loaded" class="primary my-1">
     <v-layout class="primary" row wrap justify-space-around>
       <v-flex xs12 class="pa-3 my-3">
         <div class="text-lg-center">
@@ -22,6 +22,8 @@
         </div>
       </v-flex>
       <v-flex
+        v-for="(data, i) in chartData"
+        :key="i"
         xs12
         sm12
         md6
@@ -29,15 +31,13 @@
         justify-space-around
         shrink
         class="pa-3 my-3"
-        v-for="(data, i) in chartData"
-        :key="i"
       >
         <v-card class="secondary" flat>
           <line-chart
+            :id="data.datasets[0].id"
             :chart-data="data"
             :title="data.datasets[0].label"
             :annotation="$store.state.annotations[data.datasets[0].label]"
-            :id="data.datasets[0].id"
           ></line-chart>
         </v-card>
       </v-flex>
@@ -79,10 +79,11 @@ export default {
     }, 60000);
   },
   methods: {
-    init(params = 3600000) {
+    init(hours = 1) {
+      this.loaded = false;
       axios
         .get(`${this.$store.state.domain}/envs`, {
-          params: { timespan: params }
+          params: { timespan: hours }
         })
         .then(envs => {
           this.envs = envs.data.map(env => {
@@ -94,7 +95,7 @@ export default {
             }
             return { key: env.key, data: timeConvetedData };
           });
-          this.loaded = !this.loaded;
+          this.loaded = true;
         });
     },
     update() {
@@ -119,9 +120,8 @@ export default {
     },
     onClick(index) {
       this.selectedTimespan = this.timespan[index];
-      const unixTime =
-        index === 0 ? 3600000 : index === 1 ? 3600000 * 3 : 3600000 * 24;
-      this.init(unixTime);
+      const hours = index === 0 ? 1 : index === 1 ? 3 : 24;
+      this.init(hours);
     },
     makeChartData(data, key) {
       return {

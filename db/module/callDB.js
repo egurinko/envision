@@ -33,7 +33,7 @@ module.exports = async (method, endpoint, options = null) => {
 
         client.close();
       } else {
-        const timespan = options === null ? a - 3600000 : a - options;
+        const timespan = options === null ? a - 3600000 : a - 3600000 * options;
         data = await db
           .collection(endpoint)
           .find({ timestamp: { $gt: timespan } })
