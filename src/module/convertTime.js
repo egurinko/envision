@@ -1,13 +1,15 @@
-const moment = require("moment-timezone");
+import moment from "moment-timezone";
+import store from "../store.js";
 
-module.exports = unixtime => {
+export default unixtime => {
   // const year = moment.tz(unixtime, "Asia/Tokyo").format("YYYY");
-  // const month = moment.tz(unixtime, "Asia/Tokyo").format("MM");
-  // const day = moment.tz(unixtime, "Asia/Tokyo").format("DD");
+  const month = moment.tz(unixtime, "Asia/Tokyo").format("MM");
+  const day = moment.tz(unixtime, "Asia/Tokyo").format("DD");
   const hour = moment.tz(unixtime, "Asia/Tokyo").format("HH");
   const minute = moment.tz(unixtime, "Asia/Tokyo").format("mm");
-
-  return hour + ":" + minute;
+  return store.state.timespans.selected !== "WEEK"
+    ? hour + ":" + minute
+    : month + "/" + day + " " + hour + ":" + minute;
   // const jpTime = moment.tz(unixtime, "Asia/Tokyo").format("M/D HH:mm:ss");
   // return minute[1] !== "0" && minute[1] !== "5"
   //   ? ""

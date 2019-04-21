@@ -38,6 +38,15 @@ export default new Vuex.Store({
         "UPPER LIMIT": constant.COLOR_TEMP_UPPER_LIMIT
       },
       SNACK: { "LOWER LIMIT": constant.SNACK_LOWER_LIMIT }
+    },
+    timespans: {
+      selected: "AN HOUR",
+      timespan: {
+        "AN HOUR": 1,
+        "3 HOURS": 3,
+        DAILY: 24,
+        WEEK: 24 * 7
+      }
     }
   },
   mutations: {
@@ -46,6 +55,9 @@ export default new Vuex.Store({
     },
     isTablet(state, isTablet) {
       state.isTablet = isTablet;
+    },
+    changeTimespan(state, timespan) {
+      state.timespans.selected = timespan;
     }
   },
   actions: {}

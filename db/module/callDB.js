@@ -40,6 +40,13 @@ module.exports = async (method, endpoint, options = null) => {
           .find({ timestamp: { $gt: timespan } })
           .toArray();
 
+        console.log("TIMESPAN", options);
+        console.log("BEFORE", data.length);
+        data = data.filter((value, index) => {
+          return index % options === 0;
+        });
+        console.log("AFTER", data.length);
+
         client.close();
       }
 

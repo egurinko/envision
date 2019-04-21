@@ -1,21 +1,22 @@
 <template>
-  <v-container v-if="loaded" class="primary my-1">
+  <v-container class="primary my-1">
     <v-layout class="primary" row wrap justify-space-around>
-      <v-flex xs12 class="pa-3 my-3">
+      <v-flex xs12 class="timespan">
         <div class="text-lg-center">
           <v-menu offset-y>
             <template v-slot:activator="{ on }">
-              <v-btn color="primary" dark v-on="on">
-                {{ selectedTimespan }}
+              <v-btn class="lightGreen" dark outline v-on="on">
+                <v-icon size="20" color="white" left>add_alarm</v-icon
+                >{{ $store.state.timespans.selected }}
               </v-btn>
             </template>
-            <v-list>
+            <v-list class="primary">
               <v-list-tile
-                v-for="(item, index) in timespan"
-                :key="index"
-                @click="onClick(index)"
+                v-for="(hours, key) in $store.state.timespans.timespan"
+                :key="key"
+                @click="onClick(key)"
               >
-                <v-list-tile-title>{{ item }}</v-list-tile-title>
+                <v-list-tile-title>{{ key }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
           </v-menu>
@@ -23,6 +24,7 @@
       </v-flex>
       <v-flex
         v-for="(data, i) in chartData"
+        v-if="loaded"
         :key="i"
         xs12
         sm12
@@ -57,9 +59,7 @@ export default {
   data() {
     return {
       loaded: false,
-      envs: null,
-      timespan: ["AN HOUR", "3 HOURS", "DAILY"],
-      selectedTimespan: "AN HOUR"
+      envs: null
     };
   },
   computed: {
@@ -70,6 +70,9 @@ export default {
         chartData.push(this.makeChartData(this.envs[i].data, this.envs[i].key));
       }
       return chartData;
+    },
+    selected: function() {
+      return this.$store.state.timespans.selected;
     }
   },
   created() {
@@ -79,19 +82,23 @@ export default {
     }, 60000);
   },
   methods: {
-    init(hours = 1) {
+    init() {
       this.loaded = false;
       axios
         .get(`${this.$store.state.domain}/envs`, {
-          params: { timespan: hours }
+          params: {
+            timespan: this.$store.state.timespans.timespan[this.selected]
+          }
         })
         .then(envs => {
           this.envs = envs.data.map(env => {
             let timeConvetedData = env.data;
-            console.log(env.data.length);
             if (env.data.length !== 0) {
               timeConvetedData = env.data.map(each => {
-                return { value: each.value, time: convertTime(each.timestamp) };
+                return {
+                  value: each.value,
+                  time: convertTime(each.timestamp)
+                };
               });
             }
             return { key: env.key, data: timeConvetedData };
@@ -119,10 +126,16 @@ export default {
         });
       });
     },
-    onClick(index) {
-      this.selectedTimespan = this.timespan[index];
-      const hours = index === 0 ? 1 : index === 1 ? 3 : 24;
-      this.init(hours);
+    onClick(hours) {
+      if (
+        this.$store.state.timespans.selected ===
+        this.$store.state.timespans.timespan[hours]
+      ) {
+        return;
+      }
+
+      this.$store.commit("changeTimespan", hours);
+      this.init();
     },
     makeChartData(data, key) {
       return {
@@ -142,3 +155,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.timespan {
+  float: left;
+}
+</style>
