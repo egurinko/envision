@@ -7,9 +7,9 @@
       :src="require('../assets/logo2.png')"
     />
     <v-spacer></v-spacer>
-    <v-toolbar-items v-for="(item, i) in items" :key="item.title">
+    <v-toolbar-items v-for="(item, index) in menus" :key="index">
       <div class="spacer"></div>
-      <v-btn icon flat @click="handleClick(i)"
+      <v-btn icon flat @click="handleClick(item.route)"
         ><v-icon size="25">{{ item.icon }}</v-icon></v-btn
       >
       <div class="spacer"></div>
@@ -19,16 +19,20 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      items: this.$store.state.menus
-    };
+  computed: {
+    menus: function() {
+      const icons = [];
+      this.$router.options.routes.map(route => {
+        if (route.meta) {
+          icons.push({ icon: route.meta.icon, route: route.path });
+        }
+      });
+      return icons;
+    }
   },
   methods: {
-    init() {},
-    handleClick(e) {
-      const route = this.items[e].title.toLowerCase();
-      this.$router.push(`/${route}`);
+    handleClick(route) {
+      this.$router.push(route);
     }
   }
 };

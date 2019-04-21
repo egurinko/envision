@@ -14,10 +14,6 @@ export default new Vuex.Store({
         ? "https://prod-bot-staging.herokuapp.com/api"
         : "/api",
     colors,
-    menus: [
-      { icon: "home", title: "Home" },
-      { icon: "bar_chart", title: "Graphs" }
-    ],
     annotations: {
       TEMPERATURE: {
         "LOWER LIMIT": constant.TEMP_LOWER_LIMIT,
@@ -60,5 +56,11 @@ export default new Vuex.Store({
       state.timespans.selected = timespan;
     }
   },
-  actions: {}
+  actions: {},
+  getters: {
+    getTimespan: state => {
+      const selected = state.timespans.selected;
+      return state.timespans.timespan[selected];
+    }
+  }
 });

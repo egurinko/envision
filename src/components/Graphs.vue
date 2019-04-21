@@ -1,27 +1,7 @@
 <template>
   <v-container class="primary my-1">
     <v-layout class="primary" row wrap justify-space-around>
-      <v-flex xs12 class="timespan">
-        <div class="text-lg-center">
-          <v-menu offset-y>
-            <template v-slot:activator="{ on }">
-              <v-btn class="lightGreen" dark outline v-on="on">
-                <v-icon size="20" color="white" left>add_alarm</v-icon
-                >{{ $store.state.timespans.selected }}
-              </v-btn>
-            </template>
-            <v-list class="primary">
-              <v-list-tile
-                v-for="(hours, key) in $store.state.timespans.timespan"
-                :key="key"
-                @click="onClick(key)"
-              >
-                <v-list-tile-title>{{ key }}</v-list-tile-title>
-              </v-list-tile>
-            </v-list>
-          </v-menu>
-        </div>
-      </v-flex>
+      <timespan-button @on-click="onClick"></timespan-button>
       <v-flex
         v-for="(data, i) in chartData"
         v-if="loaded"
@@ -50,11 +30,13 @@
 <script>
 import axios from "axios";
 import LineChart from "../module/lineChart.js";
+import TimespanButton from "./TimespanButton.vue";
 import convertTime from "../module/convertTime.js";
 
 export default {
   components: {
-    LineChart
+    LineChart,
+    TimespanButton
   },
   data() {
     return {
@@ -70,9 +52,6 @@ export default {
         chartData.push(this.makeChartData(this.envs[i].data, this.envs[i].key));
       }
       return chartData;
-    },
-    selected: function() {
-      return this.$store.state.timespans.selected;
     }
   },
   created() {
@@ -87,7 +66,7 @@ export default {
       axios
         .get(`${this.$store.state.domain}/envs`, {
           params: {
-            timespan: this.$store.state.timespans.timespan[this.selected]
+            timespan: this.$store.getters.getTimespan
           }
         })
         .then(envs => {
@@ -126,15 +105,7 @@ export default {
         });
       });
     },
-    onClick(hours) {
-      if (
-        this.$store.state.timespans.selected ===
-        this.$store.state.timespans.timespan[hours]
-      ) {
-        return;
-      }
-
-      this.$store.commit("changeTimespan", hours);
+    onClick() {
       this.init();
     },
     makeChartData(data, key) {

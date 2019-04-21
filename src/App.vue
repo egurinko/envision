@@ -1,9 +1,9 @@
 <template>
   <v-app dark class="primary">
-    <div class="tertiary" id="design-bar"></div>
-    <tool-bar class="primary" v-if="state.isPhone"></tool-bar>
+    <div id="design-bar" class="tertiary"></div>
+    <tool-bar v-if="state.isPhone" class="primary"></tool-bar>
     <div class="top-container primary">
-      <drawer class="drawer" v-if="!state.isPhone"></drawer>
+      <drawer v-if="!state.isPhone" class="drawer"></drawer>
       <router-view></router-view>
     </div>
   </v-app>
@@ -15,14 +15,14 @@ import ToolBar from "./components/ToolBar";
 import constant from "../constant.js";
 
 export default {
-  data() {
-    return {
-      state: this.$store.state
-    };
-  },
   components: {
     drawer: Drawer,
     ToolBar
+  },
+  computed: {
+    state: function() {
+      return this.$store.state;
+    }
   },
   created() {
     window.addEventListener("resize", this.handleWindowResize);

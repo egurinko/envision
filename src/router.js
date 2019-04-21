@@ -12,12 +12,14 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: Home
+      component: Home,
+      meta: { icon: "home" }
     },
     {
       path: "/graphs",
       name: "graphs",
-      component: Graphs
+      component: Graphs,
+      meta: { icon: "bar_chart" }
     },
     { path: "*", redirect: "/" }
   ]

@@ -15,13 +15,13 @@
 
     <v-container class="primary">
       <v-layout
-        v-for="(item, i) in items"
-        :key="item.title"
+        v-for="(item, index) in menus"
+        :key="index"
         class="primary"
         column
         align-center
       >
-        <v-btn class="ma-4" icon large @click="handleClick(i)">
+        <v-btn class="ma-4" icon large @click="handleClick(item.route)">
           <v-flex xs12>
             <v-list-tile-action>
               <v-icon x-large>{{ item.icon }}</v-icon>
@@ -38,17 +38,23 @@
 export default {
   data() {
     return {
-      drawer: !this.$store.state.isPhone,
-      items: this.$store.state.menus,
-      right: null,
       logoSrc: { src: "./assets/logo2.png" }
     };
   },
+  computed: {
+    menus: function() {
+      const icons = [];
+      this.$router.options.routes.map(route => {
+        if (route.meta) {
+          icons.push({ icon: route.meta.icon, route: route.path });
+        }
+      });
+      return icons;
+    }
+  },
   methods: {
-    init() {},
-    handleClick(e) {
-      const route = this.items[e].title.toLowerCase();
-      this.$router.push(`/${route}`);
+    handleClick(route) {
+      this.$router.push(route);
     }
   }
 };

@@ -60,6 +60,8 @@
       </v-container>
     </v-card>
 
+    <timespan-button class="mt-3" @on-click="onClick"></timespan-button>
+
     <v-card class="secondary" flat>
       <v-container class="pa-3 my-3">
         <v-layout justify-center align-center>
@@ -80,12 +82,14 @@
 import axios from "axios";
 import doughnutChart from "../module/doughnutChart.js";
 import LineChart from "../module/lineChart.js";
+import TimespanButton from "./TimespanButton.vue";
 import convertTime from "../module/convertTime.js";
 
 export default {
   components: {
     doughnutChart,
-    LineChart
+    LineChart,
+    TimespanButton
   },
   data() {
     return {
@@ -160,7 +164,11 @@ export default {
     init() {
       Promise.all([
         axios.get(`${this.$store.state.domain}/comfort`),
-        axios.get(`${this.$store.state.domain}/envs`)
+        axios.get(`${this.$store.state.domain}/envs`, {
+          params: {
+            timespan: this.$store.getters.getTimespan
+          }
+        })
       ]).then(([comfort, envs]) => {
         if (comfort.data.length === 0 || envs.data.length === 0) {
           return;
@@ -172,6 +180,9 @@ export default {
       });
     },
     update() {
+      this.init();
+    },
+    onClick() {
       this.init();
     }
   }
