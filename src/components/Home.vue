@@ -163,12 +163,12 @@ export default {
   methods: {
     init() {
       Promise.all([
-        axios.get(`${this.$store.state.domain}/comfort`),
-        axios.get(`${this.$store.state.domain}/envs`, {
+        axios.get(`${this.$store.state.domain}/comfort`, {
           params: {
             timespan: this.$store.getters.getTimespan
           }
-        })
+        }),
+        axios.get(`${this.$store.state.domain}/envs`)
       ]).then(([comfort, envs]) => {
         if (comfort.data.length === 0 || envs.data.length === 0) {
           return;
