@@ -113,7 +113,8 @@ export default {
     },
     doughnutData: function() {
       if (!this.loaded) return;
-      const comfort = this.comfort[this.comfort.length - 1].comfortIndex;
+      const comfort = this.latestComfort[this.latestComfort.length - 1]
+        .comfortIndex;
       const firstColor =
         comfort * 100 >= this.$constant.WARNING_RATIO
           ? this.state.colors.lightGreen
@@ -168,12 +169,14 @@ export default {
             timespan: this.$store.getters.getTimespan
           }
         }),
-        axios.get(`${this.$store.state.domain}/envs`)
-      ]).then(([comfort, envs]) => {
+        axios.get(`${this.$store.state.domain}/envs`),
+        axios.get(`${this.$store.state.domain}/comfort`)
+      ]).then(([comfort, envs, latestComfort]) => {
         if (comfort.data.length === 0 || envs.data.length === 0) {
           return;
         } else {
           this.comfort = comfort.data;
+          this.latestComfort = latestComfort.data;
           this.latestEnv = envs.data[envs.data.length - 1];
           this.loaded = true;
         }
