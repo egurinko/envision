@@ -5,6 +5,9 @@ import router from "./router";
 import store from "./store";
 import colors from "./module/colorTheme";
 import constant from "../constant";
+import * as Sentry from "@sentry/browser";
+import * as Integrations from "@sentry/integrations";
+
 import "@mdi/font/css/materialdesignicons.css";
 import "material-design-icons-iconfont";
 import "vuetify/dist/vuetify.min.css";
@@ -17,6 +20,16 @@ Vue.use(Vuetify, {
 });
 
 Vue.prototype.$constant = constant;
+
+Sentry.init({
+  dsn: "https://e0d73a41264c47708a3efca33256994d@sentry.io/1441419",
+  integrations: [
+    new Integrations.Vue({
+      Vue,
+      attachProps: true
+    })
+  ]
+});
 
 new Vue({
   router,
