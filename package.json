@@ -7,7 +7,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "node server/index.js",
+    "start": "nodemon server/index.js",
     "heroku-postbuild": "yarn build"
   },
   "dependencies": {
@@ -43,6 +43,7 @@
     "eslint": "^5.8.0",
     "eslint-config-recommended": "^4.0.0",
     "eslint-plugin-vue": "^5.0.0",
+    "nodemon": "^1.18.11",
     "vue-template-compiler": "^2.5.21"
   }
 }

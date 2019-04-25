@@ -10,6 +10,7 @@ module.exports = async (method, endpoint, options = null) => {
   // TIMESTAMP
   const date = new Date();
   const a = date.getTime();
+
   try {
     await client.connect();
     const db = client.db(dbName);
@@ -40,17 +41,27 @@ module.exports = async (method, endpoint, options = null) => {
           .find({ timestamp: { $gt: timespan } })
           .toArray();
 
-        console.log("TIMESPAN", options);
-        console.log("BEFORE", data.length);
         data = data.filter((value, index) => {
           return index % options === 0;
         });
-        console.log("AFTER", data.length);
 
         client.close();
       }
 
       return data;
+    } else if (method === "GET_KEYS") {
+      const keys = await db.listCollections().toArray();
+
+      client.close();
+      return keys;
+    } else if (method === "DELETE") {
+      const timespan = a - 3600000 * 24 * 10;
+      await db
+        .collection(endpoint)
+        .deleteMany({ timestamp: { $lt: timespan } });
+
+      client.close();
+      return;
     }
   } catch (err) {
     console.log(err.stack);

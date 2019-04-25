@@ -12,7 +12,7 @@ module.exports = {
     "comma-spacing": ["error", { "before": false, "after": true }],
     "array-bracket-spacing": ["error", "never"],
     semi: ["error", "always"],
-    quotes: ["error", "double"]
+    quotes: ["error", "double"],
   },
   parserOptions: {
     parser: "babel-eslint"
