@@ -30,16 +30,21 @@
         </v-btn>
       </v-layout>
     </v-container>
+
+    <reputations></reputations>
     <div class="space-fill"></div>
   </v-navigation-drawer>
 </template>
 
 <script>
+import Reputations from "./Reputation";
+
 export default {
+  components: {
+    Reputations
+  },
   data() {
-    return {
-      logoSrc: { src: "./assets/logo2.png" }
-    };
+    return {};
   },
   computed: {
     menus: function() {
@@ -69,5 +74,6 @@ export default {
 }
 .drawer-title {
   font-size: 20px;
+  text-align: center;
 }
 </style>
