@@ -2,7 +2,9 @@ const callDB = require("../module/callDB");
 
 module.exports = () => {
   return async () => {
-    const collections = await callDB("GET_KEYS");
+    const collections = await callDB("GET_KEYS").catch(err => {
+      throw Error(err);
+    });
 
     let keys = collections.map(colloction => colloction.name);
     keys = keys.filter(key => {
@@ -13,9 +15,13 @@ module.exports = () => {
       );
     });
 
-    for (let key of keys) {
-      await callDB("DELETE", key);
+    try {
+      for (let key of keys) {
+        await callDB("DELETE", key);
+      }
+      return keys;
+    } catch (err) {
+      throw Error(err);
     }
-    return keys;
   };
 };

@@ -64,6 +64,6 @@ module.exports = async (method, endpoint, options = null) => {
       return;
     }
   } catch (err) {
-    console.log(err.stack);
+    throw Error(err);
   }
 };
