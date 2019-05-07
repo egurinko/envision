@@ -18,11 +18,19 @@ module.exports = async (method, endpoint, options = null) => {
 
     if (method === "POST") {
       options.timestamp = a;
-      await db.collection(endpoint).insertOne(options);
+      return await db
+        .collection(endpoint)
+        .insertOne(options)
+        .then(res => {
+          return res.ops;
+        })
+        .finally(() => {
+          console.log("Closed MONGODB connection successfully");
+          client.close();
+        });
+    }
 
-      client.close();
-      return;
-    } else if (method === "GET") {
+    if (method === "GET") {
       let data;
       if (options === "latest") {
         data = await db
@@ -36,6 +44,7 @@ module.exports = async (method, endpoint, options = null) => {
       } else {
         if (options === null) options = 1;
         const timespan = a - 3600000 * options;
+
         data = await db
           .collection(endpoint)
           .find({ timestamp: { $gt: timespan } })
@@ -49,12 +58,24 @@ module.exports = async (method, endpoint, options = null) => {
       }
 
       return data;
-    } else if (method === "GET_KEYS") {
-      const keys = await db.listCollections().toArray();
+    }
 
-      client.close();
-      return keys;
-    } else if (method === "DELETE") {
+    if (method === "GET_ONE") {
+      return await db
+        .collection(endpoint)
+        .findOne({ username: options.username })
+        .then(res => {
+          return res;
+        })
+        .catch(err => {
+          return err;
+        })
+        .finally(() => {
+          client.close();
+        });
+    }
+
+    if (method === "DELETE") {
       const timespan = a - 3600000 * 24 * 10;
       await db
         .collection(endpoint)
@@ -62,6 +83,13 @@ module.exports = async (method, endpoint, options = null) => {
 
       client.close();
       return;
+    }
+
+    if (method === "GET_KEYS") {
+      const keys = await db.listCollections().toArray();
+
+      client.close();
+      return keys;
     }
   } catch (err) {
     throw Error(err);

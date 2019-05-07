@@ -3,6 +3,7 @@ module.exports = function() {
     envs: require("./envs")(),
     comfort: require("./comfort")(),
     oldData: require("./oldData")(),
-    trainingData: require("./trainingData")()
+    trainingData: require("./trainingData")(),
+    user: require("./user")()
   };
 };
