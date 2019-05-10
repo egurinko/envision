@@ -6,6 +6,7 @@ const secret = process.env.API_SECRET;
 
 // Check if the privided username and password is matched with username and hashedPW in db
 module.exports = services => {
+  console.log("HELLO LOGIN API");
   router.post("/", async (req, res) => {
     await services.user
       .get({ username: req.body.username })
