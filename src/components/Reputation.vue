@@ -2,7 +2,7 @@
   <v-container class="primary">
     <v-layout class="primary" row align-center justify-center>
       <v-flex v-for="(item, index) in reputations" :key="index" xs5>
-        <v-btn class="ma-3 ml-4" icon large @click="handleReputations(index)">
+        <v-btn class="ma-3" icon large @click="handleReputations(index)">
           <v-icon
             x-large
             :color="item.icon === 'mood' ? 'lightGreen' : 'lightCritical'"

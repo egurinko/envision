@@ -14,6 +14,10 @@ export default new Vuex.Store({
         ? "https://prod-bot-staging.herokuapp.com/api"
         : "/api",
     colors,
+    auth: {
+      username: "",
+      token: ""
+    },
     annotations: {
       TEMPERATURE: {
         "LOWER LIMIT": constant.TEMP_LOWER_LIMIT,
@@ -54,6 +58,9 @@ export default new Vuex.Store({
     },
     changeTimespan(state, timespan) {
       state.timespans.selected = timespan;
+    },
+    setAuth(state, auth) {
+      state.auth = auth;
     }
   },
   actions: {},
