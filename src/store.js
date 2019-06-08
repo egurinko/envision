@@ -27,7 +27,7 @@ export default new Vuex.Store({
       }
     },
     response: {
-      statusCode: "",
+      status: "",
       errors: ""
     }
   },
@@ -45,7 +45,7 @@ export default new Vuex.Store({
       state.username = username;
     },
     setResponse(state, response) {
-      state.response.statusCode = response.statusCode;
+      state.response = response;
     }
   },
   actions: {},
