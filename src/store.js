@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import colors from "./module/colorTheme";
+import annotations from "./module/annotations";
 import constant from "../constant";
 
 Vue.use(Vuex);
@@ -15,7 +16,7 @@ export default new Vuex.Store({
         : "/api",
     colors,
     username: "",
-    annotations: constant.ANNOTATIONS,
+    annotations: annotations,
     timespans: {
       selected: "AN HOUR",
       timespan: {
@@ -24,6 +25,10 @@ export default new Vuex.Store({
         DAILY: 24,
         WEEK: 24 * 7
       }
+    },
+    response: {
+      statusCode: "",
+      errors: ""
     }
   },
   mutations: {
@@ -38,6 +43,9 @@ export default new Vuex.Store({
     },
     setUsername(state, username) {
       state.username = username;
+    },
+    setResponse(state, response) {
+      state.response.statusCode = response.statusCode;
     }
   },
   actions: {},
