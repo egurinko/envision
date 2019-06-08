@@ -41,11 +41,9 @@
                 :disabled="!usernameValid || !pwValid"
                 class="login-button"
                 @click="login"
-                ><span
-                  :class="{ 'login-button-word': usernameValid && pwValid }"
-                  >Login</span
-                ></v-btn
               >
+                <span :class="{ 'login-button-word': usernameValid && pwValid }">Login</span>
+              </v-btn>
             </v-flex>
           </v-layout>
         </v-container>
@@ -56,6 +54,8 @@
 
 <script>
 import axios from "axios";
+import { setTokenFromCookie, setTokenToCookie } from "../module/controllCookie";
+
 export default {
   data() {
     return {
@@ -91,6 +91,7 @@ export default {
               username: auth.username,
               token: auth.token
             });
+            setTokenToCookie(auth.token);
           }
         });
     }
