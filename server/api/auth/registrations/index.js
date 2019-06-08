@@ -4,9 +4,11 @@ const bcrypt = require("bcryptjs");
 require("dotenv").config();
 const secret = process.env.API_SECRET;
 
+const verifyToken = require("../../../middleware/verifyToken");
+
 // Create a new user and token
 module.exports = services => {
-  router.post("/", async (req, res) => {
+  router.post("/", verifyToken, async (req, res) => {
     const hashedPW = bcrypt.hashSync(req.body.password, 8);
 
     await services.user
