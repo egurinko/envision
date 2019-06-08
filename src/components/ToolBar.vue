@@ -1,28 +1,26 @@
 <template>
   <v-toolbar flat>
-    <v-img
-      v-if="state.isPhone"
-      width="30"
-      height="30"
-      contain
-      :src="require('../assets/logo2.png')"
-    />
-    <v-spacer></v-spacer>
-    <v-toolbar-items
-      v-for="(item, index) in menus"
-      v-if="state.isPhone"
-      :key="index"
-    >
-      <div class="spacer"></div>
-      <v-btn icon flat @click="handleClick(item.route)"
-        ><v-icon size="25">{{ item.icon }}</v-icon></v-btn
-      >
-      <div class="spacer"></div>
-    </v-toolbar-items>
-    <v-spacer></v-spacer>
-    <v-btn color="lightGreen" flat dark outline small @click="goLogin"
-      ><span class="auth pa-1">Login</span></v-btn
-    >
+    <v-container class="primary pa-3">
+      <v-layout class="primary" nowrap align-center>
+        <v-flex v-if="state.isPhone">
+          <v-img width="30" height="30" contain :src="require('../assets/logo2.png')"/>
+        </v-flex>
+
+        <v-spacer></v-spacer>
+
+        <v-flex v-if="state.isPhone" v-for="(item, index) in menus" :key="index">
+          <v-btn icon flat @click="handleClick(item.route)">
+            <v-icon size="25">{{ item.icon }}</v-icon>
+          </v-btn>
+        </v-flex>
+
+        <v-spacer></v-spacer>
+
+        <v-btn color="lightGreen" flat dark outline small @click="goLogin">
+          <span class="auth pa-1">Login</span>
+        </v-btn>
+      </v-layout>
+    </v-container>
   </v-toolbar>
 </template>
 <script>

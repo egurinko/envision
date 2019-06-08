@@ -3,8 +3,8 @@
     <div id="design-bar" class="tertiary"></div>
     <v-container id="app-container" class="primary">
       <v-layout class="primary" row nowrap>
-        <v-flex>
-          <drawer v-if="!state.isPhone" class="drawer px-3 py-4"></drawer>
+        <v-flex v-if="!state.isPhone">
+          <drawer class="drawer px-3 py-4"></drawer>
         </v-flex>
         <v-flex class="main-content">
           <v-container id="main-content-container" class="primary">
