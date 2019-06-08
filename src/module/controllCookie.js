@@ -19,7 +19,7 @@ export const getTokenFromCookie = () => {
   const rows = document.cookie.split(";");
   rows.forEach(row => {
     const content = row.split("=");
-    if (content[0] === "token") {
+    if (content[0] === "envision_session") {
       token = content[1];
     }
   });
