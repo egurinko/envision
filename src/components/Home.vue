@@ -15,22 +15,22 @@
         justify-space-between
         align-center
         :class="{
-            'detail-phone': state.isPhone,
-            'py-2': state.isPhone,
-            'pa-3': !state.isPhone,
-            'detail-normal': data.value >= $constant.WARNING_RATIO,
-            'detail-warning': data.value >= $constant.CRITICAL_RATIO,
-            'detail-critical': data.value < $constant.CRITICAL_RATIO
-          }"
+          'detail-phone': state.isPhone,
+          'py-2': state.isPhone,
+          'pa-3': !state.isPhone,
+          'detail-normal': data.value >= $constant.WARNING_RATIO,
+          'detail-warning': data.value >= $constant.CRITICAL_RATIO,
+          'detail-critical': data.value < $constant.CRITICAL_RATIO
+        }"
       >
         <v-flex xs6 sm6 md4>
           <div
             class="detail-left"
             :class="{
-                'detail-left-normal': data.value >= $constant.WARNING_RATIO,
-                'detail-left-warning': data.value >= $constant.CRITICAL_RATIO,
-                'detail-left-critical': data.value < $constant.CRITICAL_RATIO
-              }"
+              'detail-left-normal': data.value >= $constant.WARNING_RATIO,
+              'detail-left-warning': data.value >= $constant.CRITICAL_RATIO,
+              'detail-left-critical': data.value < $constant.CRITICAL_RATIO
+            }"
           >{{ data.label }}</div>
         </v-flex>
         <v-flex v-if="!state.isTablet" xs0 sm0 md3>
