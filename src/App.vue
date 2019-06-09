@@ -1,5 +1,6 @@
 <template>
   <v-app dark class="primary">
+    <Loader></Loader>
     <div id="design-bar" class="tertiary"></div>
     <v-container id="app-container" class="primary">
       <v-layout class="primary" row nowrap>
@@ -24,6 +25,7 @@
 <script>
 import Drawer from "./components/Drawer";
 import ToolBar from "./components/ToolBar";
+import Loader from "./components/Loader";
 import constant from "../constant.js";
 import { getCookie } from "./module/controllCookie";
 import { mapState } from "vuex";
@@ -31,12 +33,10 @@ import { mapState } from "vuex";
 export default {
   components: {
     drawer: Drawer,
-    ToolBar
+    ToolBar,
+    Loader
   },
   computed: {
-    state: function() {
-      return this.$store.state;
-    },
     ...mapState({
       isPhone: state => state.isPhone
     })
