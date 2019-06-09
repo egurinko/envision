@@ -1,35 +1,20 @@
 <template>
-  <div
-    v-if="loaded"
-    class="primary home"
-    :class="{
-      'py-0': state.isPhone,
-      'ma-3': state.isPhone,
-      'pa-4': !state.isPhone
-    }"
-  >
-    <v-container>
-      <v-layout row wrap justify-center align-center>
-        <v-flex xs10 class="px-3">
-          <doughnut-chart
-            :chart-data="doughnutData"
-            class="px-1 prod-chart"
-            title="COMFORT INDEX"
-          ></doughnut-chart>
-        </v-flex>
-      </v-layout>
-    </v-container>
+  <v-container v-if="loaded" class="primary">
+    <v-layout row wrap justify-center align-center>
+      <v-flex xs10 class="px-3">
+        <doughnut-chart :chart-data="doughnutData" class="px-1 prod-chart" title="COMFORT INDEX"></doughnut-chart>
+      </v-flex>
+    </v-layout>
 
     <v-card class="secondary details" flat>
-      <v-container>
-        <v-layout
-          v-for="(data, i) in detailData"
-          :key="i"
-          row
-          wrap
-          justify-space-between
-          align-center
-          :class="{
+      <v-layout
+        v-for="(data, i) in detailData"
+        :key="i"
+        row
+        wrap
+        justify-space-between
+        align-center
+        :class="{
             'detail-phone': state.isPhone,
             'py-2': state.isPhone,
             'pa-3': !state.isPhone,
@@ -37,45 +22,40 @@
             'detail-warning': data.value >= $constant.CRITICAL_RATIO,
             'detail-critical': data.value < $constant.CRITICAL_RATIO
           }"
-        >
-          <v-flex xs6 sm6 md4>
-            <div
-              class="detail-left"
-              :class="{
+      >
+        <v-flex xs6 sm6 md4>
+          <div
+            class="detail-left"
+            :class="{
                 'detail-left-normal': data.value >= $constant.WARNING_RATIO,
                 'detail-left-warning': data.value >= $constant.CRITICAL_RATIO,
                 'detail-left-critical': data.value < $constant.CRITICAL_RATIO
               }"
-            >
-              {{ data.label }}
-            </div>
-          </v-flex>
-          <v-flex v-if="!state.isTablet" xs0 sm0 md3>
-            <div class="detail-center">・・・・・・></div>
-          </v-flex>
-          <v-flex xs6 sm6 md4>
-            <div class="detail-right">{{ data.value }}{{ data.unit }}</div>
-          </v-flex>
-        </v-layout>
-      </v-container>
+          >{{ data.label }}</div>
+        </v-flex>
+        <v-flex v-if="!state.isTablet" xs0 sm0 md3>
+          <div class="detail-center">・・・・・・></div>
+        </v-flex>
+        <v-flex xs6 sm6 md4>
+          <div class="detail-right">{{ data.value }}{{ data.unit }}</div>
+        </v-flex>
+      </v-layout>
     </v-card>
 
     <timespan-button class="mt-3" @on-click="onClick"></timespan-button>
 
     <v-card class="secondary" flat>
-      <v-container class="pa-3 my-3">
-        <v-layout justify-center align-center>
-          <v-flex xs11>
-            <line-chart
-              :id="lineData.datasets[0].id"
-              :chart-data="lineData"
-              :title="lineData.datasets[0].label"
-            ></line-chart>
-          </v-flex>
-        </v-layout>
-      </v-container>
+      <v-layout justify-center align-center class="pa-3 my-3">
+        <v-flex xs11>
+          <line-chart
+            :id="lineData.datasets[0].id"
+            :chart-data="lineData"
+            :title="lineData.datasets[0].label"
+          ></line-chart>
+        </v-flex>
+      </v-layout>
     </v-card>
-  </div>
+  </v-container>
 </template>
 
 <script>
