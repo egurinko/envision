@@ -87,10 +87,7 @@ export default {
         .then(res => {
           const auth = res.data;
           if (auth.auth) {
-            this.$store.commit("setAuth", {
-              username: auth.username,
-              token: auth.token
-            });
+            this.$store.commit("setUsername", { username: auth.username });
             setTokenToCookie(auth.token);
           }
         });

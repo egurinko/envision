@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const verifyToken = require("../../middleware/verifyToken");
 
 module.exports = services => {
   router.get("/", async (req, res) => {
@@ -7,8 +8,7 @@ module.exports = services => {
     res.status(200).send(data);
   });
 
-  router.post("/", (req, res) => {
-    console.log("HELLO", req.body);
+  router.post("/", verifyToken, (req, res) => {
     services.trainingData.create(req.body);
     res.sendStatus(200);
   });

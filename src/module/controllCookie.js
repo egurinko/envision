@@ -6,11 +6,10 @@ export const setTokenToCookie = token => {
     token
   )}; expires=${date.toUTCString()}; path=/`;
 
-  if (process.env.NODE_ENV !== "development") {
-    cookie += "; secure";
-  }
+  // if (process.env.NODE_ENV !== "development") {
+  //   cookie += "; secure";
+  // }
 
-  console.log("TOKEN", cookie);
   document.cookie = cookie;
 };
 
@@ -19,7 +18,7 @@ export const getTokenFromCookie = () => {
   const rows = document.cookie.split(";");
   rows.forEach(row => {
     const content = row.split("=");
-    if (content[0] === "envision_session") {
+    if (content[0].replace(/\s/g, "") === "envision_session") {
       token = content[1];
     }
   });
