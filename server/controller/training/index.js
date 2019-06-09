@@ -5,8 +5,13 @@ exports.list = async (req, res, services) => {
 };
 
 exports.create = async (req, res, services) => {
-  services.trainingData
-    .create(req.body)
+  const username = req.body.username;
+  delete req.body.username;
+
+  Promise.all([
+    services.trainingData.create(req.body),
+    services.contribution.create({ username: username })
+  ])
     .then(response => {
       res.sendStatus(200);
     })

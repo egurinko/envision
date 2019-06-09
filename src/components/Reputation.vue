@@ -47,6 +47,8 @@ export default {
           });
         });
 
+      data.username = this.$store.state.username;
+
       const requests = [
         {
           url: `${this.$store.state.domain}/training-data`,
