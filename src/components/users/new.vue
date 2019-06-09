@@ -41,10 +41,10 @@
                 large
                 :disabled="!usernameValid || !pwValid"
                 class="login-button"
-                @click="login"
+                @click="register"
               >
                 <span :class="{ 'login-button-word': usernameValid && pwValid }"
-                  >Login</span
+                  >Register</span
                 >
               </v-btn>
             </v-flex>
@@ -52,13 +52,23 @@
         </v-container>
       </v-card>
     </v-layout>
+    <v-layout class="primary" column justify-space-around align-center>
+      <v-flex class="mt-5">
+        <v-divider class="divider"></v-divider>
+      </v-flex>
+      <v-flex class="mt-4">
+        <router-link to="/login" class="link"
+          >Already have an account?</router-link
+        >
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 
 <script>
-import { setCookie } from "../module/controllCookie";
-import callAPI from "../module/callAPI";
-import Response from "./common/Response";
+import { setCookie } from "../../module/controllCookie";
+import callAPI from "../../module/callAPI";
+import Response from "../common/Response";
 
 export default {
   components: {
@@ -84,29 +94,22 @@ export default {
   },
   computed: {},
   methods: {
-    async login() {
+    async register() {
       const data = {
         username: this.username,
         password: this.password
       };
-      const loginRequest = [
+      const userRegistrationRequest = [
         {
-          url: `${this.$store.state.domain}/auth/login`,
+          url: `${this.$store.state.domain}/auth/users`,
           method: "POST",
           data: data
         }
       ];
 
-      const [loginResponse] = await callAPI(loginRequest);
+      const [userRegistrationResponse] = await callAPI(userRegistrationRequest);
       if (this.$store.state.response.status === 200) {
-        if (loginResponse.auth) {
-          this.$store.commit("setUsername", loginResponse.username);
-          this.$store.commit("setIsloggedIn", true);
-          setCookie(loginResponse.token, loginResponse.username);
-          setTimeout(() => {
-            this.$router.push("/");
-          }, 1500);
-        }
+        // Something happens ?
       }
     }
   }
@@ -121,5 +124,11 @@ export default {
 }
 .login-button-word {
   color: white;
+}
+.link {
+  color: white;
+}
+.divider {
+  width: 400px;
 }
 </style>

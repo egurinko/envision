@@ -78,7 +78,7 @@ export default {
       this.$router.push(route);
     },
     goLogin() {
-      this.$router.push("login");
+      this.$router.push("/login");
     },
     handleLogout() {
       this.$store.commit("setUsername", "");

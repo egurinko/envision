@@ -52,6 +52,14 @@
         </v-container>
       </v-card>
     </v-layout>
+    <v-layout class="primary" column justify-space-around align-center>
+      <v-flex class="mt-5">
+        <v-divider class="divider"></v-divider>
+      </v-flex>
+      <v-flex class="mt-4">
+        <router-link to="/users/new" class="link">New to ENVISION?</router-link>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 
@@ -121,5 +129,11 @@ export default {
 }
 .login-button-word {
   color: white;
+}
+.link {
+  color: white;
+}
+.divider {
+  width: 400px;
 }
 </style>
