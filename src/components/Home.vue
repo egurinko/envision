@@ -1,7 +1,7 @@
 <template>
   <v-container v-if="loaded" class="primary">
     <v-layout row wrap justify-center align-center>
-      <v-flex xs10 class="px-3">
+      <v-flex xs10 class="px-3 pb-3">
         <doughnut-chart :chart-data="doughnutData" class="px-1 prod-chart" title="COMFORT INDEX"></doughnut-chart>
       </v-flex>
     </v-layout>
