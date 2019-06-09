@@ -1,16 +1,12 @@
 const router = require("express").Router();
+const envsController = require("../../controller/envs/index");
 
 module.exports = services => {
-  router.get("/", async (req, res) => {
-    const timespan = req.query.timespan ? req.query.timespan : null;
-    const data = await services.envs.list(timespan);
-    res.status(200).send(data);
-  });
+  router.get("/", async (req, res) => envsController.list(req, res, services));
 
-  router.post("/", (req, res) => {
-    services.envs.create(req.body);
-    res.sendStatus(200);
-  });
+  router.post("/", async (req, res) =>
+    envsController.create(req, res, services)
+  );
 
   return router;
 };
