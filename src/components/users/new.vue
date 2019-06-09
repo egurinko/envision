@@ -5,6 +5,11 @@
         <Response></Response>
         <v-container class="secondary">
           <v-layout class="secondary" align-center column>
+            <v-flex xs4 class="mt-4 mb-4">
+              <div class="title font-weight-bold lightGreen--text">
+                Add new users.
+              </div>
+            </v-flex>
             <v-flex xs4 class="mt-4 mb-4 login-form">
               <v-form v-model="usernameValid">
                 <v-text-field
@@ -66,7 +71,6 @@
 </template>
 
 <script>
-import { setCookie } from "../../module/controllCookie";
 import callAPI from "../../module/callAPI";
 import Response from "../common/Response";
 

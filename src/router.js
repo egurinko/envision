@@ -32,7 +32,8 @@ const router = new Router({
     {
       path: "/users/new",
       name: "usersRegistration",
-      component: UserRegistration
+      component: UserRegistration,
+      meta: { icon: "supervisor_account" }
     },
     { path: "*", redirect: "/" }
   ]

@@ -5,6 +5,11 @@
         <Response></Response>
         <v-container class="secondary">
           <v-layout class="secondary" align-center column>
+            <v-flex xs4 class="mt-4 mb-4">
+              <div class="title font-weight-bold lightGreen--text">
+                Login to your account.
+              </div>
+            </v-flex>
             <v-flex xs4 class="mt-4 mb-4 login-form">
               <v-form v-model="usernameValid">
                 <v-text-field
@@ -57,7 +62,9 @@
         <v-divider class="divider"></v-divider>
       </v-flex>
       <v-flex class="mt-4">
-        <router-link to="/users/new" class="link">New to ENVISION?</router-link>
+        <router-link to="/users/new" class="link"
+          >Add new users to ENVISION?</router-link
+        >
       </v-flex>
     </v-layout>
   </v-container>
