@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 
 const services = require("../db/index")();
-const apiRouter = require("./api")(services);
+const apiRouter = require("./routes")(services);
 
 const cron = require("node-cron");
 const makeComfortIndex = require("./cron/makeComfortIndex");
