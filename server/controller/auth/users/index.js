@@ -3,6 +3,11 @@ const bcrypt = require("bcryptjs");
 require("dotenv").config();
 const secret = process.env.API_SECRET;
 
+exports.list = async (req, res, services) => {
+  const data = await services.user.list();
+  res.status(200).send(data);
+};
+
 exports.create = async (req, res, services) => {
   const hashedPW = bcrypt.hashSync(req.body.password, 8);
 
