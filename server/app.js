@@ -14,8 +14,12 @@ const deleteOldData = require("./cron/deleteOldData");
 
 cron.schedule("* * * * *", () => {
   makeComfortIndex(services);
+  console.log("Making a comfort index");
+});
+
+cron.schedule("00 50 23 * * *", () => {
   deleteOldData(services);
-  console.log("running a task every minute");
+  console.log("Delete Old data");
 });
 
 const app = express();
