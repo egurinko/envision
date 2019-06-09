@@ -15,9 +15,9 @@
         </v-flex>
 
         <v-spacer></v-spacer>
-        <div v-if="!isPhone && isLoggedIn" class="px-4">
-          <v-icon dark>account_circle</v-icon>
-          <span class="username">{{ username }}</span>
+        <div v-if="!isPhone && isLoggedIn" class="px-4 account-container">
+          <v-icon class="account-icon" dark>account_circle</v-icon>
+          <span class="account-username">{{ username }}</span>
         </div>
 
         <v-btn v-if="!isLoggedIn" color="lightGreen" flat dark outline small @click="goLogin">
@@ -77,9 +77,15 @@ export default {
 .auth {
   color: white;
 }
-.username {
+.account-container {
+  display: flex;
+  align-items: center;
+}
+.account-username {
   font-size: 18px;
   margin-left: 10px;
-  padding-bottom: 5px;
+}
+.account-account-icon {
+  padding-top: 5px;
 }
 </style>
