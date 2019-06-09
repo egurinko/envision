@@ -9,8 +9,14 @@ module.exports = services => {
   });
 
   router.post("/", verifyToken, (req, res) => {
-    services.trainingData.create(req.body);
-    res.sendStatus(200);
+    services.trainingData
+      .create(req.body)
+      .then(res => {
+        res.status(200);
+      })
+      .catch(err => {
+        console.log("ERROR", err);
+      });
   });
 
   return router;

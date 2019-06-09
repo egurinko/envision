@@ -1,5 +1,6 @@
 <template>
-  <v-container :v-if="isLoading" class="primary">
+  <v-container :v-if="!isLoading" class="primary">
+    <Response></Response>
     <v-layout row wrap justify-center align-center>
       <v-flex xs10 class="px-3 pb-3">
         <doughnut-chart
@@ -71,12 +72,14 @@ import LineChart from "../module/lineChart.js";
 import TimespanButton from "./common/TimespanButton";
 import convertTime from "../module/convertTime.js";
 import { mapState } from "vuex";
+import Response from "./common/Response";
 
 export default {
   components: {
     doughnutChart,
     LineChart,
-    TimespanButton
+    TimespanButton,
+    Response
   },
   data() {
     return {

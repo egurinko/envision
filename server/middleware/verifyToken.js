@@ -6,14 +6,16 @@ module.exports = (req, res, next) => {
   let token = req.headers["x-access-token"];
 
   if (!token) {
-    return res.status(403).send({ auth: false, message: "No token provided." });
+    return res
+      .status(403)
+      .send({ auth: false, errorMessage: "No token provided." });
   }
 
   jwt.verify(token, secret, (err, decoded) => {
     if (err) {
-      return res.json({
+      return res.status(403).send({
         auth: false,
-        message: "Token is not valid"
+        errorMessage: "Token is not valid."
       });
     }
 

@@ -3,10 +3,11 @@ import Router from "vue-router";
 import Home from "./components/Home.vue";
 import Graphs from "./components/Graphs.vue";
 import Login from "./components/Login.vue";
+import store from "./store";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -30,3 +31,10 @@ export default new Router({
     { path: "*", redirect: "/" }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  store.commit("setResponse", { status: "", errors: "" });
+  next();
+});
+
+export default router;
