@@ -2,6 +2,7 @@
   <v-container class="primary">
     <v-layout class="primary" justify-center row>
       <v-card class="secondary" flat style="width: 400px;">
+        <Response></Response>
         <v-container class="secondary">
           <v-layout class="secondary" align-center column>
             <v-flex xs4 class="mt-4 mb-4 login-form">
@@ -57,8 +58,12 @@
 <script>
 import { setCookie } from "../module/controllCookie";
 import callAPI from "../module/callAPI";
+import Response from "./common/Response";
 
 export default {
+  components: {
+    Response
+  },
   data() {
     return {
       usernameValid: false,
@@ -100,7 +105,7 @@ export default {
           setCookie(loginResponse.token, loginResponse.username);
           setTimeout(() => {
             this.$router.push("/");
-          }, 1000);
+          }, 1500);
         }
       }
     }

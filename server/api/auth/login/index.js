@@ -11,13 +11,17 @@ module.exports = services => {
       .get({ username: req.body.username })
       .then(data => {
         if (!data) {
-          res.status(404).send("No user found.");
+          res.status(404).send({ errorMessage: "No user found." });
           return;
         }
 
         const isPWValid = bcrypt.compareSync(req.body.password, data.password);
         if (!isPWValid) {
-          res.status(401).send({ auth: false, token: null });
+          res.status(401).send({
+            auth: false,
+            token: null,
+            errorMessage: "Password is invalid."
+          });
           return;
         }
         const token = jwt.sign({ id: res._id }, secret, {

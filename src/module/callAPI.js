@@ -23,7 +23,18 @@ export default requests => {
       return responses.map(response => response.data);
     })
     .catch(error => {
-      console.log("CATCH CALL API: ", error);
+      if (error.response) {
+        store.commit("setResponse", {
+          status: error.response.status,
+          errors: error.response.data
+        });
+      } else {
+        store.commit("setResponse", {
+          status: 500,
+          errors: { errorMessage: "500 Sorry it's me, not you." }
+        });
+      }
+      console.log("CATCH CALL API: ", error.response);
     })
     .finally(error => {
       store.commit("setIsLoading", false);
