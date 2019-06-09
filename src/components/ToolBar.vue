@@ -3,7 +3,12 @@
     <v-container class="primary pa-3">
       <v-layout class="primary" nowrap align-center>
         <v-flex v-if="isPhone">
-          <v-img width="30" height="30" contain :src="require('../assets/logo2.png')"/>
+          <v-img
+            width="30"
+            height="30"
+            contain
+            :src="require('../assets/logo2.png')"
+          />
         </v-flex>
 
         <v-spacer></v-spacer>
@@ -20,10 +25,26 @@
           <span class="account-username">{{ username }}</span>
         </div>
 
-        <v-btn v-if="!isLoggedIn" color="lightGreen" flat dark outline small @click="goLogin">
+        <v-btn
+          v-if="!isLoggedIn"
+          color="lightGreen"
+          flat
+          dark
+          outline
+          small
+          @click="goLogin"
+        >
           <span class="auth pa-1">Login</span>
         </v-btn>
-        <v-btn v-if="isLoggedIn" color="lightGreen" flat dark outline small @click="handleLogout">
+        <v-btn
+          v-if="isLoggedIn"
+          color="lightGreen"
+          flat
+          dark
+          outline
+          small
+          @click="handleLogout"
+        >
           <span class="auth pa-1">Logout</span>
         </v-btn>
       </v-layout>

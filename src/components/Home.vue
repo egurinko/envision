@@ -1,8 +1,12 @@
 <template>
-  <v-container v-if="loaded" class="primary">
+  <v-container :v-if="isLoading" class="primary">
     <v-layout row wrap justify-center align-center>
       <v-flex xs10 class="px-3 pb-3">
-        <doughnut-chart :chart-data="doughnutData" class="px-1 prod-chart" title="COMFORT INDEX"></doughnut-chart>
+        <doughnut-chart
+          :chart-data="doughnutData"
+          class="px-1 prod-chart"
+          title="COMFORT INDEX"
+        ></doughnut-chart>
       </v-flex>
     </v-layout>
 
@@ -31,7 +35,9 @@
               'detail-left-warning': data.value >= $constant.CRITICAL_RATIO,
               'detail-left-critical': data.value < $constant.CRITICAL_RATIO
             }"
-          >{{ data.label }}</div>
+          >
+            {{ data.label }}
+          </div>
         </v-flex>
         <v-flex v-if="!isTablet" xs0 sm0 md3>
           <div class="detail-center">・・・・・・></div>
@@ -74,7 +80,6 @@ export default {
   },
   data() {
     return {
-      loaded: false,
       latestEnv: null,
       comfort: null,
       state: this.$store.state
@@ -83,10 +88,11 @@ export default {
   computed: {
     ...mapState({
       isPhone: state => state.isPhone,
-      isTablet: state => state.isTablet
+      isTablet: state => state.isTablet,
+      isLoading: state => state.isLoading
     }),
     detailData: function() {
-      if (!this.loaded) return;
+      if (!this.comfort) return;
       const latest = this.comfort[this.comfort.length - 1];
       return latest.detail.map(data => {
         return {
@@ -97,7 +103,7 @@ export default {
       });
     },
     doughnutData: function() {
-      if (!this.loaded) return;
+      if (!this.comfort) return;
       const comfort = this.latestComfort[this.latestComfort.length - 1]
         .comfortIndex;
       const firstColor =
@@ -124,7 +130,7 @@ export default {
       };
     },
     lineData: function() {
-      if (!this.loaded) return;
+      if (!this.comfort) return;
       return {
         labels: this.comfort.map(shot => convertTime(shot.timestamp)),
         datasets: [
@@ -140,15 +146,18 @@ export default {
       };
     }
   },
-  created() {
-    this.init();
+  async created() {
+    this.$store.commit("setIsLoading", true);
+    await this.init();
+    this.$store.commit("setIsLoading", false);
+
     setInterval(() => {
       this.update();
     }, 60000);
   },
   methods: {
     init() {
-      Promise.all([
+      return Promise.all([
         axios.get(`${this.$store.state.domain}/comfort`, {
           params: {
             timespan: this.$store.getters.getTimespan
@@ -159,19 +168,20 @@ export default {
       ]).then(([comfort, envs, latestComfort]) => {
         if (comfort.data.length === 0 || envs.data.length === 0) {
           return;
-        } else {
-          this.comfort = comfort.data;
-          this.latestComfort = latestComfort.data;
-          this.latestEnv = envs.data[envs.data.length - 1];
-          this.loaded = true;
         }
+        this.comfort = comfort.data;
+        this.latestComfort = latestComfort.data;
+        this.latestEnv = envs.data[envs.data.length - 1];
+        return;
       });
     },
-    update() {
-      this.init();
+    async update() {
+      await this.init();
     },
-    onClick() {
-      this.init();
+    async onClick() {
+      this.$store.commit("setIsLoading", true);
+      await this.init();
+      this.$store.commit("setIsLoading", false);
     }
   }
 };

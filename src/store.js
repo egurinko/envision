@@ -12,6 +12,7 @@ export default new Vuex.Store({
     isTablet: window.innerWidth < constant.TABLET_SIZE,
     username: "",
     isLoggedIn: false,
+    isLoading: false,
     domain:
       process.env.NODE_ENV === "development"
         ? "https://prod-bot-staging.herokuapp.com/api"
@@ -41,6 +42,9 @@ export default new Vuex.Store({
     },
     setIsloggedIn(state, isLoggedIn) {
       state.isLoggedIn = isLoggedIn;
+    },
+    setIsLoading(state, isLoading) {
+      state.isLoading = isLoading;
     },
     changeTimespan(state, timespan) {
       state.timespans.selected = timespan;

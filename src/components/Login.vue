@@ -42,7 +42,9 @@
                 class="login-button"
                 @click="login"
               >
-                <span :class="{ 'login-button-word': usernameValid && pwValid }">Login</span>
+                <span :class="{ 'login-button-word': usernameValid && pwValid }"
+                  >Login</span
+                >
               </v-btn>
             </v-flex>
           </v-layout>
@@ -53,8 +55,8 @@
 </template>
 
 <script>
-import axios from "axios";
 import { setCookie } from "../module/controllCookie";
+import callAPI from "../module/callAPI";
 
 export default {
   data() {
@@ -82,18 +84,25 @@ export default {
         username: this.username,
         password: this.password
       };
-      await axios
-        .post(`${this.$store.state.domain}/auth/login`, data)
-        .then(res => {
-          const auth = res.data;
-          if (auth.auth) {
-            this.$store.commit("setUsername", auth.username);
-            setCookie(auth.token, auth.username);
-            setTimeout(() => {
-              this.$router.push("/");
-            }, 1000);
-          }
-        });
+      const loginRequest = [
+        {
+          url: `${this.$store.state.domain}/auth/login`,
+          method: "POST",
+          data: data
+        }
+      ];
+
+      const [loginResponse] = await callAPI(loginRequest);
+      if (this.$store.state.response.status === 200) {
+        if (loginResponse.auth) {
+          this.$store.commit("setUsername", loginResponse.username);
+          this.$store.commit("setIsloggedIn", true);
+          setCookie(loginResponse.token, loginResponse.username);
+          setTimeout(() => {
+            this.$router.push("/");
+          }, 1000);
+        }
+      }
     }
   }
 };

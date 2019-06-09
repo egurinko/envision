@@ -12,6 +12,7 @@ import store from "../store";
 
 export default requests => {
   const reqPromises = [];
+  store.commit("setIsLoading", true);
   for (const request of requests) {
     reqPromises.push(requestAPI(request));
   }
@@ -23,6 +24,9 @@ export default requests => {
     })
     .catch(error => {
       console.log("CATCH CALL API: ", error);
+    })
+    .finally(error => {
+      store.commit("setIsLoading", false);
     });
 };
 
@@ -41,8 +45,6 @@ const requestAPI = request => {
       config.data = request.data;
     }
   }
-
-  console.log("REQUEST", config);
 
   return axios.request(config);
 };

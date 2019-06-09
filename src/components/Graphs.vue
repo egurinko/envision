@@ -1,10 +1,9 @@
 <template>
   <v-container class="primary my-1">
-    <v-layout class="primary" row wrap justify-space-around>
+    <v-layout v-if="!isLoading" class="primary" row wrap justify-space-around>
       <timespan-button @on-click="onClick"></timespan-button>
       <v-flex
         v-for="(data, i) in chartData"
-        v-if="loaded"
         :key="i"
         xs12
         sm12
@@ -41,13 +40,12 @@ export default {
   },
   data() {
     return {
-      loaded: false,
       envs: null
     };
   },
   computed: {
     chartData: function() {
-      if (!this.loaded) return;
+      if (this.envs === null) return;
       const chartData = [];
       for (let i in this.envs) {
         chartData.push(this.makeChartData(this.envs[i].data, this.envs[i].key));
@@ -55,7 +53,8 @@ export default {
       return chartData;
     },
     ...mapState({
-      annotations: state => state.annotations
+      annotations: state => state.annotations,
+      isLoading: state => state.isLoading
     })
   },
   created() {
@@ -66,7 +65,8 @@ export default {
   },
   methods: {
     init() {
-      this.loaded = false;
+      this.$store.commit("setIsLoading", true);
+
       axios
         .get(`${this.$store.state.domain}/envs`, {
           params: {
@@ -86,7 +86,9 @@ export default {
             }
             return { key: env.key, data: timeConvetedData };
           });
-          this.loaded = true;
+        })
+        .finally(error => {
+          this.$store.commit("setIsLoading", false);
         });
     },
     update() {
