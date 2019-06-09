@@ -68,7 +68,7 @@
 import axios from "axios";
 import doughnutChart from "../module/doughnutChart.js";
 import LineChart from "../module/lineChart.js";
-import TimespanButton from "./TimespanButton.vue";
+import TimespanButton from "./common/TimespanButton";
 import convertTime from "../module/convertTime.js";
 import { mapState } from "vuex";
 
