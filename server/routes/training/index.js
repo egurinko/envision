@@ -1,23 +1,13 @@
 const router = require("express").Router();
 const verifyToken = require("../../middleware/verifyToken");
+const trainingController = require("../../controller/training/index");
 
 module.exports = services => {
-  router.get("/", async (req, res) => {
-    const timespan = req.query.timespan ? req.query.timespan : null;
-    const data = await services.envs.list(timespan);
-    res.status(200).send(data);
-  });
+  router.get("/", (req, res) => trainingController.list(req, res, services));
 
-  router.post("/", verifyToken, (req, res) => {
-    services.trainingData
-      .create(req.body)
-      .then(res => {
-        res.status(200);
-      })
-      .catch(err => {
-        console.log("ERROR", err);
-      });
-  });
+  router.post("/", verifyToken, (req, res) =>
+    trainingController.create(req, res, services)
+  );
 
   return router;
 };
