@@ -11,7 +11,8 @@ module.exports = () => {
       return (
         key !== "system.indexes" &&
         key !== "objectlabs-system.admin.collections" &&
-        key !== "objectlabs-system"
+        key !== "objectlabs-system" &&
+        key !== "user"
       );
     });
 
