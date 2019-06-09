@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "./components/Home.vue";
 import Graphs from "./components/Graphs.vue";
 import Login from "./components/Login.vue";
+import UserRegistration from "./components/users/new.vue";
 import store from "./store";
 
 Vue.use(Router);
@@ -27,6 +28,11 @@ const router = new Router({
       path: "/login",
       name: "login",
       component: Login
+    },
+    {
+      path: "/users/new",
+      name: "usersRegistration",
+      component: UserRegistration
     },
     { path: "*", redirect: "/" }
   ]

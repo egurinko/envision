@@ -5,6 +5,6 @@ module.exports = function() {
     oldData: require("./oldData")(),
     trainingData: require("./trainingData")(),
     contribution: require("./contribution")(),
-    user: require("./user")()
+    user: require("./users")()
   };
 };
