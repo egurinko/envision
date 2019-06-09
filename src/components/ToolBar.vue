@@ -15,7 +15,11 @@
         </v-flex>
 
         <v-spacer></v-spacer>
-        <span v-if="!isPhone && isLoggedIn" class="px-3">{{ username }}</span>
+        <div v-if="!isPhone && isLoggedIn" class="px-4">
+          <v-icon dark>account_circle</v-icon>
+          <span class="username">{{ username }}</span>
+        </div>
+
         <v-btn v-if="!isLoggedIn" color="lightGreen" flat dark outline small @click="goLogin">
           <span class="auth pa-1">Login</span>
         </v-btn>
@@ -72,5 +76,10 @@ export default {
 }
 .auth {
   color: white;
+}
+.username {
+  font-size: 18px;
+  margin-left: 10px;
+  padding-bottom: 5px;
 }
 </style>

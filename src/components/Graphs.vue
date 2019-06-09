@@ -19,7 +19,7 @@
             :id="data.datasets[0].id"
             :chart-data="data"
             :title="data.datasets[0].label"
-            :annotation="$store.state.annotations[data.datasets[0].label]"
+            :annotation="annotations[data.datasets[0].label]"
           ></line-chart>
         </v-card>
       </v-flex>
@@ -32,6 +32,7 @@ import axios from "axios";
 import LineChart from "../module/lineChart.js";
 import TimespanButton from "./TimespanButton.vue";
 import convertTime from "../module/convertTime.js";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -52,7 +53,10 @@ export default {
         chartData.push(this.makeChartData(this.envs[i].data, this.envs[i].key));
       }
       return chartData;
-    }
+    },
+    ...mapState({
+      annotations: state => state.annotations
+    })
   },
   created() {
     this.init();

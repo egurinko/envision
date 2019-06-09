@@ -15,9 +15,9 @@
         justify-space-between
         align-center
         :class="{
-          'detail-phone': state.isPhone,
-          'py-2': state.isPhone,
-          'pa-3': !state.isPhone,
+          'detail-phone': isPhone,
+          'py-2': isPhone,
+          'pa-3': !isPhone,
           'detail-normal': data.value >= $constant.WARNING_RATIO,
           'detail-warning': data.value >= $constant.CRITICAL_RATIO,
           'detail-critical': data.value < $constant.CRITICAL_RATIO
@@ -33,7 +33,7 @@
             }"
           >{{ data.label }}</div>
         </v-flex>
-        <v-flex v-if="!state.isTablet" xs0 sm0 md3>
+        <v-flex v-if="!isTablet" xs0 sm0 md3>
           <div class="detail-center">・・・・・・></div>
         </v-flex>
         <v-flex xs6 sm6 md4>
@@ -64,6 +64,7 @@ import doughnutChart from "../module/doughnutChart.js";
 import LineChart from "../module/lineChart.js";
 import TimespanButton from "./TimespanButton.vue";
 import convertTime from "../module/convertTime.js";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -80,6 +81,10 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      isPhone: state => state.isPhone,
+      isTablet: state => state.isTablet
+    }),
     detailData: function() {
       if (!this.loaded) return;
       const latest = this.comfort[this.comfort.length - 1];
