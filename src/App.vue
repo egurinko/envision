@@ -3,7 +3,7 @@
     <div id="design-bar" class="tertiary"></div>
     <v-container id="app-container" class="primary">
       <v-layout class="primary" row nowrap>
-        <v-flex v-if="!state.isPhone">
+        <v-flex v-if="!isPhone">
           <drawer class="drawer px-3 py-4"></drawer>
         </v-flex>
         <v-flex class="main-content">
@@ -25,6 +25,8 @@
 import Drawer from "./components/Drawer";
 import ToolBar from "./components/ToolBar";
 import constant from "../constant.js";
+import { getCookie } from "./module/controllCookie";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -34,16 +36,27 @@ export default {
   computed: {
     state: function() {
       return this.$store.state;
-    }
+    },
+    ...mapState({
+      isPhone: state => state.isPhone
+    })
   },
   created() {
     window.addEventListener("resize", this.handleWindowResize);
+    this.handleLoginStatus();
   },
   methods: {
     handleWindowResize() {
       const width = window.innerWidth;
       this.$store.commit("isPhone", width < constant.PHONE_SIZE);
       this.$store.commit("isTablet", width < constant.TABLET_SIZE);
+    },
+    handleLoginStatus() {
+      const cookie = getCookie();
+      if (cookie.token !== "") {
+        this.$store.commit("setIsloggedIn", true);
+        this.$store.commit("setUsername", cookie.username);
+      }
     }
   }
 };

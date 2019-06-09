@@ -10,12 +10,13 @@ export default new Vuex.Store({
   state: {
     isPhone: window.innerWidth < constant.PHONE_SIZE,
     isTablet: window.innerWidth < constant.TABLET_SIZE,
+    username: "",
+    isLoggedIn: false,
     domain:
       process.env.NODE_ENV === "development"
         ? "https://prod-bot-staging.herokuapp.com/api"
         : "/api",
     colors,
-    username: "",
     annotations: annotations,
     timespans: {
       selected: "AN HOUR",
@@ -37,6 +38,9 @@ export default new Vuex.Store({
     },
     isTablet(state, isTablet) {
       state.isTablet = isTablet;
+    },
+    setIsloggedIn(state, isLoggedIn) {
+      state.isLoggedIn = isLoggedIn;
     },
     changeTimespan(state, timespan) {
       state.timespans.selected = timespan;

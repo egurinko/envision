@@ -2,28 +2,35 @@
   <v-toolbar flat>
     <v-container class="primary pa-3">
       <v-layout class="primary" nowrap align-center>
-        <v-flex v-if="state.isPhone">
+        <v-flex v-if="isPhone">
           <v-img width="30" height="30" contain :src="require('../assets/logo2.png')"/>
         </v-flex>
 
         <v-spacer></v-spacer>
 
-        <v-flex v-if="state.isPhone" v-for="(item, index) in menus" :key="index">
+        <v-flex v-for="(item, index) in menus" v-if="isPhone" :key="index">
           <v-btn icon flat @click="handleClick(item.route)">
             <v-icon size="25">{{ item.icon }}</v-icon>
           </v-btn>
         </v-flex>
 
         <v-spacer></v-spacer>
-
-        <v-btn color="lightGreen" flat dark outline small @click="goLogin">
+        <span v-if="!isPhone && isLoggedIn" class="px-3">{{ username }}</span>
+        <v-btn v-if="!isLoggedIn" color="lightGreen" flat dark outline small @click="goLogin">
           <span class="auth pa-1">Login</span>
+        </v-btn>
+        <v-btn v-if="isLoggedIn" color="lightGreen" flat dark outline small @click="handleLogout">
+          <span class="auth pa-1">Logout</span>
         </v-btn>
       </v-layout>
     </v-container>
   </v-toolbar>
 </template>
 <script>
+import { removeCookie } from "../module/controllCookie";
+import { setTimeout } from "timers";
+import { mapState } from "vuex";
+
 export default {
   computed: {
     menus: function() {
@@ -35,9 +42,11 @@ export default {
       });
       return icons;
     },
-    state: function() {
-      return this.$store.state;
-    }
+    ...mapState({
+      isLoggedIn: state => state.isLoggedIn,
+      username: state => state.username,
+      isPhone: state => state.isPhone
+    })
   },
   methods: {
     handleClick(route) {
@@ -45,6 +54,14 @@ export default {
     },
     goLogin() {
       this.$router.push("login");
+    },
+    handleLogout() {
+      this.$store.commit("setUsername", "");
+      this.$store.commit("setIsloggedIn", false);
+      removeCookie();
+      setTimeout(() => {
+        this.$router.push("/");
+      }, 1000);
     }
   }
 };

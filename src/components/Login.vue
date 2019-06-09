@@ -54,7 +54,7 @@
 
 <script>
 import axios from "axios";
-import { setTokenFromCookie, setTokenToCookie } from "../module/controllCookie";
+import { setCookie } from "../module/controllCookie";
 
 export default {
   data() {
@@ -87,8 +87,11 @@ export default {
         .then(res => {
           const auth = res.data;
           if (auth.auth) {
-            this.$store.commit("setUsername", { username: auth.username });
-            setTokenToCookie(auth.token);
+            this.$store.commit("setUsername", auth.username);
+            setCookie(auth.token, auth.username);
+            setTimeout(() => {
+              this.$router.push("/");
+            }, 1000);
           }
         });
     }

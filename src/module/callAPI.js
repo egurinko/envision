@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getTokenFromCookie } from "./controllCookie";
+import { getCookie } from "./controllCookie";
 import store from "../store";
 
 // This function is for making the interceptor to check and set the token in cookie
@@ -34,7 +34,7 @@ const requestAPI = request => {
       config.params = request.params;
     }
   } else {
-    const token = getTokenFromCookie();
+    const { token } = getCookie();
     config.headers = { "x-access-token": token };
 
     if (request.method === "POST") {
