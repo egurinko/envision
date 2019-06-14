@@ -19,18 +19,24 @@ export default requests => {
 
   return Promise.all(reqPromises)
     .then(responses => {
-      store.commit("setResponse", { status: 200, errors: "" });
+      store.commit("setResponse", {
+        status: 200,
+        method: requests[0].method,
+        errors: ""
+      });
       return responses.map(response => response.data);
     })
     .catch(error => {
       if (error.response) {
         store.commit("setResponse", {
           status: error.response.status,
+          method: requests[0].method,
           errors: error.response.data
         });
       } else {
         store.commit("setResponse", {
           status: 500,
+          method: requests[0].method,
           errors: { errorMessage: "500 Sorry it's me, not you." }
         });
       }

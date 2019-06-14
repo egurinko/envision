@@ -30,6 +30,7 @@ export default new Vuex.Store({
     },
     response: {
       status: "",
+      method: "",
       errors: ""
     }
   },

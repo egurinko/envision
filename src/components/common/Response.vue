@@ -1,7 +1,7 @@
 <template>
   <div class="primary pb-3">
     <v-alert
-      :value="response.status === 200"
+      :value="response.status === 200 && response.method !== 'GET'"
       color="lightGreen"
       icon="check_circle"
       outline
