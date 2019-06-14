@@ -1,5 +1,6 @@
 <template>
   <v-container class="primary my-1">
+    <Response></Response>
     <v-layout v-if="!isLoading" class="primary" row wrap justify-space-around>
       <timespan-button @on-click="onClick"></timespan-button>
       <v-flex
@@ -32,11 +33,14 @@ import LineChart from "../module/lineChart.js";
 import TimespanButton from "./common/TimespanButton";
 import convertTime from "../module/convertTime.js";
 import { mapState } from "vuex";
+import Response from "./common/Response";
+import callAPI from "../module/callAPI";
 
 export default {
   components: {
     LineChart,
-    TimespanButton
+    TimespanButton,
+    Response
   },
   data() {
     return {
@@ -64,32 +68,30 @@ export default {
     }, 60000);
   },
   methods: {
-    init() {
-      this.$store.commit("setIsLoading", true);
+    async init() {
+      const requests = [
+        {
+          url: `${this.$store.state.domain}/envs`,
+          method: "GET",
+          params: { timespan: this.$store.getters.getTimespan }
+        }
+      ];
 
-      axios
-        .get(`${this.$store.state.domain}/envs`, {
-          params: {
-            timespan: this.$store.getters.getTimespan
+      const [envs] = await callAPI(requests);
+      if (this.$store.state.response.status === 200) {
+        this.envs = envs.map(env => {
+          let timeConvetedData = env.data;
+          if (env.data.length !== 0) {
+            timeConvetedData = env.data.map(each => {
+              return {
+                value: each.value,
+                time: convertTime(each.timestamp)
+              };
+            });
           }
-        })
-        .then(envs => {
-          this.envs = envs.data.map(env => {
-            let timeConvetedData = env.data;
-            if (env.data.length !== 0) {
-              timeConvetedData = env.data.map(each => {
-                return {
-                  value: each.value,
-                  time: convertTime(each.timestamp)
-                };
-              });
-            }
-            return { key: env.key, data: timeConvetedData };
-          });
-        })
-        .finally(error => {
-          this.$store.commit("setIsLoading", false);
+          return { key: env.key, data: timeConvetedData };
         });
+      }
     },
     update() {
       axios.get(`${this.$store.state.domain}/envs`).then(envs => {
