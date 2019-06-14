@@ -17,7 +17,13 @@ const callDB = async (method, endpoint) => {
 
     client.close();
 
-    return data;
+    return data.map(user => {
+      return {
+        id: user._id,
+        username: user.username,
+        timestamp: user.timestamp
+      };
+    });
   } catch (err) {
     throw Error(err);
   }
