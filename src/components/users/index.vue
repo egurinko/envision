@@ -1,0 +1,189 @@
+<template>
+  <v-container :v-if="!isLoading" class="primary">
+    <Response></Response>
+    <v-btn
+      color="lightGreen"
+      flat
+      dark
+      outline
+      small
+      @click="goUserRegistration"
+    >
+      <span class="registration pa-1">Register a new user</span>
+    </v-btn>
+    <v-layout row wrap justify-center align-start>
+      <v-flex xs12 md6>
+        <v-card class="secondary user-table" flat>
+          <v-layout
+            v-for="(user, i) in userData"
+            :key="i"
+            row
+            wrap
+            justify-space-between
+            align-center
+            :class="{
+              'detail-phone': isPhone,
+              'py-2': isPhone,
+              'pa-3': !isPhone
+            }"
+          >
+            <v-flex xs6>
+              <div
+                class="detail-left"
+                :class="{ 'detail-left-normal': i !== 0 }"
+              >
+                {{ user.username }}
+              </div>
+            </v-flex>
+            <v-flex xs6>
+              <div class="detail-right">{{ user.createdAt }}</div>
+            </v-flex>
+            <v-flex v-if="i === 0" xs12>
+              <v-divider></v-divider>
+            </v-flex>
+          </v-layout>
+        </v-card>
+      </v-flex>
+      <v-flex xs12 md6>
+        <v-card class="secondary contribution-card" flat>
+          <barChart
+            class="px-1 contribution-chart"
+            title="TRAINING DATA CONTRIBUTIONS"
+            :chart-data="contributionData"
+          ></barChart>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
+</template>
+
+<script>
+import barChart from "../../module/barChart.js";
+import callAPI from "../../module/callAPI";
+import { mapState } from "vuex";
+import Response from "../common/Response";
+import makeCreatedAt from "../../module/makeCreatedAt";
+
+export default {
+  components: {
+    barChart,
+    Response
+  },
+  data() {
+    return {
+      contributions: null,
+      users: null
+    };
+  },
+  computed: {
+    ...mapState({
+      isPhone: state => state.isPhone,
+      isTablet: state => state.isTablet,
+      isLoading: state => state.isLoading
+    }),
+    contributionData: function() {
+      if (!this.contributions && !this.users) return {};
+      const labels = this.users.map(user => user.username);
+      const data = labels.map(() => 0);
+      this.contributions.map(contribution => {
+        const index = labels.indexOf(contribution.username);
+        data[index] += 1;
+      });
+
+      return {
+        labels,
+        datasets: [
+          {
+            borderWidth: 1,
+            borderColor: this.$store.state.colors.lightGreen,
+            data
+          }
+        ]
+      };
+    },
+    userData: function() {
+      if (!this.users) return;
+      const userData = this.users.map(user => {
+        return {
+          username: user.username,
+          createdAt: makeCreatedAt(user.timestamp)
+        };
+      });
+      userData.unshift({
+        username: "Username",
+        createdAt: "Registration Date"
+      });
+      return userData;
+    }
+  },
+  created() {
+    this.init();
+  },
+  methods: {
+    async init() {
+      const requests = [
+        {
+          url: `${this.$store.state.domain}/contributions`,
+          method: "GET"
+        },
+        {
+          url: `${this.$store.state.domain}/auth/users`,
+          method: "GET"
+        }
+      ];
+
+      const [contributions, users] = await callAPI(requests);
+      if (this.$store.state.response.status === 200) {
+        this.contributions = contributions;
+        this.users = users;
+      }
+    },
+    goUserRegistration() {
+      this.$router.push("/users/new");
+    }
+  }
+};
+</script>
+<style scoped>
+.registration {
+  color: white;
+}
+.contribution-chart {
+  max-width: 400px;
+  min-width: 250px;
+  margin: 0 auto 0 auto;
+}
+.contribution-card {
+  max-height: 100%;
+  margin: 10px;
+  padding: 10px;
+}
+.user-table {
+  font-size: 18px;
+  text-align: center;
+  margin: 10px;
+}
+.detail-left {
+  float: left;
+  padding: 10px 0;
+  padding-left: 30px;
+  margin-left: 20px;
+}
+.detail-left-normal {
+  border-left: solid 7px #08b97f;
+}
+.detail-center {
+  color: gray;
+  font-size: 1.3vw;
+}
+.detail-right {
+  margin: 0 20px 0 0;
+  float: right;
+}
+.detail-normal {
+  color: white;
+}
+.detail-phone {
+  font-size: 14px;
+}
+</style>

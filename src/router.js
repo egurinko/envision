@@ -4,6 +4,7 @@ import Home from "./components/Home.vue";
 import Graphs from "./components/Graphs.vue";
 import Login from "./components/Login.vue";
 import UserRegistration from "./components/users/new.vue";
+import UserOverview from "./components/users/index.vue";
 import store from "./store";
 
 Vue.use(Router);
@@ -32,7 +33,12 @@ const router = new Router({
     {
       path: "/users/new",
       name: "usersRegistration",
-      component: UserRegistration,
+      component: UserRegistration
+    },
+    {
+      path: "/users",
+      name: "userOverview",
+      component: UserOverview,
       meta: { icon: "supervisor_account" }
     },
     { path: "*", redirect: "/" }
@@ -40,7 +46,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  store.commit("setResponse", { status: "", errors: "" });
+  store.commit("setResponse", { status: "", method: "", errors: "" });
   next();
 });
 
