@@ -1,6 +1,6 @@
 <template>
   <v-toolbar flat>
-    <v-container class="primary pa-3">
+    <v-container class="primary py-3">
       <v-layout class="primary" nowrap align-center>
         <v-flex v-if="isPhone">
           <v-img
@@ -19,12 +19,11 @@
           </v-btn>
         </v-flex>
 
-        <v-spacer></v-spacer>
+        <v-spacer v-if="!isPhone"></v-spacer>
         <div v-if="!isPhone && isLoggedIn" class="px-4 account-container">
           <v-icon class="account-icon" dark>account_circle</v-icon>
           <span class="account-username">{{ username }}</span>
         </div>
-
         <v-btn
           v-if="!isLoggedIn"
           color="lightGreen"
