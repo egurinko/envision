@@ -1,7 +1,7 @@
 <template>
   <v-container class="primary">
     <v-layout class="primary" justify-center row>
-      <v-card class="secondary" flat style="width: 400px;">
+      <v-card class="secondary" :class="{ card: isPhone }" flat>
         <Response></Response>
         <v-container class="secondary">
           <v-layout class="secondary" align-center column>
@@ -74,6 +74,7 @@
 import { setCookie } from "../module/controllCookie";
 import callAPI from "../module/callAPI";
 import Response from "./common/Response";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -97,7 +98,11 @@ export default {
       }
     };
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      isPhone: state => state.isPhone
+    })
+  },
   methods: {
     async login() {
       const data = {
@@ -128,6 +133,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.card {
+  width: 320px;
+}
 .login-form {
   width: 300px;
 }
