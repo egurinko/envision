@@ -11,7 +11,7 @@
     "heroku-postbuild": "yarn build"
   },
   "dependencies": {
-    "@mdi/font": "^3.5.95",
+    "@mdi/font": "^3.8.95",
     "@sentry/browser": "^5.1.1",
     "@sentry/integrations": "^5.1.0",
     "axios": "^0.18.0",
