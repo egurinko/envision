@@ -20,7 +20,7 @@
     "chalk": "^2.4.2",
     "chart.js": "^2.8.0",
     "chartjs-plugin-annotation": "^0.5.7",
-    "dotenv": "^7.0.0",
+    "dotenv": "^8.0.0",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.16.3",
