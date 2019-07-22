@@ -14,7 +14,7 @@
     "@mdi/font": "^3.8.95",
     "@sentry/browser": "^5.5.0",
     "@sentry/integrations": "^5.5.0",
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "chalk": "^2.4.2",
