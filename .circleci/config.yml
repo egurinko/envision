@@ -40,9 +40,12 @@ jobs:
 
 workflows:
   version: 2
-  build:
+  build-and-deploy:
     jobs:
       - build:
+    triggers:
+      - schedule:
+          cron: '00 01 * * 2'
           filters:
             branches:
               only: master
