@@ -14,8 +14,6 @@
     >
       <v-layout
         class="primary"
-        row
-        nowrap
       >
         <v-flex v-if="!isPhone">
           <drawer class="drawer px-3 py-4" />
@@ -27,7 +25,6 @@
           >
             <v-layout
               class="primary"
-              column
             >
               <v-flex>
                 <tool-bar class="primary" />
