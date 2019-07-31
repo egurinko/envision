@@ -1,7 +1,7 @@
 <template>
   <v-container
     :v-if="!isLoading"
-    class="primary"
+    class="primary container"
   >
     <Response />
     <v-layout
@@ -24,7 +24,6 @@
 
     <v-card
       class="secondary details"
-      text
       elevation="0"
     >
       <v-layout
@@ -234,6 +233,9 @@ export default {
 };
 </script>
 <style scoped>
+.container {
+  padding: 0 3%;
+}
 .home {
   width: 100%;
 }

@@ -1,5 +1,5 @@
 <template>
-  <v-container class="primary my-1">
+  <v-container class="primary my-1 container">
     <Response />
     <v-layout
       v-if="!isLoading"
@@ -23,6 +23,7 @@
         <v-card
           class="secondary"
           text
+          elevation="0"
         >
           <line-chart
             :id="data.datasets[0].id"
@@ -145,6 +146,9 @@ export default {
 };
 </script>
 <style scoped>
+.container {
+  padding: 0 3%;
+}
 .timespan {
   float: left;
 }

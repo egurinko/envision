@@ -8,7 +8,7 @@
       <v-card
         class="secondary"
         :class="{ card: isPhone }"
-        text
+        elevation="0"
       >
         <Response />
         <v-container class="secondary">
@@ -34,7 +34,7 @@
                   v-model="username"
                   :rules="usernameRules"
                   :counter="10"
-                  browser-autocomplete="off"
+                  autocomplete="off"
                   label="Username"
                   required
                 />
@@ -52,7 +52,7 @@
                   :type="isShow ? 'text' : 'password'"
                   hint="At least 8 characters"
                   counter
-                  browser-autocomplete="off"
+                  autocomplete="off"
                   label="Password"
                   @click:append="isShow = !isShow"
                 />
@@ -64,8 +64,7 @@
             >
               <v-btn
                 color="lightGreen"
-                text
-                dark
+                tile
                 outlined
                 large
                 :disabled="!usernameValid || !pwValid"

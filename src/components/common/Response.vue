@@ -5,6 +5,7 @@
       color="lightGreen"
       icon="check_circle"
       outlined
+      tile
     >
       Succeeded !
     </v-alert>
@@ -14,6 +15,7 @@
       color="lightCritical"
       icon="warning"
       outlined
+      tile
     >
       {{ response.errors.errorMessage }}
     </v-alert>

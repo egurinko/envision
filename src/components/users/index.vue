@@ -1,13 +1,12 @@
 <template>
   <v-container
     :v-if="!isLoading"
-    class="primary"
+    class="primary container"
   >
     <Response />
     <v-btn
       color="lightGreen"
-      text
-      dark
+      tile
       outlined
       small
       @click="goUserRegistration"
@@ -26,7 +25,7 @@
       >
         <v-card
           class="secondary user-table"
-          text
+          elevation="0"
         >
           <v-layout
             v-for="(user, i) in userData"
@@ -69,7 +68,7 @@
       >
         <v-card
           class="secondary contribution-card"
-          text
+          elevation="0"
         >
           <barChart
             class="px-1 contribution-chart"
@@ -171,6 +170,9 @@ export default {
 };
 </script>
 <style scoped>
+.container {
+  padding: 0 3%;
+}
 .registration {
   color: white;
 }
