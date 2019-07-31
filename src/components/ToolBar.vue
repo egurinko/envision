@@ -1,6 +1,9 @@
 <template>
-  <v-toolbar text>
-    <v-container class="primary py-3">
+  <v-toolbar class="elevation-0">
+    <v-container
+      class="primary py-3"
+      flat
+    >
       <v-layout
         class="primary"
         nowrap
@@ -18,11 +21,11 @@
         <v-spacer />
 
         <v-flex
-          v-for="(item, index) in menus"
           v-if="isPhone"
-          :key="index"
         >
           <v-btn
+            v-for="(item, index) in menus"
+            :key="index"
             icon
             text
             @click="handleClick(item.route)"
@@ -49,8 +52,7 @@
         <v-btn
           v-if="!isLoggedIn"
           color="lightGreen"
-          text
-          dark
+          tile
           outlined
           small
           @click="goLogin"
@@ -60,8 +62,7 @@
         <v-btn
           v-if="isLoggedIn"
           color="lightGreen"
-          text
-          dark
+          tile
           outlined
           small
           @click="handleLogout"

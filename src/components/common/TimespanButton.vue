@@ -13,6 +13,7 @@
           <template v-slot:activator="{ on }">
             <v-btn
               color="lightGreen"
+              tile
               outlined
               medium
               v-on="on"
