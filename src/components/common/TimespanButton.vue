@@ -12,9 +12,9 @@
         <v-menu offset-y>
           <template v-slot:activator="{ on }">
             <v-btn
-              class="lightGreen"
-              dark
+              color="lightGreen"
               outlined
+              medium
               v-on="on"
             >
               <v-icon
@@ -23,17 +23,22 @@
                 left
               >
                 add_alarm
-              </v-icon>{{ $store.state.timespans.selected }}
+              </v-icon><span class="white--text">{{ $store.state.timespans.selected }}</span>
             </v-btn>
           </template>
           <v-list class="primary">
-            <v-list-tile
+            <v-list-item
               v-for="(hours, key) in $store.state.timespans.timespan"
               :key="key"
               @click="onClick(key)"
             >
-              <v-list-item-title>{{ key }}</v-list-item-title>
-            </v-list-tile>
+              <v-list-item-content>
+                <v-list-item-title
+                  class="mx-3"
+                  v-text="key"
+                />
+              </v-list-item-content>
+            </v-list-item>
           </v-list>
         </v-menu>
       </v-flex>
