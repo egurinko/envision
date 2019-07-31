@@ -25,6 +25,7 @@
     <v-card
       class="secondary details"
       text
+      elevation="0"
     >
       <v-layout
         v-for="(data, i) in detailData"
@@ -87,6 +88,7 @@
 
     <v-card
       class="secondary"
+      elevation="0"
       text
     >
       <v-layout
