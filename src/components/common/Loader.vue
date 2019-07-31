@@ -2,11 +2,11 @@
   <v-layout
     row
     justify-center
+    align-center
   >
     <v-dialog
       v-model="isLoading"
       persistent
-      max-width="290"
     >
       <sync-loader
         id="loader"
@@ -40,7 +40,7 @@ export default {
 #loader {
   position: fixed;
   top: 50%;
-  left: 50%;
+  left: 100%;
   transform: translateY(-50%) translateX(-50%);
   -webkit-transform: translateY(-50%) translateX(-50%);
   margin: auto;
