@@ -1,17 +1,34 @@
 <template>
   <v-container class="primary">
-    <v-layout class="primary" row align-center justify-center>
-      <v-flex v-for="(item, index) in reputations" :key="index" xs5>
-        <v-btn class="ma-3" icon large @click="handleReputations(index)">
+    <v-layout
+      class="primary"
+      row
+      align-center
+      justify-center
+    >
+      <v-flex
+        v-for="(item, index) in reputations"
+        :key="index"
+        xs5
+      >
+        <v-btn
+          class="ma-3"
+          icon
+          large
+          @click="handleReputations(index)"
+        >
           <v-icon
             x-large
             :color="item.icon === 'mood' ? 'lightGreen' : 'lightCritical'"
-            >{{ item.icon }}</v-icon
           >
+            {{ item.icon }}
+          </v-icon>
         </v-btn>
-        <v-list-tile-title class="drawer-title pl-1">{{
-          item.title
-        }}</v-list-tile-title>
+        <v-list-item-title class="drawer-title pl-1">
+          {{
+            item.title
+          }}
+        </v-list-item-title>
       </v-flex>
     </v-layout>
   </v-container>
@@ -22,6 +39,7 @@ import callAPI from "../module/callAPI";
 import axios from "axios";
 
 export default {
+  name: "Reputation",
   data() {
     return {
       reputations: [

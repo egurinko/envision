@@ -1,8 +1,14 @@
 <template>
   <v-container class="primary my-1">
-    <Response></Response>
-    <v-layout v-if="!isLoading" class="primary" row wrap justify-space-around>
-      <timespan-button @on-click="onClick"></timespan-button>
+    <Response />
+    <v-layout
+      v-if="!isLoading"
+      class="primary"
+      row
+      wrap
+      justify-space-around
+    >
+      <timespan-button @on-click="onClick" />
       <v-flex
         v-for="(data, i) in chartData"
         :key="i"
@@ -14,13 +20,16 @@
         shrink
         class="pa-3 my-3"
       >
-        <v-card class="secondary" flat>
+        <v-card
+          class="secondary"
+          text
+        >
           <line-chart
             :id="data.datasets[0].id"
             :chart-data="data"
             :title="data.datasets[0].label"
             :annotation="annotations[data.datasets[0].label]"
-          ></line-chart>
+          />
         </v-card>
       </v-flex>
     </v-layout>
@@ -37,6 +46,7 @@ import Response from "./common/Response";
 import callAPI from "../module/callAPI";
 
 export default {
+  name: "Graphs",
   components: {
     LineChart,
     TimespanButton,

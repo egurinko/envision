@@ -1,19 +1,33 @@
 <template>
-  <v-container :v-if="!isLoading" class="primary">
-    <Response></Response>
+  <v-container
+    :v-if="!isLoading"
+    class="primary"
+  >
+    <Response />
     <v-btn
       color="lightGreen"
-      flat
+      text
       dark
-      outline
+      outlined
       small
       @click="goUserRegistration"
     >
       <span class="registration pa-1">Register a new user</span>
     </v-btn>
-    <v-layout row wrap justify-center align-start>
-      <v-flex xs12 md6>
-        <v-card class="secondary user-table" flat>
+    <v-layout
+      row
+      wrap
+      justify-center
+      align-start
+    >
+      <v-flex
+        xs12
+        md6
+      >
+        <v-card
+          class="secondary user-table"
+          text
+        >
           <v-layout
             v-for="(user, i) in userData"
             :key="i"
@@ -36,21 +50,32 @@
               </div>
             </v-flex>
             <v-flex xs6>
-              <div class="detail-right">{{ user.createdAt }}</div>
+              <div class="detail-right">
+                {{ user.createdAt }}
+              </div>
             </v-flex>
-            <v-flex v-if="i === 0" xs12>
-              <v-divider></v-divider>
+            <v-flex
+              v-if="i === 0"
+              xs12
+            >
+              <v-divider />
             </v-flex>
           </v-layout>
         </v-card>
       </v-flex>
-      <v-flex xs12 md6>
-        <v-card class="secondary contribution-card" flat>
+      <v-flex
+        xs12
+        md6
+      >
+        <v-card
+          class="secondary contribution-card"
+          text
+        >
           <barChart
             class="px-1 contribution-chart"
             title="TRAINING DATA CONTRIBUTIONS"
             :chart-data="contributionData"
-          ></barChart>
+          />
         </v-card>
       </v-flex>
     </v-layout>
@@ -65,6 +90,7 @@ import Response from "../common/Response";
 import makeCreatedAt from "../../module/makeCreatedAt";
 
 export default {
+  name: "UsersIndex",
   components: {
     barChart,
     Response

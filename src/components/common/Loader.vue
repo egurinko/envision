@@ -1,7 +1,17 @@
 <template>
-  <v-layout row justify-center>
-    <v-dialog v-model="isLoading" persistent max-width="290">
-      <sync-loader id="loader" :loading="isLoading"></sync-loader>
+  <v-layout
+    row
+    justify-center
+  >
+    <v-dialog
+      v-model="isLoading"
+      persistent
+      max-width="290"
+    >
+      <sync-loader
+        id="loader"
+        :loading="isLoading" 
+      />
     </v-dialog>
   </v-layout>
 </template>
@@ -11,6 +21,7 @@ import { mapState } from "vuex";
 import SyncLoader from "vue-spinner/src/SyncLoader";
 
 export default {
+  name: "Loader",
   components: {
     SyncLoader
   },

@@ -1,17 +1,31 @@
 <template>
-  <v-container :v-if="!isLoading" class="primary">
-    <Response></Response>
-    <v-layout row wrap justify-center align-center>
-      <v-flex xs10 class="px-3 pb-3">
+  <v-container
+    :v-if="!isLoading"
+    class="primary"
+  >
+    <Response />
+    <v-layout
+      row
+      wrap
+      justify-center
+      align-center
+    >
+      <v-flex
+        xs10
+        class="px-3 pb-3"
+      >
         <doughnut-chart
           :chart-data="doughnutData"
           class="px-1 prod-chart"
           title="COMFORT INDEX"
-        ></doughnut-chart>
+        />
       </v-flex>
     </v-layout>
 
-    <v-card class="secondary details" flat>
+    <v-card
+      class="secondary details"
+      text
+    >
       <v-layout
         v-for="(data, i) in detailData"
         :key="i"
@@ -28,7 +42,11 @@
           'detail-critical': data.value < $constant.CRITICAL_RATIO
         }"
       >
-        <v-flex xs6 sm6 md4>
+        <v-flex
+          xs6
+          sm6
+          md4
+        >
           <div
             class="detail-left"
             :class="{
@@ -40,25 +58,48 @@
             {{ data.label }}
           </div>
         </v-flex>
-        <v-flex v-if="!isTablet" xs0 sm0 md3>
-          <div class="detail-center">・・・・・・></div>
+        <v-flex
+          v-if="!isTablet"
+          xs0
+          sm0
+          md3
+        >
+          <div class="detail-center">
+            ・・・・・・>
+          </div>
         </v-flex>
-        <v-flex xs6 sm6 md4>
-          <div class="detail-right">{{ data.value }}{{ data.unit }}</div>
+        <v-flex
+          xs6
+          sm6
+          md4
+        >
+          <div class="detail-right">
+            {{ data.value }}{{ data.unit }}
+          </div>
         </v-flex>
       </v-layout>
     </v-card>
 
-    <timespan-button class="mt-3" @on-click="onClick"></timespan-button>
+    <timespan-button
+      class="mt-3"
+      @on-click="onClick" 
+    />
 
-    <v-card class="secondary" flat>
-      <v-layout justify-center align-center class="pa-3 my-3">
+    <v-card
+      class="secondary"
+      text
+    >
+      <v-layout
+        justify-center
+        align-center
+        class="pa-3 my-3"
+      >
         <v-flex xs11>
           <line-chart
             :id="lineData.datasets[0].id"
             :chart-data="lineData"
             :title="lineData.datasets[0].label"
-          ></line-chart>
+          />
         </v-flex>
       </v-layout>
     </v-card>
@@ -75,6 +116,7 @@ import { mapState } from "vuex";
 import Response from "./common/Response";
 
 export default {
+  name: "Home",
   components: {
     doughnutChart,
     LineChart,

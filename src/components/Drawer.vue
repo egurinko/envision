@@ -1,14 +1,29 @@
 <template>
-  <v-navigation-drawer height="100%" width="250" class="primary" permanent>
+  <v-navigation-drawer
+    height="100%"
+    width="250"
+    class="primary"
+    permanent
+  >
     <v-container class="primary">
-      <v-layout class="primary" row align-center>
-        <v-flex xs4 class="ma-2">
-          <v-img width="50" height="50" :src="require('../assets/logo2.png')" />
+      <v-layout
+        class="primary"
+        align-center
+      >
+        <v-flex
+          xs4
+          class="my-2 ml-2"
+        >
+          <v-img
+            width="50"
+            height="50"
+            :src="require('../assets/logo2.png')"
+          />
         </v-flex>
-        <v-flex xs8>
-          <v-list-tile-title class="drawer-title">
+        <v-flex xs7>
+          <v-list-item-title class="drawer-title">
             ENVISION
-          </v-list-tile-title>
+          </v-list-item-title>
         </v-flex>
       </v-layout>
     </v-container>
@@ -21,18 +36,23 @@
         column
         align-center
       >
-        <v-btn class="ma-4" icon large @click="handleClick(item.route)">
+        <v-btn
+          class="ma-4"
+          icon
+          large
+          @click="handleClick(item.route)"
+        >
           <v-flex xs12>
-            <v-list-tile-action>
-              <v-icon x-large>{{ item.icon }}</v-icon>
-            </v-list-tile-action>
+            <v-icon x-large>
+              {{ item.icon }}
+            </v-icon>
           </v-flex>
         </v-btn>
       </v-layout>
     </v-container>
 
-    <reputations></reputations>
-    <div class="space-fill"></div>
+    <reputations />
+    <div class="space-fill" />
   </v-navigation-drawer>
 </template>
 
@@ -40,6 +60,7 @@
 import Reputations from "./Reputation";
 
 export default {
+  name: "Drawer",
   components: {
     Reputations
   },

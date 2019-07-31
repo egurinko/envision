@@ -1,12 +1,29 @@
 <template>
   <v-container class="primary my-1">
-    <v-layout row wrap justify-space-around>
-      <v-flex xs12 class="timespan">
+    <v-layout
+      row
+      wrap
+      justify-space-around
+    >
+      <v-flex
+        xs12
+        class="timespan"
+      >
         <v-menu offset-y>
           <template v-slot:activator="{ on }">
-            <v-btn class="lightGreen" dark outline v-on="on">
-              <v-icon size="20" color="white" left>add_alarm</v-icon
-              >{{ $store.state.timespans.selected }}
+            <v-btn
+              class="lightGreen"
+              dark
+              outlined
+              v-on="on"
+            >
+              <v-icon
+                size="20"
+                color="white"
+                left
+              >
+                add_alarm
+              </v-icon>{{ $store.state.timespans.selected }}
             </v-btn>
           </template>
           <v-list class="primary">
@@ -15,7 +32,7 @@
               :key="key"
               @click="onClick(key)"
             >
-              <v-list-tile-title>{{ key }}</v-list-tile-title>
+              <v-list-item-title>{{ key }}</v-list-item-title>
             </v-list-tile>
           </v-list>
         </v-menu>
@@ -26,6 +43,7 @@
 
 <script>
 export default {
+  name: "TimespanButton",
   methods: {
     onClick(hours) {
       if (

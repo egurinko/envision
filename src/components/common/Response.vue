@@ -4,7 +4,7 @@
       :value="response.status === 200 && response.method !== 'GET'"
       color="lightGreen"
       icon="check_circle"
-      outline
+      outlined
     >
       Succeeded !
     </v-alert>
@@ -13,7 +13,7 @@
       :value="response.status !== '' && response.status !== 200"
       color="lightCritical"
       icon="warning"
-      outline
+      outlined
     >
       {{ response.errors.errorMessage }}
     </v-alert>
@@ -24,6 +24,7 @@
 import { mapState } from "vuex";
 
 export default {
+  name: "Response",
   computed: {
     ...mapState({
       response: state => state.response
