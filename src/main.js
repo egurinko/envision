@@ -1,9 +1,7 @@
 import Vue from "vue";
-import Vuetify from "vuetify";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-import colors from "./module/colorTheme";
 import constant from "../constant";
 import * as Sentry from "@sentry/browser";
 import * as Integrations from "@sentry/integrations";
@@ -11,13 +9,9 @@ import * as Integrations from "@sentry/integrations";
 import "@mdi/font/css/materialdesignicons.css";
 import "material-design-icons-iconfont";
 import "vuetify/dist/vuetify.min.css";
+import vuetify from "./plugins/vuetify";
 
 Vue.config.productionTip = false;
-
-Vue.use(Vuetify, {
-  iconfont: "mdi",
-  theme: colors
-});
 
 Vue.prototype.$constant = constant;
 
@@ -34,5 +28,6 @@ Sentry.init({
 new Vue({
   router,
   store,
+  vuetify,
   render: h => h(App)
 }).$mount("#app");

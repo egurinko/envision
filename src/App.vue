@@ -50,6 +50,7 @@ import { getCookie } from "./module/controllCookie";
 import { mapState } from "vuex";
 
 export default {
+  name: "App",
   components: {
     drawer: Drawer,
     ToolBar,
