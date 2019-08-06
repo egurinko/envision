@@ -11,7 +11,7 @@
     "start": "nodemon server/index.js"
   },
   "dependencies": {
-    "@mdi/font": "^3.8.95",
+    "@mdi/font": "^3.9.95",
     "@sentry/browser": "^5.5.0",
     "@sentry/integrations": "^5.5.0",
     "axios": "^0.19.0",
