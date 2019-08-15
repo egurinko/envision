@@ -5,10 +5,6 @@ import store from "./store";
 import constant from "../constant";
 import * as Sentry from "@sentry/browser";
 import * as Integrations from "@sentry/integrations";
-
-import "@mdi/font/css/materialdesignicons.css";
-import "material-design-icons-iconfont";
-import "vuetify/dist/vuetify.min.css";
 import vuetify from "./plugins/vuetify";
 
 Vue.config.productionTip = false;
