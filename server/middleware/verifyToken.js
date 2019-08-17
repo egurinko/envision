@@ -1,6 +1,6 @@
 let jwt = require("jsonwebtoken");
-require("dotenv").config();
-const secret = process.env.API_SECRET;
+const config = require("../../config");
+const secret = config.express.apiSecret;
 
 module.exports = (req, res, next) => {
   let token = req.headers["x-access-token"];

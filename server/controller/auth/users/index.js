@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-require("dotenv").config();
-const secret = process.env.API_SECRET;
+const config = require("../../config");
+const secret = config.express.apiSecret;
 
 exports.list = async (req, res, services) => {
   const data = await services.user.list();
