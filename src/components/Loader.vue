@@ -1,5 +1,6 @@
 <template>
   <v-layout
+    v-if="isLoading"
     row
     justify-center
     align-center

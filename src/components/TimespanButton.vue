@@ -1,5 +1,5 @@
 <template>
-  <v-container class="primary my-1">
+  <v-container class="primary">
     <v-layout
       row
       wrap

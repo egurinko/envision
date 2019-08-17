@@ -1,26 +1,21 @@
 <template>
-  <v-toolbar class="elevation-0">
-    <v-container
-      class="primary py-3"
-      flat
+  <v-toolbar class="elevation-0 toolbar">
+    <img
+      v-if="isPhone"
+      width="35"
+      height="35"
+      class="ml-2"
+      :src="require('../assets/logo2.png')"
     >
-      <v-layout
-        class="primary"
-        nowrap
-        align-center
-      >
-        <v-flex v-if="isPhone">
-          <v-img
-            width="30"
-            height="30"
-            contain
-            :src="require('../assets/logo2.png')"
-          />
-        </v-flex>
+    <v-icon
+      v-if="isPhone"
+      size="25"
+    >
+      expand_more
+    </v-icon>
 
-        <v-spacer />
 
-        <v-flex
+    <!-- <v-flex
           v-if="isPhone"
         >
           <v-btn
@@ -34,43 +29,45 @@
               {{ item.icon }}
             </v-icon>
           </v-btn>
-        </v-flex>
+        </v-flex> -->
 
-        <v-spacer v-if="!isPhone" />
-        <div
-          v-if="!isPhone && isLoggedIn"
-          class="px-4 account-container"
-        >
-          <v-icon
-            class="account-icon"
-            dark
-          >
-            account_circle
-          </v-icon>
-          <span class="account-username">{{ username }}</span>
-        </div>
-        <v-btn
-          v-if="!isLoggedIn"
-          color="lightGreen"
-          tile
-          outlined
-          small
-          @click="goLogin"
-        >
-          <span class="auth pa-1">Login</span>
-        </v-btn>
-        <v-btn
-          v-if="isLoggedIn"
-          color="lightGreen"
-          tile
-          outlined
-          small
-          @click="handleLogout"
-        >
-          <span class="auth pa-1">Logout</span>
-        </v-btn>
-      </v-layout>
-    </v-container>
+    
+    <v-btn
+      v-if="!isLoggedIn"
+      color="lightGreen"
+      class="toolbar-button"
+      tile
+      outlined
+      small
+      @click="goLogin"
+    >
+      <span class="auth pa-1">Login</span>
+    </v-btn>
+    <div
+      v-if="isLoggedIn"
+      class="toolbar-button"
+    >
+      <v-icon
+        v-if="!isPhone"
+        class="account-icon"
+        dark
+      >
+        account_circle
+      </v-icon>
+      <span
+        v-if="!isPhone"
+        class="account-username"
+      >{{ username }}</span>
+      <v-btn
+        color="lightGreen"
+        tile
+        outlined
+        small
+        @click="handleLogout"
+      >
+        <span class="auth pa-1">Logout</span>
+      </v-btn>
+    </div>
   </v-toolbar>
 </template>
 <script>
@@ -115,19 +112,20 @@ export default {
 };
 </script>
 <style scoped>
-.spacer {
-  margin: 20px;
+.toolbar{
+  padding-top: 2%;
+}
+.toolbar-button{
+  margin-left: auto;
+  margin-right: 3%;
 }
 .auth {
   color: white;
 }
-.account-container {
-  display: flex;
-  align-items: center;
-}
 .account-username {
   font-size: 18px;
   margin-left: 10px;
+  margin-right: 10px;
 }
 .account-account-icon {
   padding-top: 5px;

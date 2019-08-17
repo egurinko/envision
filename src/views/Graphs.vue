@@ -1,14 +1,13 @@
 <template>
-  <v-container class="primary my-1 container">
+  <v-container class="primary graph-container">
     <Response />
+    <timespan-button @on-click="onClick" />
+
     <v-layout
       v-if="!isLoading"
       class="primary"
-      row
       wrap
-      justify-space-around
     >
-      <timespan-button @on-click="onClick" />
       <v-flex
         v-for="(data, i) in chartData"
         :key="i"
@@ -146,10 +145,7 @@ export default {
 };
 </script>
 <style scoped>
-.container {
+.graph-container {
   padding: 0 3%;
-}
-.timespan {
-  float: left;
 }
 </style>
