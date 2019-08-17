@@ -12,7 +12,7 @@
         xs5
       >
         <v-btn
-          class="ma-3"
+          class="ma-3 ml-5 pl-4"
           icon
           large
           :data-cy="item.icon"
