@@ -1,9 +1,9 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import colors from "./module/colorTheme";
-import annotations from "./module/annotations";
-import constant from "../constant";
-import config from "../config";
+import colors from "../utils/colorTheme";
+import annotations from "../utils/annotations";
+import constant from "../../constant";
+import config from "../../config";
 
 Vue.use(Vuex);
 

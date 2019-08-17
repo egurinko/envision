@@ -39,12 +39,12 @@
 
 <script>
 import axios from "axios";
-import LineChart from "../module/lineChart.js";
-import TimespanButton from "./common/TimespanButton";
-import convertTime from "../module/convertTime.js";
+import LineChart from "../utils/lineChart.js";
+import TimespanButton from "../components/TimespanButton";
+import convertTime from "../utils/convertTime.js";
 import { mapState } from "vuex";
-import Response from "./common/Response";
-import callAPI from "../module/callAPI";
+import Response from "../components/Response";
+import callAPI from "../utils/callAPI";
 
 export default {
   name: "Graphs",

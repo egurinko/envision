@@ -1,6 +1,6 @@
 import { Doughnut, mixins } from "vue-chartjs";
 const { reactiveProp } = mixins;
-import store from "../store.js";
+import store from "../store/index";
 
 const fontColor = "white";
 let fontSize;

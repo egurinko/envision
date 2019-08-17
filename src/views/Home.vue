@@ -109,12 +109,12 @@
 
 <script>
 import axios from "axios";
-import doughnutChart from "../module/doughnutChart.js";
-import LineChart from "../module/lineChart.js";
-import TimespanButton from "./common/TimespanButton";
-import convertTime from "../module/convertTime.js";
+import doughnutChart from "../utils/doughnutChart.js";
+import LineChart from "../utils/lineChart.js";
+import TimespanButton from "../components/TimespanButton";
+import convertTime from "../utils/convertTime.js";
 import { mapState } from "vuex";
-import Response from "./common/Response";
+import Response from "../components/Response";
 
 export default {
   name: "Home",

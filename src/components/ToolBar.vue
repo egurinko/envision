@@ -74,7 +74,7 @@
   </v-toolbar>
 </template>
 <script>
-import { removeCookie } from "../module/controllCookie";
+import { removeCookie } from "../utils/controllCookie";
 import { setTimeout } from "timers";
 import { mapState } from "vuex";
 

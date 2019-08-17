@@ -82,11 +82,11 @@
 </template>
 
 <script>
-import barChart from "../../module/barChart.js";
-import callAPI from "../../module/callAPI";
+import barChart from "../../utils/barChart.js";
+import callAPI from "../../utils/callAPI";
 import { mapState } from "vuex";
-import Response from "../common/Response";
-import makeCreatedAt from "../../module/makeCreatedAt";
+import Response from "../../components/Response";
+import makeCreatedAt from "../../utils/makeCreatedAt";
 
 export default {
   name: "UsersIndex",

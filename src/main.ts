@@ -1,7 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import router from "./router/router";
+import store from "./store/index";
 import constant from "../constant";
 import * as Sentry from "@sentry/browser";
 import * as Integrations from "@sentry/integrations";

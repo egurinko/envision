@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import callAPI from "../module/callAPI";
+import callAPI from "../utils/callAPI";
 import axios from "axios";
 
 export default {

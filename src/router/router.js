@@ -1,11 +1,11 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./components/Home.vue";
-import Graphs from "./components/Graphs.vue";
-import Login from "./components/Login.vue";
-import UserRegistration from "./components/users/new.vue";
-import UserOverview from "./components/users/index.vue";
-import store from "./store";
+import Home from "../views/Home.vue";
+import Graphs from "../views/Graphs.vue";
+import Login from "../views/Login.vue";
+import UserRegistration from "../views/users/new.vue";
+import UserOverview from "../views/users/index.vue";
+import store from "../store/index";
 
 Vue.use(Router);
 

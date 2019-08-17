@@ -1,6 +1,6 @@
 import axios from "axios";
 import { getCookie } from "./controllCookie";
-import store from "../store";
+import store from "../store/index";
 
 // This function is for making the interceptor to check and set the token in cookie
 

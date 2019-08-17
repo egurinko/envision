@@ -22,7 +22,7 @@
               class="mt-4 mb-4"
             >
               <div class="title font-weight-bold lightGreen--text">
-                Login to your account.
+                Add new users.
               </div>
             </v-flex>
             <v-flex
@@ -69,11 +69,11 @@
                 large
                 :disabled="!usernameValid || !pwValid"
                 class="login-button"
-                @click="login"
+                @click="register"
               >
                 <span
                   :class="{ 'login-button-word': usernameValid && pwValid }"
-                >Login</span>
+                >Register</span>
               </v-btn>
             </v-flex>
           </v-layout>
@@ -91,10 +91,10 @@
       </v-flex>
       <v-flex class="mt-4">
         <router-link
-          to="/users/new"
+          to="/login"
           class="link"
         >
-          Add new users to ENVISION?
+          Already have an account?
         </router-link>
       </v-flex>
     </v-layout>
@@ -102,13 +102,12 @@
 </template>
 
 <script>
-import { setCookie } from "../module/controllCookie";
-import callAPI from "../module/callAPI";
-import Response from "./common/Response";
+import callAPI from "../../utils/callAPI";
+import Response from "../../components/Response";
 import { mapState } from "vuex";
 
 export default {
-  name: "Login",
+  name: "UsersNew",
   components: {
     Response
   },
@@ -136,29 +135,22 @@ export default {
     })
   },
   methods: {
-    async login() {
+    async register() {
       const data = {
         username: this.username,
         password: this.password
       };
-      const loginRequest = [
+      const userRegistrationRequest = [
         {
-          url: `${this.$store.state.domain}/auth/login`,
+          url: `${this.$store.state.domain}/auth/users`,
           method: "POST",
           data: data
         }
       ];
 
-      const [loginResponse] = await callAPI(loginRequest);
+      const [userRegistrationResponse] = await callAPI(userRegistrationRequest);
       if (this.$store.state.response.status === 200) {
-        if (loginResponse.auth) {
-          this.$store.commit("setUsername", loginResponse.username);
-          this.$store.commit("setIsloggedIn", true);
-          setCookie(loginResponse.token, loginResponse.username);
-          setTimeout(() => {
-            this.$router.push("/");
-          }, 1500);
-        }
+        // Something happens ?
       }
     }
   }
