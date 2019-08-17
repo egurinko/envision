@@ -1,6 +1,6 @@
 const config = require("../../config");
 const MongoClient = require("mongodb").MongoClient;
-const parser = { useNewUrlParser: true };
+const parser = { useNewUrlParser: true, useUnifiedTopology: true };
 
 module.exports = async (method, endpoint, options = null) => {
   const client = MongoClient(config.db.mongoURL, parser);
