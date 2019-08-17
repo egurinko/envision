@@ -14,7 +14,6 @@ workflows:
             - cypress/install
           start: yarn start
           wait-on: 'http://localhost:4000'
-          record: true
           parallel: true
           parallelism: 3
           group: 3x
