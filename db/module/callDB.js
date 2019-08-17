@@ -1,11 +1,9 @@
+const config = require("../../config");
 const MongoClient = require("mongodb").MongoClient;
-require("dotenv").config();
-const domain = process.env.MONGO_URL;
-const dbName = process.env.DB_NAME;
 const parser = { useNewUrlParser: true };
 
 module.exports = async (method, endpoint, options = null) => {
-  const client = MongoClient(domain, parser);
+  const client = MongoClient(config.db.mongoURL, parser);
 
   // TIMESTAMP
   const date = new Date();
@@ -13,7 +11,7 @@ module.exports = async (method, endpoint, options = null) => {
 
   try {
     await client.connect();
-    const db = client.db(dbName);
+    const db = client.db(config.db.dbName);
 
     if (method === "POST") {
       options.timestamp = a;

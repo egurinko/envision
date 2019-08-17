@@ -1,14 +1,12 @@
 const MongoClient = require("mongodb").MongoClient;
-require("dotenv").config();
-const domain = process.env.MONGO_URL;
-const dbName = process.env.DB_NAME;
+const config = require("../../config");
 const parser = { useNewUrlParser: true };
 
 const callDB = async (method, endpoint) => {
-  const client = MongoClient(domain, parser);
+  const client = MongoClient(config.db.mongoURL, parser);
   try {
     await client.connect();
-    const db = client.db(dbName);
+    const db = client.db(config.db.dbName);
 
     const data = await db
       .collection(endpoint)
