@@ -61,6 +61,7 @@ export default {
   created() {
     window.addEventListener("resize", this.handleWindowResize);
     this.handleLoginStatus();
+    console.log("START ENVISION");
   },
   methods: {
     handleWindowResize() {
