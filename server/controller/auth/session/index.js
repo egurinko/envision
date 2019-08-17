@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const config = require("../../config");
+const config = require("../../../../config");
 const secret = config.express.apiSecret;
 
 exports.create = async (req, res, services) => {

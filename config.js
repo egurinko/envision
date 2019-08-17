@@ -13,8 +13,8 @@ module.exports = env === "development" ? {
         mongoURL: "mongodb://127.0.0.1:27017",
     },
     express: {
-      port: 3000,
-      apiSecret: apiSecret
+      port: 4000,
+      apiSecret: "apiSecret"
     }
   } : {
     db: {

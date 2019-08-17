@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import colors from "./module/colorTheme";
 import annotations from "./module/annotations";
 import constant from "../constant";
+import config from "../config";
 
 Vue.use(Vuex);
 
@@ -15,7 +16,7 @@ export default new Vuex.Store({
     isLoading: false,
     domain:
       process.env.NODE_ENV === "development"
-        ? "https://prod-bot-staging.herokuapp.com/api"
+        ? `http://localhost:${config.express.port}/api`
         : "/api",
     colors,
     annotations: annotations,

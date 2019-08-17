@@ -1,5 +1,6 @@
 const app = require("./app");
-const PORT = process.env.PORT || 4000;
+const config = require("../config");
+const PORT = process.env.PORT || config.express.port;
 const chalk = require("chalk");
 
 app.listen(PORT, () => {
