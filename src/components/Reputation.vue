@@ -15,6 +15,7 @@
           class="ma-3"
           icon
           large
+          :data-cy="item.icon"
           @click="handleReputations(index)"
         >
           <v-icon

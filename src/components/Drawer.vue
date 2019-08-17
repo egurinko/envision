@@ -18,6 +18,7 @@
             width="50"
             height="50"
             :src="require('../assets/logo2.png')"
+            data-cy="logo"
           />
         </v-flex>
         <v-flex xs7>
@@ -40,6 +41,7 @@
           class="ma-4"
           icon
           large
+          :data-cy="item.icon"
           @click="handleClick(item.route)"
         >
           <v-flex xs12>
