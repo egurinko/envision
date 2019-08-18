@@ -1,24 +1,45 @@
 version: 2
 
 container: &container
+  working_directory: ~/app
   docker:
-    - image: cypress/base:latest
+    - image: cypress/base:12.6.0
       environment:
         TERM: xterm
     - image: circleci/mongo:latest
-  working_directory: ~/app  
+      environment:
+        MONGO_URL: "mongodb://localhost:27017/envision"
 
 jobs:
-  prepare:
+  build-test:
     <<: *container
     steps:
       - checkout
+
+      # Install mongo-seeding-cli globally
       - run: yarn global add mongo-seeding-cli
+
+      # Install sudo for cypress/base because it's debian
+      - run:
+          name: Install sudo
+          command: apt-get update && apt-get install -y sudo
+
+      # Install dockerize to wait for mongodb start
+      - run:
+          name: install dockerize
+          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          environment:
+            DOCKERIZE_VERSION: v0.3.0
 
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
+
+      # Wait for mongodb start
+      - run:
+          name: Wait for Mongo
+          command: dockerize -wait tcp://127.0.0.1:27017 -timeout 120s
 
       - run:
           name: Install dependencies
@@ -32,22 +53,6 @@ jobs:
           name: Seed data
           command: yarn seed
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
-
-  test:
-    <<: *container
-    steps:
-      - attach_workspace:
-          at: .
-
       - run:
           name: Start app
           command: yarn start
@@ -60,11 +65,13 @@ jobs:
           name: Run cypress test
           command: yarn test:wait
 
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
 workflows:
   version: 2
   build-and-test:
     jobs:
-      - prepare
-      - test:
-          requires:
-            - prepare
+      - build-test
