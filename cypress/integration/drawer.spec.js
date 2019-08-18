@@ -2,6 +2,7 @@
 
 describe("Drawer", () => {
   beforeEach(() => {
+    cy.exec("yarn seed");
     cy.visit("/");
   });
 

@@ -2,6 +2,7 @@
 
 context("Graphs", () => {
   beforeEach(() => {
+    cy.exec("yarn seed");
     cy.visit("/graphs");
   });
 
