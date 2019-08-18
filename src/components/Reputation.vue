@@ -10,9 +10,10 @@
         v-for="(item, index) in reputations"
         :key="index"
         xs5
+        class="ml-3"
       >
         <v-btn
-          class="ma-3 ml-5 pl-4"
+          class="ma-3 ml-5"
           icon
           large
           :data-cy="item.icon"
@@ -25,7 +26,7 @@
             {{ item.icon }}
           </v-icon>
         </v-btn>
-        <v-list-item-title class="drawer-title pl-1">
+        <v-list-item-title class="drawer-title pr-2">
           {{
             item.title
           }}
