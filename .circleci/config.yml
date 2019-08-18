@@ -6,8 +6,9 @@ container: &container
       environment:
         TERM: xterm
     - image: circleci/mongo:latest
-      ports:
-        - "27017:27017"
+      environment:
+        MONGO_URL: "mongodb://localhost:27017/envision"
+        
   working_directory: ~/app  
 
 jobs:
@@ -26,9 +27,9 @@ jobs:
           name: Install dependencies
           command: yarn install
 
-      - run:
-          name: Wait for Mongo
-          command: dockerize -wait tcp://127.0.0.1:27017 -timeout 120s
+      # - run:
+      #     name: Wait for Mongo
+      #     command: dockerize -wait tcp://127.0.0.1:27017 -timeout 120s
       
       - run:
           name: Build app
