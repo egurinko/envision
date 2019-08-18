@@ -7,7 +7,7 @@ module.exports = () => {
         await callDB("POST", obj.type, { value: obj.value });
       }
     } catch (err) {
-      throw err;
+      throw new Error(err);
     }
   };
 };

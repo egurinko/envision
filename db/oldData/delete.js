@@ -21,8 +21,8 @@ module.exports = () => {
         await callDB("DELETE", key);
       }
       return keys;
-    } catch (err) {      
-      throw err;
+    } catch (err) {     
+      throw new Error(err);
     }
   };
 };

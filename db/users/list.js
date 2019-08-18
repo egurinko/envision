@@ -23,7 +23,7 @@ const callDB = async (method, endpoint) => {
       };
     });
   } catch (err) {
-    throw err;
+    throw new Error(err);
   }
 };
 
