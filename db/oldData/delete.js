@@ -3,7 +3,7 @@ const callDB = require("../module/callDB");
 module.exports = () => {
   return async () => {
     const collections = await callDB("GET_KEYS").catch(err => {
-      throw Error(err);
+      return Promise.reject(err);
     });
 
     let keys = collections.map(colloction => colloction.name);
@@ -21,8 +21,8 @@ module.exports = () => {
         await callDB("DELETE", key);
       }
       return keys;
-    } catch (err) {
-      throw Error(err);
+    } catch (err) {     
+      throw new Error(err);
     }
   };
 };

@@ -15,7 +15,7 @@ module.exports = async (method, endpoint, options = null) => {
 
     if (method === "POST") {
       options.timestamp = a;
-      return await db
+      return db
         .collection(endpoint)
         .insertOne(options)
         .then(res => {
@@ -89,6 +89,6 @@ module.exports = async (method, endpoint, options = null) => {
       return keys;
     }
   } catch (err) {
-    throw Error(err);
+    // throw new Error(err);
   }
 };

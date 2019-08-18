@@ -3,12 +3,12 @@ const date = new Date().getTime();
 module.exports = [
     {
         "username" : "super",
-        "password" : "$2a$08$KgoN7rTKRbXiatn5BGvPN.R110nCsWudh9.wYEzSdb7nG5fUCM4G6",
+        "password" : "$2a$08$OU/cTyjU/PSR.ZIiZRW3B.z4cx6181r2/xiyPiG2sFz94sPClqzdO",
         "timestamp" : date
     },
     {
-        "username" : "test",
-        "password" : "$2a$08$KgoN7rTKRbXiatn5BGvPN.R110nCsWudh9.wYEzSdb7nG5fUCM4G6",
+        "username" : "cypress",
+        "password": "$2a$08$OU/cTyjU/PSR.ZIiZRW3B.z4cx6181r2/xiyPiG2sFz94sPClqzdO",
         "timestamp" : date
     }
 ];
