@@ -11,8 +11,7 @@
     "start": "NODE_ENV=development nodemon server/index.js",
     "seed": "seed --db-name envision --drop-database ./db/seed",
     "test:e2e": "cypress open",
-    "test:wait": "wait-on http://localhost:4000 && yarn test",
-    "cypress:install": "cypress install"
+    "test:wait": "wait-on http://localhost:4000 && yarn test"
   },
   "dependencies": {
     "@sentry/browser": "^5.5.0",
@@ -42,7 +41,8 @@
     "vue-router": "^3.1.1",
     "vue-spinner": "^1.0.3",
     "vuetify": "^2.0.5",
-    "vuex": "^3.1.1"
+    "vuex": "^3.1.1",
+    "wait-on": "^3.3.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.9.2",
