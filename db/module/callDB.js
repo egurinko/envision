@@ -21,9 +21,6 @@ module.exports = async (method, endpoint, options = null) => {
         .then(res => {
           return res.ops;
         })
-        .catch(err => {
-          return Promise.reject(err);
-        })
         .finally(() => {
           console.log("Closed MONGODB connection successfully");
           client.close();
@@ -92,6 +89,6 @@ module.exports = async (method, endpoint, options = null) => {
       return keys;
     }
   } catch (err) {
-    throw new Error(err);
+    // throw new Error(err);
   }
 };
