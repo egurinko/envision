@@ -40,7 +40,6 @@ export default requests => {
           errors: { errorMessage: "500 Sorry it's me, not you." }
         });
       }
-      console.log("CATCH CALL API: ", error.response);
     })
     .finally(error => {
       store.commit("setIsLoading", false);
