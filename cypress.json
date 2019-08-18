@@ -2,6 +2,6 @@
     "baseUrl": "http://localhost:4000",
     "env": {
         "username": "cypress",
-        "password": "password"
+        "password": "Test123!"
     }
 }
