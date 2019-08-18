@@ -54,9 +54,6 @@ jobs:
           name: Start app
           command: yarn start
           background: true
-      
-      - run:
-          command: yarn cypress:install
 
       - run:
           name: Run cypress test
