@@ -45,22 +45,6 @@ jobs:
           name: Seed data
           command: yarn seed
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
-
-  test:
-    <<: *container
-    steps:
-      - attach_workspace:
-          at: .
-
       - run:
           name: Start app
           command: yarn start
@@ -73,11 +57,39 @@ jobs:
           name: Run cypress test
           command: yarn test:wait
 
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  # test:
+  #   <<: *container
+  #   steps:
+  #     - attach_workspace:
+  #         at: .
+
+  #     - run:
+  #         name: Start app
+  #         command: yarn start
+  #         background: true
+      
+  #     - run:
+  #         command: yarn cypress:install
+
+  #     - run:
+  #         name: Run cypress test
+  #         command: yarn test:wait
+
 workflows:
   version: 2
   build-and-test:
     jobs:
       - prepare
-      - test:
-          requires:
-            - prepare
+      # - test:
+      #     requires:
+      #       - prepare
