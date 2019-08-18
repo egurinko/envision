@@ -17,7 +17,7 @@ const callDB = async (method, endpoint) => {
 
     return data;
   } catch (err) {
-    throw err;
+    throw new Error(err);
   }
 };
 
