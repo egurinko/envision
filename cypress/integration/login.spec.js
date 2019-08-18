@@ -13,7 +13,7 @@ describe("Login", () => {
 
   it("should be done with valid user", () => {
     cy.get("[data-cy=username]").type("super");
-    cy.get("[data-cy=password]").type("password");
+    cy.get("[data-cy=password]").type(password);
     cy.get("[data-cy=login-button]").click();
 
     cy.wait("@login").then(res =>{
