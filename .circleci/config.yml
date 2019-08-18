@@ -1,21 +1,19 @@
 version: 2
 
 container: &container
-  working_directory: ~/repo
   docker:
-    - image: circleci/node:latest
-    - image: circleci/mongo:latest
     - image: cypress/base:latest
       environment:
         TERM: xterm
+    - image: circleci/mongo:latest
+  working_directory: ~/app  
 
 jobs:
   prepare:
     <<: *container
     steps:
       - checkout
-      - run: sudo npm install -g yarn
-      - run: sudo yarn global add mongo-seeding-cli
+      - run: yarn global add mongo-seeding-cli
 
       - restore_cache:
           keys:
@@ -54,6 +52,9 @@ jobs:
           name: Start app
           command: yarn start
           background: true
+      
+      - run:
+          command: yarn cypress:install
 
       - run:
           name: Run cypress test
