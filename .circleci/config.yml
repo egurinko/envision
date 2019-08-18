@@ -1,19 +1,48 @@
-version: 2.1
-orbs:
-  cypress: cypress-io/cypress@1
-
-workflows:
+version: 2
+jobs:
   build:
-    jobs:
-      - cypress/install:
-          yarn: true
-          build: yarn build
-      - cypress/run:
-          yarn: true
-          requires:
-            - cypress/install
-          start: yarn start
-          wait-on: 'http://localhost:4000'
-          parallel: true
-          parallelism: 3
-          group: 3x
+    docker:
+      - image: circleci/node:latest
+      - image: circleci/mongo:latest
+      - image: cypress/base:latest
+        environment:
+          ## this enables colors in the output
+          TERM: xterm
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - run: sudo npm install -g yarn
+      - run: sudo npm install -g yarn
+      - run: sudo yarn global add mongo-seeding-cli
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+
+      - run:
+          name: Install dependencies
+          command: yarn install
+      
+      - run:
+          name: Build app
+          command: yarn build
+
+      - run:
+          name: Start app
+          command: yarn start
+
+      - run:
+          name: Seed data
+          command: yarn seed
+
+      - run:
+          name: Run cypress test
+          command: yarn test:e2e
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
