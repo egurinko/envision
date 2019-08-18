@@ -37,6 +37,7 @@
                   autocomplete="off"
                   label="Username"
                   required
+                  data-cy="username"
                 />
               </v-form>
             </v-flex>
@@ -54,6 +55,7 @@
                   counter
                   autocomplete="off"
                   label="Password"
+                  data-cy="password"
                   @click:append="isShow = !isShow"
                 />
               </v-form>
@@ -69,6 +71,7 @@
                 large
                 :disabled="!usernameValid || !pwValid"
                 class="login-button"
+                data-cy="login-button"
                 @click="login"
               >
                 <span
