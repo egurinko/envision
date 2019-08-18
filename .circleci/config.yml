@@ -1,12 +1,12 @@
 version: 2
 
 container: &container
-  working_directory: ~/repo
   docker:
-    - image: circleci/mongo:latest
     - image: cypress/base:latest
       environment:
         TERM: xterm
+    - image: circleci/mongo:latest
+  working_directory: ~/app  
 
 jobs:
   prepare:
