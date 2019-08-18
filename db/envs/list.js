@@ -23,7 +23,8 @@ module.exports = () => {
         { key: "pressure", data: pressure }
       ];
     } catch (err) {
-      throw Error(err);
+      next(err);
+      // throw Error(err);
     }
   };
 };

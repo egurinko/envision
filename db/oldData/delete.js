@@ -22,7 +22,8 @@ module.exports = () => {
       }
       return keys;
     } catch (err) {
-      throw Error(err);
+      next(err);
+      // throw Error(err);
     }
   };
 };

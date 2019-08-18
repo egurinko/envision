@@ -4,7 +4,6 @@ const parser = { useNewUrlParser: true, useUnifiedTopology: true };
 
 module.exports = async (method, endpoint, options = null) => {
   const client = MongoClient(config.db.mongoURL, parser);
-  console.log("CONFFFFFFFFIG", config);
 
   // TIMESTAMP
   const date = new Date();
@@ -90,6 +89,7 @@ module.exports = async (method, endpoint, options = null) => {
       return keys;
     }
   } catch (err) {
-    throw Error(err);
+    next(err);
+    // throw Error(err);
   }
 };
