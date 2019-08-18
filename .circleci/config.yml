@@ -3,7 +3,7 @@ version: 2
 container: &container
   working_directory: ~/app
   docker:
-    - image: cypress/base:latest
+    - image: cypress/base:centos7-12.4.0
       environment:
         TERM: xterm
     - image: circleci/mongo:latest
