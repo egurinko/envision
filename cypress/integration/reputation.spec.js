@@ -2,7 +2,6 @@
 
 describe("Reputation", () => {
   beforeEach(() => {
-    cy.exec("yarn seed");
     cy.visit("/");
   });
 
