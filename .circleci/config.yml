@@ -6,6 +6,8 @@ container: &container
       environment:
         TERM: xterm
     - image: circleci/mongo:latest
+      ports:
+        - "27017:27017"
   working_directory: ~/app  
 
 jobs:
