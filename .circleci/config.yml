@@ -16,6 +16,7 @@ jobs:
     steps:
       - checkout
       - run: yarn global add mongo-seeding-cli
+      - run: apt-get update
       - run: apt-get install -y sudo
       - run:
           name: install dockerize
