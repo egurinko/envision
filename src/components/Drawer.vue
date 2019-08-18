@@ -19,6 +19,8 @@
             height="50"
             :src="require('../assets/logo2.png')"
             data-cy="logo"
+            class="logo"
+            @click="handleClick('/')"
           />
         </v-flex>
         <v-flex xs7>
@@ -82,6 +84,7 @@ export default {
   },
   methods: {
     handleClick(route) {
+      if (route === this.$route.path) return;
       this.$router.push(route);
     }
   }
@@ -89,6 +92,9 @@ export default {
 </script>
 
 <style scoped>
+.logo {
+  cursor: pointer;
+}
 .space-fill {
   min-height: 100vh;
 }
