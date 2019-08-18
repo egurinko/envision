@@ -18,14 +18,13 @@ const callDB = async (method, endpoint) => {
     return data;
   } catch (err) {
     next(err);
-    // throw Error(err);
   }
 };
 
 module.exports = () => {
   return async () => {
     return await callDB("GET", "contribution").catch(err => {
-      throw Error(err);
+      return Promise.reject(err);
     });
   };
 };

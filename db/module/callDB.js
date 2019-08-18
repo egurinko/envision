@@ -90,6 +90,5 @@ module.exports = async (method, endpoint, options = null) => {
     }
   } catch (err) {
     next(err);
-    // throw Error(err);
   }
 };

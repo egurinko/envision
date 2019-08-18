@@ -24,7 +24,6 @@ module.exports = () => {
       ];
     } catch (err) {
       next(err);
-      // throw Error(err);
     }
   };
 };

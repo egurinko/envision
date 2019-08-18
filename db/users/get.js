@@ -5,7 +5,7 @@ module.exports = () => {
     return await callDB("GET_ONE", "user", data)
       .then(res => res)
       .catch(err => {
-        throw Error(err);
+        return Promise.reject(err);
       });
   };
 };
