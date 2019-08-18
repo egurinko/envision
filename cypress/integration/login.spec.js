@@ -18,6 +18,7 @@ describe("Login", () => {
 
     cy.wait("@login").then(res =>{
       expect(res.status).eq(200);
+      console.log("RESPONSE", res);
     });
   });
 
@@ -28,6 +29,7 @@ describe("Login", () => {
 
     cy.wait("@login").then(res =>{
       expect(res.status).eq(200);
+      console.log("RESPONSE", res);
     });
   });
 });
