@@ -3,7 +3,6 @@ version: 2
 container: &container
   working_directory: ~/repo
   docker:
-    - image: circleci/node:latest
     - image: circleci/mongo:latest
     - image: cypress/base:latest
       environment:
