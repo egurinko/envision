@@ -11,6 +11,7 @@
     "start": "NODE_ENV=development nodemon server/index.js",
     "seed": "seed --db-name envision --drop-database ./db/seed",
     "test:e2e": "cypress open",
+    "cypress:install": "cypress install",
     "test:wait": "wait-on http://localhost:4000 && yarn test:e2e"
   },
   "dependencies": {
