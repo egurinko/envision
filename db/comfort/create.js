@@ -11,6 +11,8 @@ module.exports = () => {
     const snack = await callDB("GET", "weight", "latest");
     const co2 = await callDB("GET", "co2", "latest");
 
+    console.log("CO!2222222", co2);
+
     const initialPoint = 1;
 
     let tempIndex = 1;
