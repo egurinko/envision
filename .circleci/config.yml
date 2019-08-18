@@ -1,6 +1,7 @@
 version: 2
 
 container: &container
+  working_directory: ~/app
   docker:
     - image: cypress/base:latest
       environment:
@@ -8,8 +9,6 @@ container: &container
     - image: circleci/mongo:latest
       environment:
         MONGO_URL: "mongodb://localhost:27017/envision"
-        
-  working_directory: ~/app  
 
 jobs:
   prepare:
