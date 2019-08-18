@@ -15,7 +15,7 @@ module.exports = async (method, endpoint, options = null) => {
 
     if (method === "POST") {
       options.timestamp = a;
-      return await db
+      return db
         .collection(endpoint)
         .insertOne(options)
         .then(res => {
