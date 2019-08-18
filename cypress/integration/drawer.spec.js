@@ -7,6 +7,7 @@ describe("Drawer", () => {
   });
 
   it("logo and app name should be rendered", () => {
+    expect(true).to.true;
     expect(cy.contains("ENVISION")).to.exist;
     expect(cy.get("[data-cy=logo]")).to.exist;
   });
