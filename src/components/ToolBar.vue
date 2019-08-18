@@ -7,31 +7,6 @@
       class="ml-2"
       :src="require('../assets/logo2.png')"
     >
-    <v-icon
-      v-if="isPhone"
-      size="25"
-    >
-      expand_more
-    </v-icon>
-
-
-    <!-- <v-flex
-          v-if="isPhone"
-        >
-          <v-btn
-            v-for="(item, index) in menus"
-            :key="index"
-            icon
-            text
-            @click="handleClick(item.route)"
-          >
-            <v-icon size="25">
-              {{ item.icon }}
-            </v-icon>
-          </v-btn>
-        </v-flex> -->
-
-    
     <v-btn
       v-if="!isLoggedIn"
       color="lightGreen"
@@ -118,6 +93,7 @@ export default {
 .toolbar-button{
   margin-left: auto;
   margin-right: 3%;
+  margin-top: 5px;
 }
 .auth {
   color: white;
@@ -128,6 +104,6 @@ export default {
   margin-right: 10px;
 }
 .account-account-icon {
-  padding-top: 5px;
+  padding-top: 8px;
 }
 </style>

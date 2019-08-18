@@ -29,6 +29,7 @@
               <v-flex>
                 <tool-bar class="primary" />
                 <router-view />
+                <bottom-navigation v-if="isPhone" />
               </v-flex>
             </v-layout>
           </v-container>
@@ -42,6 +43,7 @@
 import Drawer from "./components/Drawer";
 import ToolBar from "./components/ToolBar";
 import Loader from "./components/Loader";
+import BottomNavigation from "./components/BottomNavigation";
 import constant from "../constant.js";
 import { getCookie } from "./utils/controllCookie";
 import { mapState } from "vuex";
@@ -51,7 +53,8 @@ export default {
   components: {
     drawer: Drawer,
     ToolBar,
-    Loader
+    Loader,
+    BottomNavigation
   },
   computed: {
       ...mapState({

@@ -15,29 +15,29 @@ const router = new Router({
   routes: [
     {
       path: "/",
-      name: "home",
+      name: "Home",
       component: Home,
       meta: { icon: "home" }
     },
     {
       path: "/graphs",
-      name: "graphs",
+      name: "Graphs",
       component: Graphs,
       meta: { icon: "bar_chart" }
     },
     {
       path: "/login",
-      name: "login",
+      name: "Login",
       component: Login
     },
     {
       path: "/users/new",
-      name: "usersRegistration",
+      name: "UsersRegistration",
       component: UserRegistration
     },
     {
       path: "/users",
-      name: "userOverview",
+      name: "Users",
       component: UserOverview,
       meta: { icon: "supervisor_account" }
     },
