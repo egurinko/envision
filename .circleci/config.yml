@@ -13,8 +13,7 @@ jobs:
     <<: *container
     steps:
       - checkout
-      - run: sudo npm install -g yarn
-      - run: sudo yarn global add mongo-seeding-cli
+      - run: yarn global add mongo-seeding-cli
 
       - restore_cache:
           keys:
