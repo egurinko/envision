@@ -10,7 +10,8 @@
     "heroku-postbuild": "yarn build",
     "start": "NODE_ENV=development nodemon server/index.js",
     "seed": "seed --db-name envision --drop-database ./db/seed",
-    "test:e2e": "cypress open"
+    "test:e2e": "cypress open",
+    "test:wait": "wait-on http://localhost:4000 && yarn test"
   },
   "dependencies": {
     "@sentry/browser": "^5.5.0",
