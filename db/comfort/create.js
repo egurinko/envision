@@ -83,7 +83,7 @@ module.exports = () => {
     }
 
     const data = {
-      timestamp: new Date().getTime(),
+      timestamp: co2[0].timestamp,
       comfortIndex:
         tempIndex * humIndex * pressureIndex * co2Index * luxIndex * snackIndex,
       detail: [
