@@ -89,6 +89,6 @@ module.exports = async (method, endpoint, options = null) => {
       return keys;
     }
   } catch (err) {
-    // throw Error(err);
+    throw new Error(err);
   }
 };
