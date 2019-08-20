@@ -36,6 +36,7 @@
                   :counter="10"
                   autocomplete="off"
                   label="Username"
+                  data-cy="username"
                   required
                 />
               </v-form>
@@ -54,6 +55,7 @@
                   counter
                   autocomplete="off"
                   label="Password"
+                  data-cy="password"
                   @click:append="isShow = !isShow"
                 />
               </v-form>
@@ -69,6 +71,7 @@
                 large
                 :disabled="!usernameValid || !pwValid"
                 class="login-button"
+                data-cy="login-button"
                 @click="register"
               >
                 <span
@@ -93,6 +96,7 @@
         <router-link
           to="/login"
           class="link"
+          data-cy="link"
         >
           Already have an account?
         </router-link>
