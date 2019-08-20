@@ -18,6 +18,7 @@
           :chart-data="doughnutData"
           class="px-1 prod-chart"
           title="COMFORT INDEX"
+          data-cy="comfort-index"
         />
       </v-flex>
     </v-layout>
@@ -54,6 +55,7 @@
               'detail-left-warning': data.value >= $constant.CRITICAL_RATIO,
               'detail-left-critical': data.value < $constant.CRITICAL_RATIO
             }"
+            :data-cy="data.label"
           >
             {{ data.label }}
           </div>
@@ -82,7 +84,8 @@
 
     <timespan-button
       class="mt-3"
-      @on-click="onClick" 
+      data-cy="timespan"
+      @on-click="onClick"
     />
 
     <v-card
@@ -100,6 +103,7 @@
             :id="lineData.datasets[0].id"
             :chart-data="lineData"
             :title="lineData.datasets[0].label"
+            data-cy="comfort-graph"
           />
         </v-flex>
       </v-layout>

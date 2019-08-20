@@ -16,6 +16,7 @@
               tile
               outlined
               medium
+              data-cy="timespan-button"
               v-on="on"
             >
               <v-icon
@@ -31,6 +32,7 @@
             <v-list-item
               v-for="(hours, key) in $store.state.timespans.timespan"
               :key="key"
+              :data-cy="key"
               @click="onClick(key)"
             >
               <v-list-item-content>
