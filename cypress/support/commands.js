@@ -36,6 +36,5 @@ Cypress.Commands.add("login", (userType, options = {}) => {
     cy.wait("@login").then(res =>{
       expect(res.status).eq(200);
     });
-    cy.visit("/");
   });
   
