@@ -74,6 +74,7 @@
             class="px-1 contribution-chart"
             title="TRAINING DATA CONTRIBUTIONS"
             :chart-data="contributionData"
+            data-cy="contribution-graph"
           />
         </v-card>
       </v-flex>
