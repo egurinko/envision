@@ -8,6 +8,16 @@ describe("Home", () => {
 
       cy.visit("/");
     });
+
+    it("should get api response", () => {
+      cy.wait("@comfort").then(res =>{
+        expect(res.status).eq(200);
+      });
+  
+      cy.wait("@envs").then(res =>{
+        expect(res.status).eq(200);
+      });
+    });
   
     it("should be rendered", () => {
       expect(cy.get("[data-cy=comfort-index]")).to.exist;
