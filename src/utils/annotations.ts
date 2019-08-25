@@ -1,26 +1,40 @@
 import constant from "../../constant";
 
+export type ChartAnnotationOption = {
+  type: string;
+  scaleID: string;
+  mode: string;
+  value: number;
+  borderWidth: number;
+  borderColor: string;
+  label: {
+    enabled: boolean;
+    backgroundColor: string;
+    fontSize: number;
+    content: string;
+  }
+};
+
+export type ChartAnnotationOptions = {
+  annotation: {
+    annotations: ChartAnnotationOption[]
+  }
+};
+
 export type Annotations = {
-  TEMPERATURE: {
-    "LOWER LIMIT": number;
-    "UPPER LIMIT": number;
-  },
-  HUMIDITY: {
-    "LOWER LIMIT": number;
-    "UPPER LIMIT": number;
-  },
-  CO2: { "UPPER LIMIT": number; },
-  LUX: {
-    "LOWER LIMIT": number;
-    "UPPER LIMIT": number;
-  },
-  PRESSURE: { "LOWER LIMIT": number; },
-  "COLOR TEMPERATURE": {
-    "LOWER LIMIT": number;
-    "UPPER LIMIT": number;
-  },
-  SNACK: { "LOWER LIMIT": number; }
-}
+  TEMPERATURE?: Annotation,
+  HUMIDITY?: Annotation,
+  CO2?: Annotation,
+  LUX?: Annotation,
+  PRESSURE?: Annotation,
+  "COLOR TEMPERATURE": Annotation,
+  SNACK?: Annotation
+};
+
+export type Annotation = {
+  "LOWER LIMIT"?: number;
+  "UPPER LIMIT"?: number;
+};
 
 const annotations: Annotations = {
   TEMPERATURE: {

@@ -1,11 +1,14 @@
+<script lang="ts">
 import { Line, mixins } from "vue-chartjs";
 const { reactiveProp } = mixins;
-import chartjsPluginAnnotation from "chartjs-plugin-annotation";
+import Vue, { PropType } from "vue";
 import store from "../store/index";
+import Chart from "chart.js";
+import { ChartAnnotationOptions, Annotation } from "./annotations";
 
 const fontColor = "white";
 
-const options = {
+const options: Chart.ChartOptions & ChartAnnotationOptions = {
   scales: {
     yAxes: [
       {
@@ -48,14 +51,38 @@ const options = {
   }
 };
 
-export default {
-  extends: Line,
-  mixins: [reactiveProp],
-  props: ["title", "id", "annotation"],
-  mounted() {
-    options.title.text = this.title;
-    options.scales.yAxes[0].scaleLabel.labelString = this.id;
-    options.scales.yAxes[0].id = this.id;
+type OwnProps = {
+  title: string;
+  id: number;
+  annotation: Annotation;
+  chartData: Chart.ChartData;
+};
+
+// Vue.extend< Method=any, Data=any, Prop=any, Computed=any>
+export default Vue.extend<Chart, any, string, any> ({
+  mixins: [Line, reactiveProp],
+  props: {
+    title: {
+      type: Number,
+      required: true
+    },
+    id: {
+      type: String,
+      required: true
+    },
+    annotation: {
+      type: Object as PropType<Annotation>,
+      required: true
+    },
+    chartData: {
+      type: Chart.Chart,
+      required: true
+    }
+  },
+  mounted(): void {
+    options.title!.text = this.title;
+    options.scales!.yAxes![0].scaleLabel!.labelString = this.id;
+    options.scales!.yAxes![0].id = this.id;
 
     for (let key in this.annotation) {
       options.annotation.annotations.push({
@@ -76,4 +103,6 @@ export default {
 
     this.renderChart(this.chartData, options);
   }
-};
+});
+
+</script>

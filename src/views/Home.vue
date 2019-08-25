@@ -113,8 +113,8 @@
 
 <script>
 import axios from "axios";
-import doughnutChart from "../utils/doughnutChart.js";
-import LineChart from "../utils/lineChart.js";
+import doughnutChart from "../utils/doughnutChart";
+import LineChart from "../utils/lineChart";
 import TimespanButton from "../components/TimespanButton";
 import convertTime from "../utils/convertTime";
 import { mapState } from "vuex";

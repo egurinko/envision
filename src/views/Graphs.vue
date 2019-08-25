@@ -29,6 +29,7 @@
             :chart-data="data"
             :title="data.datasets[0].label"
             :annotation="annotations[data.datasets[0].label]"
+            :plugins="chatjsAnnotation"
           />
         </v-card>
       </v-flex>
@@ -38,12 +39,13 @@
 
 <script>
 import axios from "axios";
-import LineChart from "../utils/lineChart.js";
+import LineChart from "../utils/lineChart";
 import TimespanButton from "../components/TimespanButton";
 import convertTime from "../utils/convertTime";
 import { mapState } from "vuex";
 import Response from "../components/Response";
 import callAPI from "../utils/callAPI";
+import * as chatjsAnnotation from "chartjs-plugin-annotation";
 
 export default {
   name: "Graphs",
