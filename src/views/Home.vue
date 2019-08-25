@@ -14,7 +14,7 @@
         xs10
         class="px-3 pb-3"
       >
-        <doughnut-chart
+        <DoughnutChart
           :chart-data="doughnutData"
           class="px-1 prod-chart"
           title="COMFORT INDEX"
@@ -99,7 +99,7 @@
         class="pa-3 my-3"
       >
         <v-flex xs11>
-          <line-chart
+          <LineChart
             :id="lineData.datasets[0].id"
             :chart-data="lineData"
             :title="lineData.datasets[0].label"
@@ -113,8 +113,8 @@
 
 <script>
 import axios from "axios";
-import doughnutChart from "../utils/doughnutChart";
-import LineChart from "../utils/lineChart";
+import DoughnutChart from "../components/DoughnutChart";
+import LineChart from "../components/LineChart";
 import TimespanButton from "../components/TimespanButton";
 import convertTime from "../utils/convertTime";
 import { mapState } from "vuex";
@@ -123,7 +123,7 @@ import Response from "../components/Response";
 export default {
   name: "Home",
   components: {
-    doughnutChart,
+    DoughnutChart,
     LineChart,
     TimespanButton,
     Response

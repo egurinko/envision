@@ -24,7 +24,7 @@
           text
           elevation="0"
         >
-          <line-chart
+          <LineChart
             :id="data.datasets[0].id"
             :chart-data="data"
             :title="data.datasets[0].label"
@@ -39,7 +39,7 @@
 
 <script>
 import axios from "axios";
-import LineChart from "../utils/lineChart";
+import LineChart from "../components/LineChart";
 import TimespanButton from "../components/TimespanButton";
 import convertTime from "../utils/convertTime";
 import { mapState } from "vuex";

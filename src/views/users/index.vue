@@ -70,7 +70,7 @@
           class="secondary contribution-card"
           elevation="0"
         >
-          <barChart
+          <BarChart
             class="px-1 contribution-chart"
             title="TRAINING DATA CONTRIBUTIONS"
             :chart-data="contributionData"
@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import barChart from "../../utils/barChart";
+import BarChart from "../../components/BarChart";
 import callAPI from "../../utils/callAPI";
 import { mapState } from "vuex";
 import Response from "../../components/Response";
@@ -92,7 +92,7 @@ import makeCreatedAt from "../../utils/makeCreatedAt";
 export default {
   name: "UsersIndex",
   components: {
-    barChart,
+    BarChart,
     Response
   },
   data() {
