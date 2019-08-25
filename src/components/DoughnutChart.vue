@@ -40,11 +40,7 @@ const options: Chart.ChartOptions = {
   }
 };
 
-type OwnProps = {
-  title: string;
-};
-
-export default Vue.extend<Chart, any, OwnProps, any>({
+export default Vue.extend<Chart, any, any, any>({
   mixins: [Doughnut, reactiveProp],
   props: {
     title: {

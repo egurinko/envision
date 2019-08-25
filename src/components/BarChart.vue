@@ -50,13 +50,7 @@ const options: Chart.ChartOptions = {
   }
 };
 
-type OwnProps = {
-  title: string;
-  id: number;
-  chartData: Chart.ChartData;
-};
-
-export default Vue.extend<Chart, any, OwnProps, any> ({
+export default Vue.extend<Chart, any, any, any> ({
   mixins: [Bar, reactiveProp],
   props: {
     title: {

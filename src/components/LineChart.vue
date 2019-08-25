@@ -51,15 +51,8 @@ const options: Chart.ChartOptions & ChartAnnotationOptions = {
   }
 };
 
-type OwnProps = {
-  title: string;
-  id: number;
-  annotation: Annotation;
-  chartData: Chart.ChartData;
-};
-
 // Vue.extend< Method=any, Data=any, Prop=any, Computed=any>
-export default Vue.extend<Chart, any, OwnProps, any> ({
+export default Vue.extend<Chart, any, any, any> ({
   mixins: [Line, reactiveProp],
   props: {
     title: {
