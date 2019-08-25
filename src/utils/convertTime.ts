@@ -1,7 +1,7 @@
 import moment from "moment-timezone";
 import store from "../store/index";
 
-export default unixtime => {
+export default (unixtime: string): string=> {
   const month = moment.tz(unixtime, "Asia/Tokyo").format("MM");
   const day = moment.tz(unixtime, "Asia/Tokyo").format("DD");
   const hour = moment.tz(unixtime, "Asia/Tokyo").format("HH");
