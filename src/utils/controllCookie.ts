@@ -1,29 +1,30 @@
-export const setCookie = (token, username) => {
-  const date = new Date();
+export const setCookie = (token: string, username: string): void => {
+  const date: Date = new Date();
   date.setMonth(date.getMonth() + 1);
 
-  let tokenCookie = `envision_session=${encodeURIComponent(
+  let tokenCookie: string = `envision_session=${encodeURIComponent(
     token
   )}; expires=${date.toUTCString()}; path=/`;
 
-  let usernameCookie = `envision_username=${encodeURIComponent(
+  let usernameCookie: string = `envision_username=${encodeURIComponent(
     username
   )}; expires=${date.toUTCString()}; path=/`;
-
-  // if (process.env.NODE_ENV !== "development") {
-  //   cookie += "; secure";
-  // }
 
   document.cookie = tokenCookie;
   document.cookie = usernameCookie;
 };
 
-export const getCookie = () => {
-  let token = "";
-  let username = "";
-  const rows = document.cookie.split(";");
+export type Cookie = {
+  token: string;
+  username: string;
+}
+
+export const getCookie = (): Cookie => {
+  let token: string = "";
+  let username: string = "";
+  const rows: string[] = document.cookie.split(";");
   rows.forEach(row => {
-    const content = row.split("=");
+    const content: string[] = row.split("=");
     if (content[0].replace(/\s/g, "") === "envision_session") {
       token = content[1];
     }
@@ -34,7 +35,7 @@ export const getCookie = () => {
   return { token, username };
 };
 
-export const removeCookie = () => {
+export const removeCookie = (): void => {
   document.cookie = "envision_session=; max-age=0";
   document.cookie = "envision_username=; max-age=0";
 };

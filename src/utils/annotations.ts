@@ -1,5 +1,28 @@
 import constant from "../../constant";
-export default {
+
+export type Annotations = {
+  TEMPERATURE: {
+    "LOWER LIMIT": number;
+    "UPPER LIMIT": number;
+  },
+  HUMIDITY: {
+    "LOWER LIMIT": number;
+    "UPPER LIMIT": number;
+  },
+  CO2: { "UPPER LIMIT": number; },
+  LUX: {
+    "LOWER LIMIT": number;
+    "UPPER LIMIT": number;
+  },
+  PRESSURE: { "LOWER LIMIT": number; },
+  "COLOR TEMPERATURE": {
+    "LOWER LIMIT": number;
+    "UPPER LIMIT": number;
+  },
+  SNACK: { "LOWER LIMIT": number; }
+}
+
+const annotations: Annotations = {
   TEMPERATURE: {
     "LOWER LIMIT": constant.TEMP_LOWER_LIMIT,
     "UPPER LIMIT": constant.TEMP_UPPER_LIMIT
@@ -20,3 +43,5 @@ export default {
   },
   SNACK: { "LOWER LIMIT": constant.SNACK_LOWER_LIMIT }
 };
+
+export default annotations;
