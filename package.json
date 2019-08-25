@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "dev": "vue-cli-service serve --mode development",
-    "heroku-postbuild": "yarn build",
+    "heroku-postbuild": "yarn build && yarn global add mongo-seeding-cli && yarn seed",
     "start": "NODE_ENV=development nodemon server/index.js",
     "seed": "seed --db-name envision --drop-database ./db/seed",
     "test:e2e:gui": "cypress open",
