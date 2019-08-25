@@ -4,7 +4,7 @@ const { reactiveProp } = mixins;
 import Vue, { PropType } from "vue";
 import store from "../store/index";
 import Chart from "chart.js";
-import { ChartAnnotationOptions, Annotation } from "./annotations";
+import { ChartAnnotationOptions, Annotation } from "../utils/annotations";
 
 const fontColor = "white";
 
