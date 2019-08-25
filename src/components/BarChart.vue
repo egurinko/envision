@@ -68,7 +68,7 @@ export default Vue.extend<Chart, any, OwnProps, any> ({
       required: true
     },
     chartData: {
-      type: Chart.Chart,
+      type: Object as PropType<Chart.ChartData>,
       required: true
     }
   },

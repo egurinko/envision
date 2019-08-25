@@ -103,6 +103,7 @@
             :id="lineData.datasets[0].id"
             :chart-data="lineData"
             :title="lineData.datasets[0].label"
+            :plugins="[chatjsAnnotation]"
             data-cy="comfort-graph"
           />
         </v-flex>
@@ -119,6 +120,7 @@ import TimespanButton from "../components/TimespanButton";
 import convertTime from "../utils/convertTime";
 import { mapState } from "vuex";
 import Response from "../components/Response";
+import * as chatjsAnnotation from "chartjs-plugin-annotation";
 
 export default {
   name: "Home",
@@ -132,7 +134,8 @@ export default {
     return {
       latestEnv: null,
       comfort: null,
-      state: this.$store.state
+      state: this.$store.state,
+      chatjsAnnotation
     };
   },
   computed: {

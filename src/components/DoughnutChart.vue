@@ -23,8 +23,8 @@ const options: Chart.ChartOptions = {
   tooltips: { enabled: true },
   animation: {
     duration: 500,
-    onComplete: (chart: any): void => {
-      let chartContext = chart.canvas.getContext("2d", { alpha: false });
+    onComplete: function(chart: any): void {
+      let chartContext = chart.chart.canvas.getContext("2d", { alpha: false });
       chartContext.fillStyle = fontColor;
       chartContext.textAlign = "center";
       chartContext.textBaseline = "middle";
@@ -32,9 +32,9 @@ const options: Chart.ChartOptions = {
       chartContext.font = `${fontSize}px Rubik`;
       
       chartContext.fillText(
-        Math.round(chart.data.datasets[0].data[0] * 100) + "%",
-        chart.width / 2,
-        chart.height / 2 + fontSize / 1.6
+        Math.round(chart.chart.data.datasets[0].data[0] * 100) + "%",
+        chart.chart.width / 2,
+        chart.chart.height / 2 + fontSize / 1.6
       );
     }
   }
@@ -42,17 +42,12 @@ const options: Chart.ChartOptions = {
 
 type OwnProps = {
   title: string;
-  id: number;
 };
 
 export default Vue.extend<Chart, any, OwnProps, any>({
   mixins: [Doughnut, reactiveProp],
   props: {
     title: {
-      type: Number,
-      required: true
-    },
-    id: {
       type: String,
       required: true
     }

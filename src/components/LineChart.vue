@@ -63,7 +63,7 @@ export default Vue.extend<Chart, any, OwnProps, any> ({
   mixins: [Line, reactiveProp],
   props: {
     title: {
-      type: Number,
+      type: String,
       required: true
     },
     id: {
@@ -72,10 +72,10 @@ export default Vue.extend<Chart, any, OwnProps, any> ({
     },
     annotation: {
       type: Object as PropType<Annotation>,
-      required: true
+      default: () => {},
     },
     chartData: {
-      type: Chart.Chart,
+      type: Object as PropType<Chart.ChartData>,
       required: true
     }
   },

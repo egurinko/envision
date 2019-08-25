@@ -29,7 +29,7 @@
             :chart-data="data"
             :title="data.datasets[0].label"
             :annotation="annotations[data.datasets[0].label]"
-            :plugins="chatjsAnnotation"
+            :plugins="[chatjsAnnotation]"
           />
         </v-card>
       </v-flex>
@@ -56,7 +56,8 @@ export default {
   },
   data() {
     return {
-      envs: null
+      envs: null,
+      chatjsAnnotation
     };
   },
   computed: {
