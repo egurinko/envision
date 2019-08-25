@@ -1,5 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
+
+import { RouteNames } from "./route.types";
+import { enhance } from "./extension";
+
 import Home from "../views/Home.vue";
 import Graphs from "../views/Graphs.vue";
 import Login from "../views/Login.vue";
@@ -15,29 +19,29 @@ const router = new Router({
   routes: [
     {
       path: "/",
-      name: "Home",
+      name: RouteNames.HOME,
       component: Home,
       meta: { icon: "home" }
     },
     {
       path: "/graphs",
-      name: "Graphs",
+      name: RouteNames.GRAPHS,
       component: Graphs,
       meta: { icon: "bar_chart" }
     },
     {
       path: "/login",
-      name: "Login",
+      name: RouteNames.LOGIN,
       component: Login
     },
     {
       path: "/users/new",
-      name: "UsersRegistration",
+      name: RouteNames.USERS_REGISTRATION,
       component: UserRegistration
     },
     {
       path: "/users",
-      name: "Users",
+      name: RouteNames.USERS,
       component: UserOverview,
       meta: { icon: "supervisor_account" }
     },
@@ -50,4 +54,4 @@ router.beforeEach((to, from, next) => {
   next();
 });
 
-export default router;
+export default enhance(router);
