@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import barChart from "../../utils/barChart.js";
+import barChart from "../../utils/barChart";
 import callAPI from "../../utils/callAPI";
 import { mapState } from "vuex";
 import Response from "../../components/Response";

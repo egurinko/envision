@@ -1,9 +1,12 @@
+<script lang="ts">
 import { Bar, mixins } from "vue-chartjs";
 const { reactiveProp } = mixins;
+import Vue, { PropType } from "vue";
+import Chart from "chart.js";
 
 const fontColor = "white";
 
-const options = {
+const options: Chart.ChartOptions = {
   scales: {
     xAxes: [
       {
@@ -47,17 +50,37 @@ const options = {
   }
 };
 
-export default {
-  extends: Bar,
-  mixins: [reactiveProp],
-  props: ["title", "id", "chartData"],
+type OwnProps = {
+  title: string;
+  id: number;
+  chartData: Chart.ChartData;
+};
+
+export default Vue.extend<Chart, any, OwnProps, any> ({
+  mixins: [Bar, reactiveProp],
+  props: {
+    title: {
+      type: Number,
+      required: true
+    },
+    id: {
+      type: String,
+      required: true
+    },
+    chartData: {
+      type: Chart.Chart,
+      required: true
+    }
+  },
   watch: {
     chartData: {
-      handler() {
-        options.title.text = this.title;
+      handler(): void {
+        options.title!.text = this.title;
         this.renderChart(this.chartData, options);
       },
       deep: true
     }
   }
-};
+});
+
+</script>

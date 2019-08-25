@@ -59,7 +59,7 @@ type OwnProps = {
 };
 
 // Vue.extend< Method=any, Data=any, Prop=any, Computed=any>
-export default Vue.extend<Chart, any, string, any> ({
+export default Vue.extend<Chart, any, OwnProps, any> ({
   mixins: [Line, reactiveProp],
   props: {
     title: {
