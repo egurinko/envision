@@ -72,7 +72,7 @@ export default {
 
       const requests = [
         {
-          url: `${domain}/training-data`,
+          url: "/training-data",
           method: "POST",
           data: data
         }

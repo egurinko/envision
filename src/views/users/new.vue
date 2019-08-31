@@ -147,7 +147,7 @@ export default {
       };
       const userRegistrationRequest = [
         {
-          url: `${domain}/auth/users`,
+          url: "/auth/users",
           method: "POST",
           data: data
         }
