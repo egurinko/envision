@@ -84,7 +84,7 @@ export default {
     async init() {
       const requests = [
         {
-          url: `${this.$store.state.domain}/envs`,
+          url: "/envs",
           method: "GET",
           params: { timespan: this.$store.getters.getTimespan }
         }

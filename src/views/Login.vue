@@ -146,7 +146,7 @@ export default {
       };
       const loginRequest = [
         {
-          url: `${this.$store.state.domain}/auth/login`,
+          url: "/auth/login",
           method: "POST",
           data: data
         }

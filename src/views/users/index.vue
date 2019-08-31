@@ -149,11 +149,11 @@ export default {
     async init() {
       const requests = [
         {
-          url: `${this.$store.state.domain}/contributions`,
+          url: "/contributions",
           method: "GET"
         },
         {
-          url: `${this.$store.state.domain}/auth/users`,
+          url: "/auth/users",
           method: "GET"
         }
       ];

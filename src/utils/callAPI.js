@@ -1,6 +1,7 @@
 import axios from "axios";
 import { getCookie } from "./controllCookie";
 import store from "../store/index";
+import domain from "./domain";
 
 // This function is for making the interceptor to check and set the token in cookie
 
@@ -47,7 +48,7 @@ export default requests => {
 };
 
 const requestAPI = request => {
-  const config = { baseURL: request.url, method: request.method };
+  const config = { baseURL: domain, url: request.url, method: request.method };
 
   if (request.method === "GET") {
     if (request.params) {
