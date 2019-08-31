@@ -18,6 +18,7 @@ export const enhance = (router: VueRouter): VueRouter => {
         name: to,
         ...(option as any)
       }, resolve, reject);
+      // eslint-disable-next-line
     }).catch(() => console.debug("ERROR"));
   };
   return router;
