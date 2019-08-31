@@ -49,11 +49,12 @@
   </v-container>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+export default Vue.extend({
   name: "TimespanButton",
   methods: {
-    onClick(hours) {
+    onClick(hours: string): void {
       if (
         this.$store.state.timespans.selected ===
         this.$store.state.timespans.timespan[hours]
@@ -61,11 +62,12 @@ export default {
         return;
       }
 
+      // TODO: Add Types here when Vuex
       this.$store.commit("changeTimespan", hours);
       this.$emit("on-click");
     }
   }
-};
+});
 </script>
 <style scoped>
 .timespan {
