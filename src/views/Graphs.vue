@@ -47,6 +47,7 @@ import Response from "../components/Response";
 import callAPI from "../utils/callAPI";
 import * as chatjsAnnotation from "chartjs-plugin-annotation";
 import domain from "../utils/domain";
+import annotations from "../utils/annotations";
 
 export default {
   name: "Graphs",
@@ -58,7 +59,8 @@ export default {
   data() {
     return {
       envs: null,
-      chatjsAnnotation
+      chatjsAnnotation,
+      annotations
     };
   },
   computed: {
@@ -71,7 +73,6 @@ export default {
       return chartData;
     },
     ...mapState({
-      annotations: state => state.annotations,
       isLoading: state => state.isLoading
     })
   },

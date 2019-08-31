@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import annotations from "../utils/annotations";
 import constant from "../../constant";
 import config from "../../config";
 
@@ -15,11 +14,6 @@ export default new Vuex.Store({
     username: "",
     isLoggedIn: false,
     isLoading: false,
-    domain:
-      process.env.NODE_ENV === "development"
-        ? `http://localhost:${config.express.port}/api`
-        : "/api",
-    annotations: annotations,
     timespans: {
       selected: "AN HOUR",
       timespan: {
