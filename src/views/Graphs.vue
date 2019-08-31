@@ -46,6 +46,7 @@ import { mapState } from "vuex";
 import Response from "../components/Response";
 import callAPI from "../utils/callAPI";
 import * as chatjsAnnotation from "chartjs-plugin-annotation";
+import domain from "../utils/domain";
 
 export default {
   name: "Graphs",
@@ -107,7 +108,7 @@ export default {
       }
     },
     update() {
-      axios.get(`${this.$store.state.domain}/envs`).then(envs => {
+      axios.get(`${domain}/envs`).then(envs => {
         envs.data.map((env, i) => {
           const newLen = env.data.length;
           if (newLen !== 0) {

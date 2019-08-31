@@ -18,7 +18,7 @@ export const enhance = (router: VueRouter): VueRouter => {
         name: to,
         ...(option as any)
       }, resolve, reject);
-    }).catch(() => console.error("ERROR"));
+    }).catch(() => console.debug("ERROR"));
   };
   return router;
 };

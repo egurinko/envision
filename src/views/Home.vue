@@ -121,6 +121,7 @@ import convertTime from "../utils/convertTime";
 import { mapState } from "vuex";
 import Response from "../components/Response";
 import * as chatjsAnnotation from "chartjs-plugin-annotation";
+import domain from "../utils/domain";
 
 export default {
   name: "Home",
@@ -211,13 +212,13 @@ export default {
   methods: {
     init() {
       return Promise.all([
-        axios.get(`${this.$store.state.domain}/comfort`, {
+        axios.get(`${domain}/comfort`, {
           params: {
             timespan: this.$store.getters.getTimespan
           }
         }),
-        axios.get(`${this.$store.state.domain}/envs`),
-        axios.get(`${this.$store.state.domain}/comfort`)
+        axios.get(`${domain}/envs`),
+        axios.get(`${domain}/comfort`)
       ]).then(([comfort, envs, latestComfort]) => {
         if (comfort.data.length === 0 || envs.data.length === 0) {
           return;

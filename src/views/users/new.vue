@@ -109,6 +109,7 @@
 import callAPI from "../../utils/callAPI";
 import Response from "../../components/Response";
 import { mapState } from "vuex";
+import domain from "../../utils/domain";
 
 export default {
   name: "UsersNew",
@@ -146,7 +147,7 @@ export default {
       };
       const userRegistrationRequest = [
         {
-          url: `${this.$store.state.domain}/auth/users`,
+          url: `${domain}/auth/users`,
           method: "POST",
           data: data
         }

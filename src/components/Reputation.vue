@@ -39,6 +39,7 @@
 <script>
 import callAPI from "../utils/callAPI";
 import axios from "axios";
+import domain from "../utils/domain";
 
 export default {
   name: "Reputation",
@@ -55,7 +56,7 @@ export default {
     async handleReputations(index) {
       let data = {};
       await axios
-        .get(`${this.$store.state.domain}/envs`, {
+        .get(`${domain}/envs`, {
           params: {
             timespan: "latest"
           }
@@ -71,7 +72,7 @@ export default {
 
       const requests = [
         {
-          url: `${this.$store.state.domain}/training-data`,
+          url: `${domain}/training-data`,
           method: "POST",
           data: data
         }
