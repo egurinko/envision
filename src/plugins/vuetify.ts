@@ -10,8 +10,5 @@ export default new Vuetify({
     themes: {
       dark: colors,
     },
-  },
-  icons: {
-    iconfont: "mdi",
-  },
+  }
 });
