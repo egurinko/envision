@@ -121,7 +121,7 @@ export default {
         datasets: [
           {
             borderWidth: 1,
-            borderColor: this.$store.state.colors.lightGreen,
+            borderColor: this.$vuetify.theme.themes.dark.lightGreen,
             data
           }
         ]

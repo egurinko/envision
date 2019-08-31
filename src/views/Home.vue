@@ -161,22 +161,22 @@ export default {
         .comfortIndex;
       const firstColor =
         comfort * 100 >= this.$constant.WARNING_RATIO
-          ? this.state.colors.lightGreen
+          ? this.$vuetify.theme.themes.dark.lightGreen
           : comfort * 100 >= this.$constant.CRITICAL_RATIO
-          ? this.state.colors.lightWarning
-          : this.state.colors.lightCritical;
+          ? this.$vuetify.theme.themes.dark.lightWarning
+          : this.$vuetify.theme.themes.dark.lightCritical;
       const secondColor =
         comfort * 100 >= this.$constant.WARNING_RATIO
-          ? this.state.colors.deepGreen
+          ? this.$vuetify.theme.themes.dark.deepGreen
           : comfort * 100 >= this.$constant.CRITICAL_RATIO
-          ? this.state.colors.deepWarning
-          : this.state.colors.lightWarning;
+          ? this.$vuetify.theme.themes.dark.deepWarning
+          : this.$vuetify.theme.themes.dark.lightWarning;
       return {
         datasets: [
           {
             backgroundColor: [firstColor, secondColor],
             borderWidth: 0,
-            borderColor: this.$store.state.colors.lightGreen,
+            borderColor: this.$vuetify.theme.themes.dark.lightGreen,
             data: [comfort, 1 - comfort]
           }
         ]
@@ -189,8 +189,8 @@ export default {
         datasets: [
           {
             label: "COMFORT TRANSITION",
-            backgroundColor: this.$store.state.colors.primary,
-            borderColor: this.$store.state.colors.lightGreen,
+            backgroundColor: this.$vuetify.theme.themes.dark.primary,
+            borderColor: this.$vuetify.theme.themes.dark.lightGreen,
             radius: 0,
             data: this.comfort.map(shot => shot.comfortIndex * 100),
             id: "%"

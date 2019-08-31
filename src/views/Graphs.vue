@@ -135,8 +135,8 @@ export default {
         datasets: [
           {
             label: key.toUpperCase(),
-            backgroundColor: this.$store.state.colors.primary,
-            borderColor: this.$store.state.colors.lightGreen,
+            backgroundColor: this.$vuetify.theme.themes.dark.primary,
+            borderColor: this.$vuetify.theme.themes.dark.lightGreen,
             radius: 0,
             data: data.map(env => env.value),
             id: key

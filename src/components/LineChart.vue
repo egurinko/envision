@@ -84,10 +84,10 @@ export default Vue.extend<Chart, any, any, any> ({
         mode: "horizontal",
         value: this.annotation[key],
         borderWidth: 2,
-        borderColor: store.state.colors.deepGreen,
+        borderColor: this.$vuetify.theme.themes.dark.deepGreen,
         label: {
           enabled: true,
-          backgroundColor: store.state.colors.deepGreen,
+          backgroundColor: this.$vuetify.theme.themes.dark.deepGreen,
           fontSize: 10,
           content: key
         }
