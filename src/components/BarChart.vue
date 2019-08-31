@@ -54,10 +54,6 @@ export default Vue.extend<Chart, any, any, any> ({
   mixins: [Bar, reactiveProp],
   props: {
     title: {
-      type: Number,
-      required: true
-    },
-    id: {
       type: String,
       required: true
     },

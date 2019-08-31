@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 export enum RouteNames {
   HOME = "Home",
   GRAPHS = "Graphs",
@@ -26,3 +28,12 @@ export type RouteOption = {
   [RouteNames.USERS_REGISTRATION]: {},
   [RouteNames.USERS]: {},
 };
+
+export type Route = {
+  path: string;
+  name: string;
+  component: Vue.Component;
+  meta?: { 
+    icon: string;
+  }
+}

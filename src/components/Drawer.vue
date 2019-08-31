@@ -33,7 +33,7 @@
 
     <v-container class="primary">
       <v-layout
-        v-for="(item, index) in menus"
+        v-for="(menu, index) in menus"
         :key="index"
         class="primary"
         column
@@ -43,12 +43,12 @@
           class="ma-4"
           icon
           large
-          :data-cy="item.icon"
-          @click="handleClick(item.route)"
+          :data-cy="menu.icon"
+          @click="handleClick(menu.route)"
         >
           <v-flex xs12>
             <v-icon x-large>
-              {{ item.icon }}
+              {{ menu.icon }}
             </v-icon>
           </v-flex>
         </v-btn>
@@ -60,35 +60,40 @@
   </v-navigation-drawer>
 </template>
 
-<script>
-import Reputations from "./Reputation";
+<script lang="ts">
+import Vue from "vue";
+import Reputations from "./Reputation.vue";
+import { Route } from "../router/route.types";
 
-export default {
+type Menu = {
+  icon: string;
+  route: string;
+}
+type Menus = Menu[]
+
+export default Vue.extend({
   name: "Drawer",
   components: {
     Reputations
   },
-  data() {
-    return {};
-  },
   computed: {
-    menus: function() {
-      const icons = [];
-      this.$router.options.routes.map(route => {
+    menus: function(): Menus {
+      const menus: Menus = [];
+      (this.$router as any).options.routes.map((route: Route): void => {
         if (route.meta) {
-          icons.push({ icon: route.meta.icon, route: route.path });
+          menus.push({ icon: route.meta.icon, route: route.path });
         }
       });
-      return icons;
+      return menus;
     }
   },
   methods: {
-    handleClick(route) {
+    handleClick(route: string): void | undefined {
       if (route === this.$route.path) return;
       this.$router.push(route);
     }
   }
-};
+});
 </script>
 
 <style scoped>
