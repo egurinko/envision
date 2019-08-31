@@ -1,11 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import colors from "../utils/colorTheme";
 import annotations from "../utils/annotations";
 import constant from "../../constant";
 import config from "../../config";
 
 Vue.use(Vuex);
+
+const debug = process.env.NODE_ENV === "development";
 
 export default new Vuex.Store({
   state: {
@@ -18,7 +19,6 @@ export default new Vuex.Store({
       process.env.NODE_ENV === "development"
         ? `http://localhost:${config.express.port}/api`
         : "/api",
-    colors,
     annotations: annotations,
     timespans: {
       selected: "AN HOUR",
