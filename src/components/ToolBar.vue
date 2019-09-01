@@ -83,7 +83,9 @@ export default {
       this.$store.dispatch("user/setUsername", "");
       removeCookie();
       setTimeout(() => {
-        this.$router.push("/");
+        if (this.$route.path !== "/" ) {
+          this.$router.push("/");
+        }
       }, 1000);
     }
   }
