@@ -68,7 +68,7 @@ export default {
           });
         });
 
-      data.username = this.$store.state.username;
+      data.username = this.$store.state.user.username;
 
       const requests = [
         {
