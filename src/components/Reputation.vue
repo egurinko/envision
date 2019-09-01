@@ -36,25 +36,35 @@
   </v-container>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from "vue";
 import callAPI from "../utils/callAPI";
 import axios from "axios";
 import domain from "../utils/domain";
 
-export default {
+type Reputation = {
+  icon: string;
+  title: string;
+}
+
+type Data = {
+  reputations: Reputation[]
+}
+
+export default Vue.extend({
   name: "Reputation",
-  data() {
-    return {
-      reputations: [
+  data: (): Data => ({
+    reputations: [
         { icon: "mood", title: "Good" },
         { icon: "mood_bad", title: "Bad" }
-      ]
-    };
-  },
-  computed: {},
+    ]
+  }),
   methods: {
-    async handleReputations(index) {
-      let data = {};
+    async handleReputations(index: number): Promise<void> {
+      type Data = { 
+        [index:string] :  number | string;
+      }
+      let data: Data = {};
       await axios
         .get(`${domain}/envs`, {
           params: {
@@ -62,7 +72,7 @@ export default {
           }
         })
         .then(latest => {
-          latest.data.map(env => {
+          latest.data.map((env: any): void => {
             data[env.key] = Number(env.data[0].value);
             data.teacher = this.reputations[index].title;
           });
@@ -80,7 +90,7 @@ export default {
       await callAPI(requests);
     }
   }
-};
+});
 </script>
 
 <style scoped>
