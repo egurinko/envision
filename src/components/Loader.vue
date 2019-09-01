@@ -17,10 +17,11 @@
   </v-layout>
 </template>
 
-<script>
-import SyncLoader from "vue-spinner/src/SyncLoader";
+<script lang="ts">
+import Vue from "vue";
+import SyncLoader from "vue-spinner/src/SyncLoader.vue";
 
-export default {
+export default Vue.extend({
   name: "Loader",
   components: {
     SyncLoader
@@ -32,10 +33,8 @@ export default {
     isLoading: function() {
       return this.$store.getters["ui/getIsLoading"];
     }
-  },
-  created() {},
-  methods: {}
-};
+  }
+});
 </script>
 
 <style>

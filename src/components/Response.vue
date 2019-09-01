@@ -22,17 +22,17 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+
+export default Vue.extend({
   name: "Response",
   computed: {
     response: function() {
       return this.$store.getters["response/getResponse"];
     },
-  },
-  created() {},
-  methods: {}
-};
+  }
+});
 </script>
 
 <style></style>

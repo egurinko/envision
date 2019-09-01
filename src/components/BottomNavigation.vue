@@ -17,39 +17,45 @@
     </v-btn>
   </v-bottom-navigation>
 </template>
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+import { Route } from "../router/route.types";
+import { Menus } from "./Drawer.vue";
+
+type Data = {
+  active: number;
+}
+
+export default Vue.extend({
   name: "Toolbar",
-  data() {
-    return {
-      active: 0
-    };
-  },
+  data: (): Data => ({
+    active: 0
+  }),
   computed: {
     isPhone: function() {
       return this.$store.getters["ui/getIsPhone"];
     },
-    menus: function() {
-      const icons = [];
-      this.$router.options.routes.map(route => {
+    menus: function(): Menus {
+      const menus: Menus = [];
+      (this.$router as any).options.routes.map((route: Route): void => {
         if (route.meta) {
-          icons.push({ icon: route.meta.icon, route: route.path, name: route.name });
+          menus.push({ icon: route.meta.icon, route: route.path, name: route.name });
         }
       });
-      return icons;
+      return menus;
     }
   },
-  created(){
-    const target = this.menus.findIndex(menu => menu.route === this.$route.path);
+  created(): void{
+    const target: number = this.menus.findIndex(menu => menu.route === this.$route.path);
     this.active = target;
   },
   methods: {
-    handleClick(route, index) {
+    handleClick(route: string, index: number): void {
       this.$router.push(route);
       this.active = index;
     }
   }
-};
+});
 </script>
 <style scoped>
 #bottom-navigation {

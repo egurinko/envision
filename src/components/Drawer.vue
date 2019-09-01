@@ -69,8 +69,9 @@ import * as Vuex from "vuex";
 type Menu = {
   icon: string;
   route: string;
+  name?: string;
 }
-type Menus = Menu[]
+export type Menus = Menu[]
 
 export default Vue.extend({
   name: "Drawer",
