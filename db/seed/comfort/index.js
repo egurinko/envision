@@ -9,7 +9,7 @@ module.exports = Array(10080).fill().map((v, i) => {
     const pressure = Math.random() * 0.05 + 0.95;
     return {
         comfortIndex: snack * co2 * temperature * lux * humidity * pressure,
-        timestamp: date - 6000 * i,
+        timestamp: date - 60000 * (10080 - i),
         detail: [
             {
                 "key" : "snack",
