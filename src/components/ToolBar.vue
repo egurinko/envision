@@ -64,9 +64,11 @@ export default {
     },
     ...mapState({
       isLoggedIn: state => state.isLoggedIn,
-      username: state => state.username,
-      isPhone: state => state.isPhone
-    })
+      username: state => state.username
+    }),
+    isPhone: function() {
+      return this.$store.getters["ui/getIsPhone"];
+    }
   },
   methods: {
     handleClick(route) {

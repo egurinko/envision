@@ -46,7 +46,6 @@ import Loader from "./components/Loader";
 import BottomNavigation from "./components/BottomNavigation";
 import constant from "../constant.js";
 import { getCookie } from "./utils/controllCookie";
-import { mapState } from "vuex";
 
 export default {
   name: "App",
@@ -57,9 +56,9 @@ export default {
     BottomNavigation
   },
   computed: {
-      ...mapState({
-      isPhone: state => state.isPhone
-    })
+    isPhone: function() {
+      return this.$store.getters["ui/getIsPhone"];
+    }
   },
   created() {
     window.addEventListener("resize", this.handleWindowResize);
@@ -70,6 +69,10 @@ export default {
       const width = window.innerWidth;
       this.$store.commit("isPhone", width < constant.PHONE_SIZE);
       this.$store.commit("isTablet", width < constant.TABLET_SIZE);
+
+      this.$store.dispatch("ui/setIsPhone", width);
+      this.$store.dispatch("ui/setIsTablet", width);
+
     },
     handleLoginStatus() {
       const cookie = getCookie();

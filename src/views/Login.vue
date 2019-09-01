@@ -108,7 +108,6 @@
 import { setCookie } from "../utils/controllCookie";
 import callAPI from "../utils/callAPI";
 import Response from "../components/Response";
-import { mapState } from "vuex";
 
 export default {
   name: "Login",
@@ -134,9 +133,9 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      isPhone: state => state.isPhone
-    })
+    isPhone: function() {
+      return this.$store.getters["ui/getIsPhone"];
+    }
   },
   methods: {
     async login() {

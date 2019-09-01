@@ -28,9 +28,9 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      isPhone: state => state.isPhone
-    }),
+    isPhone: function() {
+      return this.$store.getters["ui/getIsPhone"];
+    },
     menus: function() {
       const icons = [];
       this.$router.options.routes.map(route => {

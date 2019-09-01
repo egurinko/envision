@@ -28,9 +28,11 @@ export default {
   },
   computed: {
     ...mapState({
-      isPhone: state => state.isPhone,
       isLoading: state => state.isLoading
-    })
+    }),
+    isPhone: function() {
+      return this.$store.getters["ui/getIsPhone"];
+    }
   },
   created() {},
   methods: {}

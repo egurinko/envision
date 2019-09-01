@@ -108,7 +108,6 @@
 <script>
 import callAPI from "../../utils/callAPI";
 import Response from "../../components/Response";
-import { mapState } from "vuex";
 import domain from "../../utils/domain";
 
 export default {
@@ -135,9 +134,9 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      isPhone: state => state.isPhone
-    })
+    isPhone: function() {
+      return this.$store.getters["ui/getIsPhone"];
+    }
   },
   methods: {
     async register() {

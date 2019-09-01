@@ -64,6 +64,7 @@
 import Vue from "vue";
 import Reputations from "./Reputation.vue";
 import { Route } from "../router/route.types";
+import * as Vuex from "vuex";
 
 type Menu = {
   icon: string;

@@ -103,10 +103,14 @@ export default {
   },
   computed: {
     ...mapState({
-      isPhone: state => state.isPhone,
-      isTablet: state => state.isTablet,
       isLoading: state => state.isLoading
     }),
+    isPhone: function() {
+      return this.$store.getters["ui/getIsPhone"];
+    },
+    isTablet: function() {
+      return this.$store.getters["ui/getIsTablet"];
+    },
     contributionData: function() {
       if (!this.contributions && !this.users) return {};
       const labels = this.users.map(user => user.username);

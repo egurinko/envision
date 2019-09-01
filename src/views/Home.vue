@@ -141,10 +141,14 @@ export default {
   },
   computed: {
     ...mapState({
-      isPhone: state => state.isPhone,
-      isTablet: state => state.isTablet,
       isLoading: state => state.isLoading
     }),
+    isPhone: function() {
+      return this.$store.getters["ui/getIsPhone"];
+    },
+    isTablet: function() {
+      return this.$store.getters["ui/getIsTablet"];
+    },
     detailData: function() {
       if (!this.comfort) return;
       const latest = this.comfort[this.comfort.length - 1];
