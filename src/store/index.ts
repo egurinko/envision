@@ -1,8 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import constant from "../../constant";
-import config from "../../config";
 import ui from "./modules/ui";
+import user from "./modules/user";
 
 Vue.use(Vuex);
 
@@ -10,7 +9,8 @@ const debug = process.env.NODE_ENV === "development";
 
 export default new Vuex.Store({
   modules: {
-    ui
+    ui,
+    user
   },
   strict: debug,
   state: {
