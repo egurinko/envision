@@ -79,8 +79,8 @@ export default {
       this.$router.push("/login");
     },
     handleLogout() {
-      this.$store.commit("user/setIsLoggedIn", false);
-      this.$store.commit("user/setUsername", "");
+      this.$store.dispatch("user/setIsLoggedIn", false);
+      this.$store.dispatch("user/setUsername", "");
       removeCookie();
       setTimeout(() => {
         this.$router.push("/");

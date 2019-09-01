@@ -154,8 +154,8 @@ export default {
       const [loginResponse] = await callAPI(loginRequest);
       if (this.$store.state.response.status === 200) {
         if (loginResponse.auth) {
-          this.$store.commit("user/setIsLoggedIn", true);
-          this.$store.commit("user/setUsername", loginResponse.username);
+          this.$store.dispatch("user/setIsLoggedIn", true);
+          this.$store.dispatch("user/setUsername", loginResponse.username);
           setCookie(loginResponse.token, loginResponse.username);
           setTimeout(() => {
             this.$router.push("/");

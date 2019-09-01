@@ -206,8 +206,10 @@ export default {
   },
   async created() {
     this.$store.commit("setIsLoading", true);
+    this.$store.commit("ui/setIsLoading", true);
     await this.init();
     this.$store.commit("setIsLoading", false);
+    this.$store.commit("ui/setIsLoading", false);
 
     setInterval(() => {
       this.update();

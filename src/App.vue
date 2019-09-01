@@ -69,13 +69,12 @@ export default {
       const width = window.innerWidth;
       this.$store.dispatch("ui/setIsPhone", width);
       this.$store.dispatch("ui/setIsTablet", width);
-
     },
     handleLoginStatus() {
       const cookie = getCookie();
       if (cookie.token !== "") {
-        this.$store.commit("user/setIsLoggedIn", true);
-        this.$store.commit("user/setUsername", cookie.username);
+        this.$store.dispatch("user/setIsLoggedIn", true);
+        this.$store.dispatch("user/setUsername", cookie.username);
       }
     }
   }
