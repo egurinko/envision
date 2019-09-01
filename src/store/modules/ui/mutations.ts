@@ -7,6 +7,9 @@ const mutations: Mutations<State["ui"], IMutations["ui"]> = {
     },
     setIsTablet(state, payload) {
         state.isTablet = payload;
+    },
+    setTimespan(state, payload){
+        state.selectedTimespan = payload;
     }
 };
 

@@ -10,6 +10,9 @@ const actions: Actions<State["ui"], IActions["ui"], IGetters["ui"], IMutations["
     setIsTablet(ctx, payload){
         const isTablet: boolean = payload < constant.TABLET_SIZE;
         ctx.commit("setIsTablet", isTablet);
+    },
+    setTimespan(ctx, payload){
+        ctx.commit("setTimespan", payload);
     }
 };
 

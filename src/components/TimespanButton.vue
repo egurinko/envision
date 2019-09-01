@@ -25,12 +25,12 @@
                 left
               >
                 add_alarm
-              </v-icon><span class="white--text">{{ $store.state.timespans.selected }}</span>
+              </v-icon><span class="white--text">{{ selectedTimespan }}</span>
             </v-btn>
           </template>
           <v-list class="primary">
             <v-list-item
-              v-for="(hours, key) in $store.state.timespans.timespan"
+              v-for="(hours, key) in convertTimespan"
               :key="key"
               :data-cy="key"
               @click="onClick(key)"
@@ -51,19 +51,32 @@
 
 <script lang="ts">
 import Vue from "vue";
+import convertTimespan from "../utils/convertTimespan";
+
 export default Vue.extend({
   name: "TimespanButton",
+  data() {
+    return {
+      convertTimespan: convertTimespan
+    };
+  },
+  computed: {
+    convertedTimespan: function() {
+      return this.$store.getters["ui/getConvertedTimespan"];
+    },
+    selectedTimespan: function() {
+      return this.$store.getters["ui/getSelectedTimespan"];
+    }
+  },
   methods: {
     onClick(hours: string): void {
       if (
-        this.$store.state.timespans.selected ===
-        this.$store.state.timespans.timespan[hours]
+        this.convertedTimespan ===
+        convertTimespan[hours]
       ) {
         return;
       }
-
-      // TODO: Add Types here when Vuex
-      this.$store.commit("changeTimespan", hours);
+      this.$store.commit("ui/setTimespan", hours);
       this.$emit("on-click");
     }
   }

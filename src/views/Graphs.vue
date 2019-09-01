@@ -88,7 +88,7 @@ export default {
         {
           url: "/envs",
           method: "GET",
-          params: { timespan: this.$store.getters.getTimespan }
+          params: { timespan: this.$store.getters["ui/getConvertedTimespan"] }
         }
       ];
 

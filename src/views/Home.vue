@@ -218,7 +218,7 @@ export default {
       return Promise.all([
         axios.get(`${domain}/comfort`, {
           params: {
-            timespan: this.$store.getters.getTimespan
+            timespan: this.$store.getters["ui/getConvertedTimespan"]
           }
         }),
         axios.get(`${domain}/envs`),
