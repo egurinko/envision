@@ -14,6 +14,9 @@ const getters: Getters<State["ui"], IGetters["ui"]> = {
     },
     getSelectedTimespan(state, getters) {
         return state.selectedTimespan;
+    },
+    getIsLoading(state, getters) {
+        return state.isLoading;
     }
 };
 

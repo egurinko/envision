@@ -13,6 +13,9 @@ const actions: Actions<State["ui"], IActions["ui"], IGetters["ui"], IMutations["
     },
     setTimespan(ctx, payload){
         ctx.commit("setTimespan", payload);
+    },
+    setIsLoading(ctx, payload){
+        ctx.commit("setIsLoading", payload);
     }
 };
 

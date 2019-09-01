@@ -10,6 +10,9 @@ const mutations: Mutations<State["ui"], IMutations["ui"]> = {
     },
     setTimespan(state, payload){
         state.selectedTimespan = payload;
+    },
+    setIsLoading(state, payload){
+        state.isLoading = payload;
     }
 };
 
