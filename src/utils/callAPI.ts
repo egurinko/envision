@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosAdapter, AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 import { getCookie } from "./controllCookie";
 import store from "../store/index";
 import domain from "./domain";
@@ -11,7 +11,9 @@ import domain from "./domain";
 //  DATA: for post request
 //  PARAMS: for get request
 
-export default requests => {
+type Requests = AxiosRequestConfig[];
+
+export default (requests: Requests) => {
   const reqPromises = [];
   store.dispatch("ui/setIsLoading", true);
   for (const request of requests) {
@@ -19,7 +21,7 @@ export default requests => {
   }
 
   return Promise.all(reqPromises)
-    .then(responses => {
+    .then((responses: AxiosResponse[]): any => {
       store.dispatch("response/setResponse", {
         status: 200,
         method: requests[0].method,
@@ -27,7 +29,7 @@ export default requests => {
       });
       return responses.map(response => response.data);
     })
-    .catch(error => {
+    .catch((error: AxiosError): void => {
       if (error.response) {
         store.dispatch("response/setResponse", {
           status: error.response.status,
@@ -42,13 +44,13 @@ export default requests => {
         });
       }
     })
-    .finally(error => {
+    .finally((): void => {
       store.dispatch("ui/setIsLoading", false);
     });
 };
 
-const requestAPI = request => {
-  const config = { baseURL: domain, url: request.url, method: request.method };
+const requestAPI = (request: AxiosRequestConfig): Promise<AxiosResponse> => {
+  const config: AxiosRequestConfig = { baseURL: domain, url: request.url, method: request.method };
 
   if (request.method === "GET") {
     if (request.params) {

@@ -39,7 +39,7 @@
 <script lang="ts">
 import Vue from "vue";
 import callAPI from "../utils/callAPI";
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import domain from "../utils/domain";
 
 type Reputation = {
@@ -80,7 +80,7 @@ export default Vue.extend({
 
       data.username = this.$store.state.user.username;
 
-      const requests = [
+      const requests: AxiosRequestConfig[] = [
         {
           url: "/training-data",
           method: "POST",
