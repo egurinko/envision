@@ -2,15 +2,18 @@ import Vue from "vue";
 import Vuex from "vuex";
 import constant from "../../constant";
 import config from "../../config";
+import ui from "./modules/ui";
 
 Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV === "development";
 
 export default new Vuex.Store({
+  modules: {
+    ui
+  },
+  strict: debug,
   state: {
-    isPhone: window.innerWidth < constant.PHONE_SIZE,
-    isTablet: window.innerWidth < constant.TABLET_SIZE,
     username: "",
     isLoggedIn: false,
     isLoading: false,
@@ -30,12 +33,6 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    isPhone(state, isPhone) {
-      state.isPhone = isPhone;
-    },
-    isTablet(state, isTablet) {
-      state.isTablet = isTablet;
-    },
     setIsloggedIn(state, isLoggedIn) {
       state.isLoggedIn = isLoggedIn;
     },
