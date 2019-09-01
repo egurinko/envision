@@ -85,7 +85,6 @@
 <script>
 import BarChart from "../../components/BarChart";
 import callAPI from "../../utils/callAPI";
-import { mapState } from "vuex";
 import Response from "../../components/Response";
 import makeCreatedAt from "../../utils/makeCreatedAt";
 
@@ -102,14 +101,14 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      isLoading: state => state.isLoading
-    }),
     isPhone: function() {
       return this.$store.getters["ui/getIsPhone"];
     },
     isTablet: function() {
       return this.$store.getters["ui/getIsTablet"];
+    },
+    isLoading: function() {
+      return this.$store.getters["ui/getIsLoading"];
     },
     contributionData: function() {
       if (!this.contributions && !this.users) return {};

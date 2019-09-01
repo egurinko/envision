@@ -118,7 +118,6 @@ import DoughnutChart from "../components/DoughnutChart";
 import LineChart from "../components/LineChart";
 import TimespanButton from "../components/TimespanButton";
 import convertTime from "../utils/convertTime";
-import { mapState } from "vuex";
 import Response from "../components/Response";
 import * as chatjsAnnotation from "chartjs-plugin-annotation";
 import domain from "../utils/domain";
@@ -140,14 +139,14 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      isLoading: state => state.isLoading
-    }),
     isPhone: function() {
       return this.$store.getters["ui/getIsPhone"];
     },
     isTablet: function() {
       return this.$store.getters["ui/getIsTablet"];
+    },
+    isLoading: function() {
+      return this.$store.getters["ui/getIsLoading"];
     },
     detailData: function() {
       if (!this.comfort) return;
@@ -205,10 +204,8 @@ export default {
     }
   },
   async created() {
-    this.$store.commit("setIsLoading", true);
     this.$store.commit("ui/setIsLoading", true);
     await this.init();
-    this.$store.commit("setIsLoading", false);
     this.$store.commit("ui/setIsLoading", false);
 
     setInterval(() => {
@@ -239,9 +236,9 @@ export default {
       await this.init();
     },
     async onClick() {
-      this.$store.commit("setIsLoading", true);
+      this.$store.commit("ui/setIsLoading", true);
       await this.init();
-      this.$store.commit("setIsLoading", false);
+      this.$store.commit("ui/setIsLoading", false);
     }
   }
 };

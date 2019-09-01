@@ -14,7 +14,6 @@ export default new Vuex.Store({
   },
   strict: debug,
   state: {
-    isLoading: false,
     response: {
       status: "",
       method: "",
@@ -22,9 +21,6 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    setIsLoading(state: any, isLoading) {
-      state.isLoading = isLoading;
-    },
     setResponse(state: any, response) {
       state.response = response;
     }

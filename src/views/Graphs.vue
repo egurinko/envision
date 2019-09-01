@@ -42,7 +42,6 @@ import axios from "axios";
 import LineChart from "../components/LineChart";
 import TimespanButton from "../components/TimespanButton";
 import convertTime from "../utils/convertTime";
-import { mapState } from "vuex";
 import Response from "../components/Response";
 import callAPI from "../utils/callAPI";
 import * as chatjsAnnotation from "chartjs-plugin-annotation";
@@ -72,9 +71,9 @@ export default {
       }
       return chartData;
     },
-    ...mapState({
-      isLoading: state => state.isLoading
-    })
+    isLoading: function() {
+      return this.$store.getters["ui/getIsLoading"];
+    }
   },
   created() {
     this.init();

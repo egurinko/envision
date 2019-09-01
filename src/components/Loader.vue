@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import SyncLoader from "vue-spinner/src/SyncLoader";
 
 export default {
@@ -27,11 +26,11 @@ export default {
     SyncLoader
   },
   computed: {
-    ...mapState({
-      isLoading: state => state.isLoading
-    }),
     isPhone: function() {
       return this.$store.getters["ui/getIsPhone"];
+    },
+    isLoading: function() {
+      return this.$store.getters["ui/getIsLoading"];
     }
   },
   created() {},
