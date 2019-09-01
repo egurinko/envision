@@ -82,24 +82,47 @@
   </v-container>
 </template>
 
-<script>
-import BarChart from "../../components/BarChart";
+<script lang="ts">
+import Vue from "vue";
+import { AxiosRequestConfig } from "axios";
+import BarChart from "../../components/BarChart.vue";
 import callAPI from "../../utils/callAPI";
-import Response from "../../components/Response";
+import Response from "../../components/Response.vue";
 import makeCreatedAt from "../../utils/makeCreatedAt";
+import Chart from "chart.js";
 
-export default {
+type Contribution = { 
+  _id: string;
+  username: string;
+  timestamp: number;
+}
+
+type User = { 
+  _id: string;
+  username: string;
+  timestamp: number;
+}
+
+type Data = {
+  users: User[] | null;
+  contributions: Contribution[] | null;
+};
+
+type Method = {
+  init: () => Promise<void>;
+  goUserRegistration: () => void;
+}
+
+export default Vue.extend<any, Method, any, any>({
   name: "UsersIndex",
   components: {
     BarChart,
     Response
   },
-  data() {
-    return {
-      contributions: null,
-      users: null
-    };
-  },
+  data: (): Data => ({
+    contributions: null,
+    users: null
+  }),
   computed: {
     isPhone: function() {
       return this.$store.getters["ui/getIsPhone"];
@@ -110,11 +133,11 @@ export default {
     isLoading: function() {
       return this.$store.getters["ui/getIsLoading"];
     },
-    contributionData: function() {
-      if (!this.contributions && !this.users) return {};
-      const labels = this.users.map(user => user.username);
+    contributionData: function(): Chart.ChartData {
+      if (this.contributions === null || this.users === null) return {};
+      const labels = this.users.map((user: User): string => user.username);
       const data = labels.map(() => 0);
-      this.contributions.map(contribution => {
+      this.contributions.map((contribution: Contribution): void => {
         const index = labels.indexOf(contribution.username);
         data[index] += 1;
       });
@@ -124,7 +147,7 @@ export default {
         datasets: [
           {
             borderWidth: 1,
-            borderColor: this.$vuetify.theme.themes.dark.lightGreen,
+            borderColor: this.$vuetify.theme.themes.dark.lightGreen as string,
             data
           }
         ]
@@ -132,7 +155,7 @@ export default {
     },
     userData: function() {
       if (!this.users) return;
-      const userData = this.users.map(user => {
+      const userData = this.users.map((user: User) => {
         return {
           username: user.username,
           createdAt: makeCreatedAt(user.timestamp)
@@ -145,12 +168,12 @@ export default {
       return userData;
     }
   },
-  created() {
+  created(): any {
     this.init();
   },
   methods: {
-    async init() {
-      const requests = [
+    async init(): Promise<void> {
+      const requests: AxiosRequestConfig[] = [
         {
           url: "/contributions",
           method: "GET"
@@ -167,11 +190,11 @@ export default {
         this.users = users;
       }
     },
-    goUserRegistration() {
+    goUserRegistration(): void {
       this.$router.push("/users/new");
     }
   }
-};
+});
 </script>
 <style scoped>
 .container {
