@@ -6,7 +6,10 @@ export default (unixtime: string): string=> {
   const day = moment.tz(unixtime, "Asia/Tokyo").format("DD");
   const hour = moment.tz(unixtime, "Asia/Tokyo").format("HH");
   const minute = moment.tz(unixtime, "Asia/Tokyo").format("mm");
-  return store.state.timespans.selected !== "WEEK"
-    ? hour + ":" + minute
-    : month + "/" + day + " " + hour + ":" + minute;
+
+  return hour + ":" + minute;
+  // TODO: Refer real store
+  // return store.state.timespans.selected !== "WEEK"
+  //   ? hour + ":" + minute
+  //   : month + "/" + day + " " + hour + ":" + minute;
 };

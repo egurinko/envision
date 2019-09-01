@@ -33,25 +33,25 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    setIsloggedIn(state, isLoggedIn) {
+    setIsloggedIn(state: any, isLoggedIn) {
       state.isLoggedIn = isLoggedIn;
     },
-    setIsLoading(state, isLoading) {
+    setIsLoading(state: any, isLoading) {
       state.isLoading = isLoading;
     },
-    changeTimespan(state, timespan) {
+    changeTimespan(state: any, timespan) {
       state.timespans.selected = timespan;
     },
-    setUsername(state, username) {
+    setUsername(state: any, username) {
       state.username = username;
     },
-    setResponse(state, response) {
+    setResponse(state: any, response) {
       state.response = response;
     }
   },
   actions: {},
   getters: {
-    getTimespan: state => {
+    getTimespan: (state: any) => {
       const selected = state.timespans.selected;
       return state.timespans.timespan[selected];
     }
