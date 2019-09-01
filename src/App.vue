@@ -67,9 +67,6 @@ export default {
   methods: {
     handleWindowResize() {
       const width = window.innerWidth;
-      this.$store.commit("isPhone", width < constant.PHONE_SIZE);
-      this.$store.commit("isTablet", width < constant.TABLET_SIZE);
-
       this.$store.dispatch("ui/setIsPhone", width);
       this.$store.dispatch("ui/setIsTablet", width);
 

@@ -28,7 +28,7 @@ const options: Chart.ChartOptions = {
       chartContext.fillStyle = fontColor;
       chartContext.textAlign = "center";
       chartContext.textBaseline = "middle";
-      fontSize = store.state.isPhone ? 30 : 40;
+      fontSize = 35;
       chartContext.font = `${fontSize}px Rubik`;
       
       chartContext.fillText(
