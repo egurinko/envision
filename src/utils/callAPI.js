@@ -20,7 +20,7 @@ export default requests => {
 
   return Promise.all(reqPromises)
     .then(responses => {
-      store.commit("setResponse", {
+      store.dispatch("response/setResponse", {
         status: 200,
         method: requests[0].method,
         errors: ""
@@ -29,13 +29,13 @@ export default requests => {
     })
     .catch(error => {
       if (error.response) {
-        store.commit("setResponse", {
+        store.dispatch("response/setResponse", {
           status: error.response.status,
           method: requests[0].method,
           errors: error.response.data
         });
       } else {
-        store.commit("setResponse", {
+        store.dispatch("response/setResponse", {
           status: 500,
           method: requests[0].method,
           errors: { errorMessage: "500 Sorry it's me, not you." }
