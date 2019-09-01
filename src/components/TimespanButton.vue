@@ -76,7 +76,7 @@ export default Vue.extend({
       ) {
         return;
       }
-      this.$store.commit("ui/setTimespan", hours);
+      this.$store.dispatch("ui/setTimespan", hours);
       this.$emit("on-click");
     }
   }
