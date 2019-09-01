@@ -14,8 +14,6 @@ export default new Vuex.Store({
   },
   strict: debug,
   state: {
-    username: "",
-    isLoggedIn: false,
     isLoading: false,
     timespans: {
       selected: "AN HOUR",
