@@ -92,7 +92,7 @@ export default {
       ];
 
       const [envs] = await callAPI(requests);
-      if (this.$store.state.response.status === 200) {
+      if (this.$store.getters["response/getResponse"].status === 200) {
         this.envs = envs.map(env => {
           let timeConvetedData = env.data;
           if (env.data.length !== 0) {

@@ -152,7 +152,7 @@ export default {
       ];
 
       const [loginResponse] = await callAPI(loginRequest);
-      if (this.$store.state.response.status === 200) {
+      if (this.$store.getters["response/getResponse"].status === 200) {
         if (loginResponse.auth) {
           this.$store.dispatch("user/setIsLoggedIn", true);
           this.$store.dispatch("user/setUsername", loginResponse.username);

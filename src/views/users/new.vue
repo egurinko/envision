@@ -153,7 +153,7 @@ export default {
       ];
 
       const [userRegistrationResponse] = await callAPI(userRegistrationRequest);
-      if (this.$store.state.response.status === 200) {
+      if (this.$store.getters["response/getResponse"].status === 200) {
         // Something happens ?
       }
     }

@@ -162,7 +162,7 @@ export default {
       ];
 
       const [contributions, users] = await callAPI(requests);
-      if (this.$store.state.response.status === 200) {
+      if (this.$store.getters["response/getResponse"].status === 200) {
         this.contributions = contributions;
         this.users = users;
       }

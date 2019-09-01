@@ -23,14 +23,12 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-
 export default {
   name: "Response",
   computed: {
-    ...mapState({
-      response: state => state.response
-    })
+    response: function() {
+      return this.$store.getters["response/getResponse"];
+    },
   },
   created() {},
   methods: {}
