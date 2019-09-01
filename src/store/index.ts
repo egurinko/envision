@@ -33,17 +33,11 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    setIsloggedIn(state: any, isLoggedIn) {
-      state.isLoggedIn = isLoggedIn;
-    },
     setIsLoading(state: any, isLoading) {
       state.isLoading = isLoading;
     },
     changeTimespan(state: any, timespan) {
       state.timespans.selected = timespan;
-    },
-    setUsername(state: any, username) {
-      state.username = username;
     },
     setResponse(state: any, response) {
       state.response = response;

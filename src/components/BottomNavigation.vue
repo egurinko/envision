@@ -18,8 +18,6 @@
   </v-bottom-navigation>
 </template>
 <script>
-import { mapState } from "vuex";
-
 export default {
   name: "Toolbar",
   data() {

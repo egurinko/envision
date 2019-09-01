@@ -74,8 +74,8 @@ export default {
     handleLoginStatus() {
       const cookie = getCookie();
       if (cookie.token !== "") {
-        this.$store.commit("setIsloggedIn", true);
-        this.$store.commit("setUsername", cookie.username);
+        this.$store.commit("user/setIsLoggedIn", true);
+        this.$store.commit("user/setUsername", cookie.username);
       }
     }
   }

@@ -48,7 +48,6 @@
 <script>
 import { removeCookie } from "../utils/controllCookie";
 import { setTimeout } from "timers";
-import { mapState } from "vuex";
 
 export default {
   name: "Toolbar",
@@ -62,12 +61,14 @@ export default {
       });
       return icons;
     },
-    ...mapState({
-      isLoggedIn: state => state.isLoggedIn,
-      username: state => state.username
-    }),
     isPhone: function() {
       return this.$store.getters["ui/getIsPhone"];
+    },
+    username: function() {
+      return this.$store.getters["user/getUsername"];
+    },
+    isLoggedIn: function() {
+      return this.$store.getters["user/getIsLoggedIn"];
     }
   },
   methods: {
@@ -78,8 +79,8 @@ export default {
       this.$router.push("/login");
     },
     handleLogout() {
-      this.$store.commit("setUsername", "");
-      this.$store.commit("setIsloggedIn", false);
+      this.$store.commit("user/setIsLoggedIn", false);
+      this.$store.commit("user/setUsername", "");
       removeCookie();
       setTimeout(() => {
         this.$router.push("/");
