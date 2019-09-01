@@ -3,11 +3,9 @@
 ENVISION is a IoT web application for visualizing your working environment. It gets environmental data by using Raspberry pi 3 and some sensors.
 
 <div>
-<img src="https://user-images.githubusercontent.com/23233648/56307166-2de16d80-617f-11e9-81a7-19d25ef8ce67.png" height="60%" width="60%">
-<img src="https://user-images.githubusercontent.com/23233648/56307474-e27b8f00-617f-11e9-976d-04d9984c0423.png" height="30%" width="30%">
+<img alt="Screen Shot 2019-09-02 at 8 20 05" src="https://user-images.githubusercontent.com/23233648/64083425-e7ba2e80-cd5a-11e9-82cd-60a45eec6aec.png" height="60%" width="60%">
+<img alt="Screen Shot 2019-09-02 at 8 20 39" src="https://user-images.githubusercontent.com/23233648/64083447-35cf3200-cd5b-11e9-8e73-63d66f6f4ceb.png" height="30%" width="30%">
 </div>
-
-
 
 ## Table of content
 
@@ -27,12 +25,13 @@ ENVISION is a IoT web application for visualizing your working environment. It g
 
 ENVISION provides two features,
 
-1. Provide comfort index from sensory data
+1. Provide comfort index calculated from sensory data
    - Show overall working comfort index
-   - Show comfort index of each sensing data
+   - Show each comfort index of sensing data (like CO2, temperature...)
      <br>
      <br>
-     <img src="https://user-images.githubusercontent.com/23233648/56305991-62075f00-617c-11e9-9f9b-8066d3e03be3.png" height="100%" width="100%">
+     <img width="60%" alt="Screen Shot 2019-09-02 at 8 22 02" src="https://user-images.githubusercontent.com/23233648/64083468-8050ae80-cd5b-11e9-9652-f9b301c5a362.png">
+     <img width="39%" alt="Screen Shot 2019-09-02 at 8 22 12" src="https://user-images.githubusercontent.com/23233648/64083469-847ccc00-cd5b-11e9-997c-19ddf58aa1ae.png">
      <br>
      <br>
 
@@ -42,14 +41,14 @@ ENVISION provides two features,
    - You can analyze and improve your working environment
      <br>
      <br>
-     <img src="https://user-images.githubusercontent.com/23233648/56332993-6b6ce780-61cd-11e9-9043-e304771c3d16.png" height="100%" width="100%">
+     <img width="100%" alt="Screen Shot 2019-09-02 at 8 29 59" src="https://user-images.githubusercontent.com/23233648/64083501-df162800-cd5b-11e9-9e60-5c9402ba6725.png">
      <br>
      <br>
 
 
 ## Demo Page
 
-[Demo Page](https://prod-bot-staging.herokuapp.com/) is here! You can check demo IoT project!
+[Demo Page](https://envision-iot.herokuapp.com) is here! You can check demo IoT project!
 
 ## Setup
 
@@ -146,7 +145,7 @@ yarn start
 
 ## Links
 
-- [DEMO PAGE](https://prod-bot-staging.herokuapp.com/)
+- [DEMO PAGE](https://envision-iot.herokuapp.com/)
 - [Vue](https://vuejs.org/)
 - [Vuetify](https://vuetifyjs.com/en/)
 - [Express](https://expressjs.com/)
