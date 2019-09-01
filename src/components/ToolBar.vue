@@ -45,21 +45,23 @@
     </div>
   </v-toolbar>
 </template>
-<script>
+<script lang="ts">
+import Vue from "vue";
+import { Route } from "../router/route.types";
+import { Menus } from "./Drawer.vue";
 import { removeCookie } from "../utils/controllCookie";
-import { setTimeout } from "timers";
 
-export default {
+export default Vue.extend({
   name: "Toolbar",
   computed: {
-    menus: function() {
-      const icons = [];
-      this.$router.options.routes.map(route => {
+    menus: function(): Menus {
+      const menus: Menus = [];
+      (this.$router as any).options.routes.map((route: Route): void => {
         if (route.meta) {
-          icons.push({ icon: route.meta.icon, route: route.path });
+          menus.push({ icon: route.meta.icon, route: route.path });
         }
       });
-      return icons;
+      return menus;
     },
     isPhone: function() {
       return this.$store.getters["ui/getIsPhone"];
@@ -72,13 +74,13 @@ export default {
     }
   },
   methods: {
-    handleClick(route) {
+    handleClick(route: string): void {
       this.$router.push(route);
     },
-    goLogin() {
+    goLogin(): void {
       this.$router.push("/login");
     },
-    handleLogout() {
+    handleLogout(): void {
       this.$store.dispatch("user/setIsLoggedIn", false);
       this.$store.dispatch("user/setUsername", "");
       removeCookie();
@@ -89,7 +91,7 @@ export default {
       }, 1000);
     }
   }
-};
+});
 </script>
 <style scoped>
 .toolbar{
