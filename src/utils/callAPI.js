@@ -13,7 +13,7 @@ import domain from "./domain";
 
 export default requests => {
   const reqPromises = [];
-  store.commit("ui/setIsLoading", true);
+  store.dispatch("ui/setIsLoading", true);
   for (const request of requests) {
     reqPromises.push(requestAPI(request));
   }
@@ -43,7 +43,7 @@ export default requests => {
       }
     })
     .finally(error => {
-      store.commit("ui/setIsLoading", false);
+      store.dispatch("ui/setIsLoading", false);
     });
 };
 

@@ -204,9 +204,9 @@ export default {
     }
   },
   async created() {
-    this.$store.commit("ui/setIsLoading", true);
+    this.$store.dispatch("ui/setIsLoading", true);
     await this.init();
-    this.$store.commit("ui/setIsLoading", false);
+    this.$store.dispatch("ui/setIsLoading", false);
 
     setInterval(() => {
       this.update();
@@ -236,9 +236,9 @@ export default {
       await this.init();
     },
     async onClick() {
-      this.$store.commit("ui/setIsLoading", true);
+      this.$store.dispatch("ui/setIsLoading", true);
       await this.init();
-      this.$store.commit("ui/setIsLoading", false);
+      this.$store.dispatch("ui/setIsLoading", false);
     }
   }
 };
