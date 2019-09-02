@@ -39,15 +39,17 @@
   </v-app>
 </template>
 
-<script>
-import Drawer from "./components/Drawer";
-import ToolBar from "./components/ToolBar";
-import Loader from "./components/Loader";
-import BottomNavigation from "./components/BottomNavigation";
+<script lang="ts">
+import Vue from "vue";
+import { AxiosRequestConfig } from "axios";
+import Drawer from "./components/Drawer.vue";
+import ToolBar from "./components/ToolBar.vue";
+import Loader from "./components/Loader.vue";
+import BottomNavigation from "./components/BottomNavigation.vue";
 import constant from "../constant.js";
 import { getCookie } from "./utils/controllCookie";
 
-export default {
+export default Vue.extend({
   name: "App",
   components: {
     drawer: Drawer,
@@ -61,16 +63,16 @@ export default {
     }
   },
   created() {
-    window.addEventListener("resize", this.handleWindowResize);
-    this.handleLoginStatus();
+    window.addEventListener("resize", (this as any).handleWindowResize);
+    (this as any).handleLoginStatus();
   },
   methods: {
-    handleWindowResize() {
+    handleWindowResize(): void {
       const width = window.innerWidth;
       this.$store.dispatch("ui/setIsPhone", width);
       this.$store.dispatch("ui/setIsTablet", width);
     },
-    handleLoginStatus() {
+    handleLoginStatus(): void {
       const cookie = getCookie();
       if (cookie.token !== "") {
         this.$store.dispatch("user/setIsLoggedIn", true);
@@ -78,7 +80,7 @@ export default {
       }
     }
   }
-};
+});
 </script>
 
 <style>
