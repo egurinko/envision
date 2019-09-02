@@ -105,17 +105,36 @@
   </v-container>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from "vue";
+import { AxiosRequestConfig } from "axios";
 import callAPI from "../../utils/callAPI";
-import Response from "../../components/Response";
+import Response from "../../components/Response.vue";
 import domain from "../../utils/domain";
 
-export default {
+type Rule = (v: string) => string | boolean;
+type Match = () => string;
+
+type Data = {
+  usernameValid: boolean;
+  pwValid: boolean;
+  username: string;
+  password: string;
+  isShow: boolean;
+  usernameRules: Rule[];
+  pwRules: {
+    required: Rule;
+    min: Rule;
+    emailMatch: Match
+  }
+}
+
+export default Vue.extend({
   name: "UsersNew",
   components: {
     Response
   },
-  data() {
+  data(): Data {
     return {
       usernameValid: false,
       pwValid: false,
@@ -139,12 +158,12 @@ export default {
     }
   },
   methods: {
-    async register() {
+    async register(): Promise<void> {
       const data = {
         username: this.username,
         password: this.password
       };
-      const userRegistrationRequest = [
+      const userRegistrationRequest: AxiosRequestConfig[] = [
         {
           url: "/auth/users",
           method: "POST",
@@ -158,7 +177,7 @@ export default {
       }
     }
   }
-};
+});
 </script>
 <style lang="scss" scoped>
 .card {
