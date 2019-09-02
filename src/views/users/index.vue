@@ -103,17 +103,17 @@ type User = {
   timestamp: number;
 }
 
-type Data = {
+interface Data  {
   users: User[] | null;
   contributions: Contribution[] | null;
 };
 
-type Method = {
+interface Method {
   init: () => Promise<void>;
   goUserRegistration: () => void;
 }
 
-export default Vue.extend<any, Method, any, any>({
+export default Vue.extend({
   name: "UsersIndex",
   components: {
     BarChart,
@@ -168,8 +168,8 @@ export default Vue.extend<any, Method, any, any>({
       return userData;
     }
   },
-  created(): any {
-    this.init();
+  created (): void {
+    (this as any).init();
   },
   methods: {
     async init(): Promise<void> {
@@ -193,7 +193,7 @@ export default Vue.extend<any, Method, any, any>({
     goUserRegistration(): void {
       this.$router.push("/users/new");
     }
-  }
+  },
 });
 </script>
 <style scoped>
