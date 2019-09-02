@@ -104,46 +104,63 @@
   </v-container>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from "vue";
+import { AxiosRequestConfig } from "axios";
 import { setCookie } from "../utils/controllCookie";
 import callAPI from "../utils/callAPI";
-import Response from "../components/Response";
+import Response from "../components/Response.vue";
 
-export default {
+type Rule = (v: string) => string | boolean;
+type Match = () => string;
+
+type Data = {
+  usernameValid: boolean;
+  pwValid: boolean;
+  username: string;
+  password: string;
+  isShow: boolean;
+  usernameRules: Rule[],
+  pwRules: {
+    required: Rule;
+    min: Rule;
+    emailMatch: Match;
+  }
+}
+
+export default Vue.extend({
   name: "Login",
   components: {
     Response
   },
-  data() {
-    return {
-      usernameValid: false,
-      pwValid: false,
-      username: "",
-      password: "",
-      isShow: false,
-      usernameRules: [
-        v => !!v || "Username is required",
-        v => v.length <= 10 || "Username must be less than 10 characters"
-      ],
-      pwRules: {
-        required: value => !!value || "Required.",
-        min: v => v.length >= 8 || "Min 8 characters",
-        emailMatch: () => "The email and password you entered don't match"
-      }
-    };
-  },
+  data: (): Data => ({
+    usernameValid: false,
+    pwValid: false,
+    username: "",
+    password: "",
+    isShow: false,
+    usernameRules: [
+      v => !!v || "Username is required",
+      v => v.length <= 10 || "Username must be less than 10 characters"
+    ],
+    pwRules: {
+      required: value => !!value || "Required.",
+      min: v => v.length >= 8 || "Min 8 characters",
+      emailMatch: () => "The email and password you entered don't match"
+    }
+  }),
   computed: {
     isPhone: function() {
       return this.$store.getters["ui/getIsPhone"];
     }
   },
   methods: {
-    async login() {
+    async login(): Promise<void> {
       const data = {
         username: this.username,
         password: this.password
       };
-      const loginRequest = [
+      const loginRequest: AxiosRequestConfig[] = [
         {
           url: "/auth/login",
           method: "POST",
@@ -164,7 +181,7 @@ export default {
       }
     }
   }
-};
+});
 </script>
 <style lang="scss" scoped>
 .card {
