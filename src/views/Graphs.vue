@@ -39,7 +39,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import LineChart from "../components/LineChart.vue";
 import TimespanButton from "../components/TimespanButton.vue";
 import convertTime from "../utils/convertTime";
@@ -130,7 +130,7 @@ export default Vue.extend({
       }
     },
     update() {
-      axios.get(`${domain}/envs`).then((envs: any) => {
+      axios.get(`${domain}/envs`).then((envs: AxiosResponse) => {
         envs.data.map((env: OriginalEnv, i: number) => {
           const newLen = env.data.length;
           if (newLen !== 0) {
