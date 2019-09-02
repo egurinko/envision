@@ -27,10 +27,10 @@ export default Vue.extend({
     SyncLoader
   },
   computed: {
-    isPhone: function() {
+    isPhone: function(): boolean {
       return this.$store.getters["ui/getIsPhone"];
     },
-    isLoading: function() {
+    isLoading: function(): boolean {
       return this.$store.getters["ui/getIsLoading"];
     }
   }
