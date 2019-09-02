@@ -37,37 +37,59 @@
   </v-container>
 </template>
 
-<script>
-import axios from "axios";
-import LineChart from "../components/LineChart";
-import TimespanButton from "../components/TimespanButton";
+<script lang="ts">
+import Vue from "vue";
+import axios, { AxiosRequestConfig } from "axios";
+import LineChart from "../components/LineChart.vue";
+import TimespanButton from "../components/TimespanButton.vue";
 import convertTime from "../utils/convertTime";
-import Response from "../components/Response";
+import Response from "../components/Response.vue";
 import callAPI from "../utils/callAPI";
+// @ts-ignore: Unreachable code error
 import * as chatjsAnnotation from "chartjs-plugin-annotation";
 import domain from "../utils/domain";
-import annotations from "../utils/annotations";
+import annotations, { ChartAnnotationOptions, Annotations } from "../utils/annotations";
+import Chart from "chart.js";
 
-export default {
+type OriginalEnvData = {
+  _id: string;
+  value: number;
+  timestamp: string;
+}
+
+type OriginalEnv =  { key: string, data: OriginalEnvData[]};
+
+type EnvData = {
+  value: number;
+  time: string;
+}
+
+type Env = { key: string, data: EnvData[]};
+
+type Data = {
+  envs: Env[] | null;
+  annotations: Annotations;
+  chatjsAnnotation: ChartAnnotationOptions
+}
+
+export default Vue.extend({
   name: "Graphs",
   components: {
     LineChart,
     TimespanButton,
     Response
   },
-  data() {
-    return {
+  data: (): Data => ({
       envs: null,
       chatjsAnnotation,
       annotations
-    };
-  },
+  }),
   computed: {
-    chartData: function() {
+    chartData: function(): Chart.ChartData[] | undefined {
       if (this.envs === null) return;
-      const chartData = [];
+      const chartData: Chart.ChartData[] = [];
       for (let i in this.envs) {
-        chartData.push(this.makeChartData(this.envs[i].data, this.envs[i].key));
+        chartData.push((this as any).makeChartData(this.envs[i].data, this.envs[i].key));
       }
       return chartData;
     },
@@ -76,14 +98,14 @@ export default {
     }
   },
   created() {
-    this.init();
+    (this as any).init();
     setInterval(() => {
-      this.update();
+      (this as any).update();
     }, 60000);
   },
   methods: {
     async init() {
-      const requests = [
+      const requests: AxiosRequestConfig[] = [
         {
           url: "/envs",
           method: "GET",
@@ -93,8 +115,8 @@ export default {
 
       const [envs] = await callAPI(requests);
       if (this.$store.getters["response/getResponse"].status === 200) {
-        this.envs = envs.map(env => {
-          let timeConvetedData = env.data;
+        this.envs = envs.map((env: OriginalEnv) => {
+          let timeConvetedData: EnvData[] | OriginalEnvData[] = env.data;
           if (env.data.length !== 0) {
             timeConvetedData = env.data.map(each => {
               return {
@@ -108,36 +130,36 @@ export default {
       }
     },
     update() {
-      axios.get(`${domain}/envs`).then(envs => {
-        envs.data.map((env, i) => {
+      axios.get(`${domain}/envs`).then((envs: any) => {
+        envs.data.map((env: OriginalEnv, i: number) => {
           const newLen = env.data.length;
           if (newLen !== 0) {
             const newTimestamp = convertTime(env.data[newLen - 1].timestamp);
 
-            const oldLen = this.envs[i].data.length;
-            const oldTimestamp = this.envs[i].data[oldLen - 1].time;
+            const oldLen = this.envs![i].data.length;
+            const oldTimestamp = this.envs![i].data[oldLen - 1].time;
             if (newTimestamp !== oldTimestamp) {
-              this.envs[i].data.push({
+              this.envs![i].data.push({
                 value: env.data[newLen - 1].value,
                 time: convertTime(env.data[newLen - 1].timestamp)
               });
-              this.envs[i].data.shift();
+              this.envs![i].data.shift();
             }
           }
         });
       });
     },
     onClick() {
-      this.init();
+      (this as any).init();
     },
-    makeChartData(data, key) {
+    makeChartData(data: EnvData[], key: string) {
       return {
         labels: data.map(each => each.time),
         datasets: [
           {
             label: key.toUpperCase(),
-            backgroundColor: this.$vuetify.theme.themes.dark.primary,
-            borderColor: this.$vuetify.theme.themes.dark.lightGreen,
+            backgroundColor: this.$vuetify.theme.themes.dark.primary as string,
+            borderColor: this.$vuetify.theme.themes.dark.lightGreen as string,
             radius: 0,
             data: data.map(env => env.value),
             id: key
@@ -146,7 +168,7 @@ export default {
       };
     }
   }
-};
+});
 </script>
 <style scoped>
 .graph-container {
