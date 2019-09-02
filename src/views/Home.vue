@@ -112,17 +112,47 @@
   </v-container>
 </template>
 
-<script>
-import axios from "axios";
-import DoughnutChart from "../components/DoughnutChart";
-import LineChart from "../components/LineChart";
-import TimespanButton from "../components/TimespanButton";
+<script lang="ts">
+import Vue from "vue";
+import axios, { AxiosRequestConfig } from "axios";
+import DoughnutChart from "../components/DoughnutChart.vue";
+import LineChart from "../components/LineChart.vue";
+import TimespanButton from "../components/TimespanButton.vue";
 import convertTime from "../utils/convertTime";
-import Response from "../components/Response";
+import Response from "../components/Response.vue";
+// @ts-ignore: Unreachable code error
 import * as chatjsAnnotation from "chartjs-plugin-annotation";
 import domain from "../utils/domain";
+import { OriginalEnv } from "./Graphs.vue";
+import annotations, { ChartAnnotationOptions, Annotations } from "../utils/annotations";
+import Chart from "chart.js";
 
-export default {
+type DetailData = {
+  label: string;
+  value: number;
+  unit: string;
+}
+
+type Data = {
+  latestEnv: OriginalEnv[] | null;
+  latestComfort: Comforts;
+  comfort: Comforts;
+  chatjsAnnotation: ChartAnnotationOptions;
+}
+
+type Comfort = {
+  _id: string;
+  timestamp: string;
+  comfortIndex: number;
+  detail: { 
+    key :  string;
+    value: number;
+  } []
+}
+
+type Comforts = Comfort[] | null;
+
+export default Vue.extend({
   name: "Home",
   components: {
     DoughnutChart,
@@ -130,14 +160,12 @@ export default {
     TimespanButton,
     Response
   },
-  data() {
-    return {
+  data: (): Data =>({
       latestEnv: null,
+      latestComfort: null,
       comfort: null,
-      state: this.$store.state,
       chatjsAnnotation
-    };
-  },
+  }),
   computed: {
     isPhone: function() {
       return this.$store.getters["ui/getIsPhone"];
@@ -148,7 +176,7 @@ export default {
     isLoading: function() {
       return this.$store.getters["ui/getIsLoading"];
     },
-    detailData: function() {
+    detailData: function(): DetailData[] | undefined {
       if (!this.comfort) return;
       const latest = this.comfort[this.comfort.length - 1];
       return latest.detail.map(data => {
@@ -159,28 +187,28 @@ export default {
         };
       });
     },
-    doughnutData: function() {
+    doughnutData: function(): Chart.ChartData | undefined {
       if (!this.comfort) return;
-      const comfort = this.latestComfort[this.latestComfort.length - 1]
+      const comfort = this.latestComfort![this.latestComfort!.length - 1]
         .comfortIndex;
-      const firstColor =
-        comfort * 100 >= this.$constant.WARNING_RATIO
-          ? this.$vuetify.theme.themes.dark.lightGreen
-          : comfort * 100 >= this.$constant.CRITICAL_RATIO
-          ? this.$vuetify.theme.themes.dark.lightWarning
-          : this.$vuetify.theme.themes.dark.lightCritical;
-      const secondColor =
-        comfort * 100 >= this.$constant.WARNING_RATIO
-          ? this.$vuetify.theme.themes.dark.deepGreen
-          : comfort * 100 >= this.$constant.CRITICAL_RATIO
-          ? this.$vuetify.theme.themes.dark.deepWarning
-          : this.$vuetify.theme.themes.dark.lightWarning;
+      const firstColor: string =
+        comfort * 100 >= (this as any).$constant.WARNING_RATIO
+          ? this.$vuetify.theme.themes.dark.lightGreen as string
+          : comfort * 100 >= (this as any).$constant.CRITICAL_RATIO
+          ? this.$vuetify.theme.themes.dark.lightWarning as string
+          : this.$vuetify.theme.themes.dark.lightCritical as string;
+      const secondColor: string =
+        comfort * 100 >= (this as any).$constant.WARNING_RATIO
+          ? this.$vuetify.theme.themes.dark.deepGreen as string
+          : comfort * 100 >= (this as any).$constant.CRITICAL_RATIO
+          ? this.$vuetify.theme.themes.dark.deepWarning as string
+          : this.$vuetify.theme.themes.dark.lightWarning as string;
       return {
         datasets: [
           {
             backgroundColor: [firstColor, secondColor],
             borderWidth: 0,
-            borderColor: this.$vuetify.theme.themes.dark.lightGreen,
+            borderColor: this.$vuetify.theme.themes.dark.lightGreen as string,
             data: [comfort, 1 - comfort]
           }
         ]
@@ -203,17 +231,17 @@ export default {
       };
     }
   },
-  async created() {
+  async created() : Promise<void> {
     this.$store.dispatch("ui/setIsLoading", true);
-    await this.init();
+    await (this as any).init();
     this.$store.dispatch("ui/setIsLoading", false);
 
-    setInterval(() => {
-      this.update();
+    setInterval(() : void => {
+      (this as any).update();
     }, 60000);
   },
   methods: {
-    init() {
+    init() : Promise<void> {
       return Promise.all([
         axios.get(`${domain}/comfort`, {
           params: {
@@ -232,16 +260,16 @@ export default {
         return;
       });
     },
-    async update() {
-      await this.init();
+    async update() : Promise<void> {
+      await (this as any).init();
     },
-    async onClick() {
+    async onClick() : Promise<void> {
       this.$store.dispatch("ui/setIsLoading", true);
-      await this.init();
+      await (this as any).init();
       this.$store.dispatch("ui/setIsLoading", false);
     }
   }
-};
+});
 </script>
 <style scoped>
 .container {

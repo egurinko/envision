@@ -57,7 +57,7 @@ type OriginalEnvData = {
   timestamp: string;
 }
 
-type OriginalEnv =  { key: string, data: OriginalEnvData[]};
+export type OriginalEnv =  { key: string, data: OriginalEnvData[]};
 
 type EnvData = {
   value: number;
