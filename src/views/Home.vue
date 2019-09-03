@@ -100,7 +100,7 @@
       >
         <v-flex xs11>
           <LineChart
-            :id="lineData.datasets[0].id"
+            id="%"
             :chart-data="lineData"
             :title="lineData.datasets[0].label"
             :plugins="[chatjsAnnotation]"
@@ -167,13 +167,13 @@ export default Vue.extend({
       chatjsAnnotation
   }),
   computed: {
-    isPhone: function() {
+    isPhone: function(): boolean {
       return this.$store.getters["ui/getIsPhone"];
     },
-    isTablet: function() {
+    isTablet: function(): boolean {
       return this.$store.getters["ui/getIsTablet"];
     },
-    isLoading: function() {
+    isLoading: function(): boolean {
       return this.$store.getters["ui/getIsLoading"];
     },
     detailData: function(): DetailData[] | undefined {
@@ -214,18 +214,17 @@ export default Vue.extend({
         ]
       };
     },
-    lineData: function() {
+    lineData: function(): Chart.ChartData | undefined {
       if (!this.comfort) return;
       return {
         labels: this.comfort.map(shot => convertTime(shot.timestamp)),
         datasets: [
           {
             label: "COMFORT TRANSITION",
-            backgroundColor: this.$vuetify.theme.themes.dark.primary,
-            borderColor: this.$vuetify.theme.themes.dark.lightGreen,
+            backgroundColor: this.$vuetify.theme.themes.dark.primary as string,
+            borderColor: this.$vuetify.theme.themes.dark.lightGreen as string,
             radius: 0,
             data: this.comfort.map(shot => shot.comfortIndex * 100),
-            id: "%"
           }
         ]
       };
@@ -235,7 +234,7 @@ export default Vue.extend({
     this.$store.dispatch("ui/setIsLoading", true);
     await (this as any).init();
     this.$store.dispatch("ui/setIsLoading", false);
-
+    
     setInterval(() : void => {
       (this as any).update();
     }, 60000);

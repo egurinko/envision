@@ -58,11 +58,11 @@ export default Vue.extend({
     BottomNavigation
   },
   computed: {
-    isPhone: function() {
+    isPhone: function(): boolean {
       return this.$store.getters["ui/getIsPhone"];
     }
   },
-  created() {
+  created(): void {
     window.addEventListener("resize", (this as any).handleWindowResize);
     (this as any).handleLoginStatus();
   },

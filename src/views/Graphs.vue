@@ -25,7 +25,7 @@
           elevation="0"
         >
           <LineChart
-            :id="data.datasets[0].id"
+            :id="envs[i].key"
             :chart-data="data"
             :title="data.datasets[0].label"
             :annotation="annotations[data.datasets[0].label]"
@@ -93,18 +93,18 @@ export default Vue.extend({
       }
       return chartData;
     },
-    isLoading: function() {
+    isLoading: function(): boolean {
       return this.$store.getters["ui/getIsLoading"];
     }
   },
-  created() {
+  created(): void {
     (this as any).init();
     setInterval(() => {
       (this as any).update();
     }, 60000);
   },
   methods: {
-    async init() {
+    async init(): Promise<void> {
       const requests: AxiosRequestConfig[] = [
         {
           url: "/envs",
@@ -129,7 +129,7 @@ export default Vue.extend({
         });
       }
     },
-    update() {
+    update(): void {
       axios.get(`${domain}/envs`).then((envs: AxiosResponse) => {
         envs.data.map((env: OriginalEnv, i: number) => {
           const newLen = env.data.length;
@@ -149,10 +149,10 @@ export default Vue.extend({
         });
       });
     },
-    onClick() {
+    onClick(): void {
       (this as any).init();
     },
-    makeChartData(data: EnvData[], key: string) {
+    makeChartData(data: EnvData[], key: string): Chart.ChartData | undefined  {
       return {
         labels: data.map(each => each.time),
         datasets: [
@@ -161,8 +161,7 @@ export default Vue.extend({
             backgroundColor: this.$vuetify.theme.themes.dark.primary as string,
             borderColor: this.$vuetify.theme.themes.dark.lightGreen as string,
             radius: 0,
-            data: data.map(env => env.value),
-            id: key
+            data: data.map(env => env.value)
           }
         ]
       };

@@ -150,7 +150,7 @@ export default Vue.extend({
     }
   }),
   computed: {
-    isPhone: function() {
+    isPhone: function(): boolean {
       return this.$store.getters["ui/getIsPhone"];
     }
   },

@@ -108,6 +108,11 @@ interface Data  {
   contributions: Contribution[] | null;
 };
 
+type UserData = { 
+  username: string;
+  createdAt: string;
+}
+
 interface Method {
   init: () => Promise<void>;
   goUserRegistration: () => void;
@@ -124,13 +129,13 @@ export default Vue.extend({
     users: null
   }),
   computed: {
-    isPhone: function() {
+    isPhone: function(): boolean {
       return this.$store.getters["ui/getIsPhone"];
     },
-    isTablet: function() {
+    isTablet: function(): boolean {
       return this.$store.getters["ui/getIsTablet"];
     },
-    isLoading: function() {
+    isLoading: function(): boolean {
       return this.$store.getters["ui/getIsLoading"];
     },
     contributionData: function(): Chart.ChartData {
@@ -153,7 +158,7 @@ export default Vue.extend({
         ]
       };
     },
-    userData: function() {
+    userData: function(): UserData[] | undefined {
       if (!this.users) return;
       const userData = this.users.map((user: User) => {
         return {
