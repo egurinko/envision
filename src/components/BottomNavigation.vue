@@ -32,7 +32,7 @@ export default Vue.extend({
     active: 0
   }),
   computed: {
-    isPhone: function() {
+    isPhone: function(): boolean {
       return this.$store.getters["ui/getIsPhone"];
     },
     menus: function(): Menus {

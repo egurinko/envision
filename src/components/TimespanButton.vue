@@ -53,18 +53,20 @@
 import Vue from "vue";
 import convertTimespan from "../utils/convertTimespan";
 
+type Data = {
+  convertTimespan: { [index:string] :  number };
+}
+
 export default Vue.extend({
   name: "TimespanButton",
-  data() {
-    return {
+  data: (): Data => ({
       convertTimespan: convertTimespan
-    };
-  },
+  }),
   computed: {
-    convertedTimespan: function() {
+    convertedTimespan: function(): number {
       return this.$store.getters["ui/getConvertedTimespan"];
     },
-    selectedTimespan: function() {
+    selectedTimespan: function(): string {
       return this.$store.getters["ui/getSelectedTimespan"];
     }
   },

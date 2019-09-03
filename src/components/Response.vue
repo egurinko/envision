@@ -24,11 +24,12 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { ResponseS } from "../store/modules/response/types";
 
 export default Vue.extend({
   name: "Response",
   computed: {
-    response: function() {
+    response: function(): ResponseS {
       return this.$store.getters["response/getResponse"];
     },
   }
