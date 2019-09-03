@@ -34,6 +34,7 @@ export type Annotations = {
 export type Annotation = {
   "LOWER LIMIT"?: number;
   "UPPER LIMIT"?: number;
+  [propName: string]: number;
 };
 
 const annotations: Annotations = {
