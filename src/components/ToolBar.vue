@@ -63,13 +63,13 @@ export default Vue.extend({
       });
       return menus;
     },
-    isPhone: function() {
+    isPhone: function(): boolean {
       return this.$store.getters["ui/getIsPhone"];
     },
-    username: function() {
+    username: function(): boolean {
       return this.$store.getters["user/getUsername"];
     },
-    isLoggedIn: function() {
+    isLoggedIn: function(): boolean {
       return this.$store.getters["user/getIsLoggedIn"];
     }
   },
