@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
-    "@types/chart.js": "^2.8.4",
+    "@types/chart.js": "^2.8.5",
     "@types/moment-timezone": "^0.5.12",
     "@types/vue-router": "^2.0.0",
     "@vue/cli-plugin-babel": "^3.9.2",
