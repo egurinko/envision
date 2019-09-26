@@ -1,6 +1,7 @@
 # ENVISION
 
 ENVISION is a IoT web application for visualizing your working environment. It gets environmental data by using Raspberry pi 3 and some sensors.
+This repo is the backend of ENVISION.
 
 <div>
 <img alt="Screen Shot 2019-09-02 at 8 20 05" src="https://user-images.githubusercontent.com/23233648/64083425-e7ba2e80-cd5a-11e9-82cd-60a45eec6aec.png" height="60%" width="60%">
@@ -48,7 +49,7 @@ ENVISION provides two features,
 
 ## Demo Page
 
-[Demo Page](https://envision-iot.herokuapp.com) is here! You can check demo IoT project!
+[Demo Page](https://envision-iot.work) is here! You can check demo IoT project!
 
 ## Setup
 
@@ -145,7 +146,7 @@ yarn start
 
 ## Links
 
-- [DEMO PAGE](https://envision-iot.herokuapp.com/)
+- [DEMO PAGE](https://envision-iot.work)
 - [Vue](https://vuejs.org/)
 - [Vuetify](https://vuetifyjs.com/en/)
 - [Express](https://expressjs.com/)
