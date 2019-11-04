@@ -57,7 +57,7 @@
     "eslint": "^6.5.1",
     "eslint-config-recommended": "^4.0.0",
     "eslint-plugin-vue": "^5.2.3",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.0",
     "nodemon": "^1.19.4",
     "sass": "^1.22.12",
     "sass-loader": "^7.3.1",
