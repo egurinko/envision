@@ -46,7 +46,7 @@
     "@types/chart.js": "^2.8.5",
     "@types/moment-timezone": "^0.5.12",
     "@types/vue-router": "^2.0.0",
-    "@vue/cli-plugin-babel": "^3.9.2",
+    "@vue/cli-plugin-babel": "^4.1.1",
     "@vue/cli-plugin-eslint": "^4.0.5",
     "@vue/cli-plugin-typescript": "^4.1.1",
     "@vue/cli-service": "^4.0.5",
