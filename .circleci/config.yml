@@ -44,26 +44,11 @@ jobs:
       - run:
           name: Install dependencies
           command: yarn install
-      
-      - run:
-          name: Build app
-          command: yarn build
 
+      # Test seed
       - run:
           name: Seed data
           command: yarn seed
-
-      - run:
-          name: Start app
-          command: yarn start
-          background: true
-      
-      - run:
-          command: yarn cypress:install
-
-      - run:
-          name: Run cypress test
-          command: yarn test:wait
 
       - save_cache:
           paths:
