@@ -35,6 +35,6 @@
     "nodemon": "^2.0.2",
     "sass": "^1.26.2",
     "sass-loader": "^8.0.2",
-    "typescript": "^3.7.5"
+    "typescript": "^3.8.3"
   }
 }
