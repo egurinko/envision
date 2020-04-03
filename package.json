@@ -16,7 +16,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.20.13",
     "mongo-seeding": "^3.4.0",
-    "mongodb": "^3.5.4",
+    "mongodb": "^3.5.5",
     "morgan": "^1.9.1",
     "node-cron": "^2.0.3"
   },
