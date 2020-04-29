@@ -1137,10 +1137,12 @@
   dependencies:
     eslint-config-prettier "^6.0.0"
 
-"@vue/eslint-config-typescript@^5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@vue/eslint-config-typescript/-/eslint-config-typescript-5.0.1.tgz#06d986dd91cadc60583158dadc7c9c4f0372af31"
-  integrity sha512-gpP8zQA0rJ93ROkAW5fbOJB3EG7p6U70Jb0/CVOjhs5zuEXf1WgLk4gP+zUZGwiRpLoXBa5oIRH4hLQDbS1/eg==
+"@vue/eslint-config-typescript@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@vue/eslint-config-typescript/-/eslint-config-typescript-5.0.2.tgz#c2f3328e70d55d10aeb826f209405397960548c7"
+  integrity sha512-GEZOHKOnelgQf5npA+6VNuhJZu9xEJaics3SYUyRjaSay+2SCpEINHhEpt6fXoNy/aIFt8CkDlt9CaEb+QPIcg==
+  dependencies:
+    vue-eslint-parser "^7.0.0"
 
 "@vue/preload-webpack-plugin@^1.1.0":
   version "1.1.1"
@@ -3590,10 +3592,10 @@ eslint-plugin-react@^7.11.1:
     prop-types "^15.7.2"
     resolve "^1.13.1"
 
-eslint-plugin-vue@^6.2.1:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-6.2.1.tgz#ca802df5c33146aed1e56bb21d250c1abb6120a3"
-  integrity sha512-MiIDOotoWseIfLIfGeDzF6sDvHkVvGd2JgkvjyHtN3q4RoxdAXrAMuI3SXTOKatljgacKwpNAYShmcKZa4yZzw==
+eslint-plugin-vue@^6.2.2:
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-6.2.2.tgz#27fecd9a3a24789b0f111ecdd540a9e56198e0fe"
+  integrity sha512-Nhc+oVAHm0uz/PkJAWscwIT4ijTrK5fqNqz9QB1D35SbbuMG1uB6Yr5AJpvPSWg+WOw7nYNswerYh0kOk64gqQ==
   dependencies:
     natural-compare "^1.4.0"
     semver "^5.6.0"
@@ -6316,10 +6318,10 @@ mongodb@3.3.2:
     require_optional "^1.0.1"
     safe-buffer "^5.1.2"
 
-mongodb@^3.5.4:
-  version "3.5.4"
-  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.5.4.tgz#f7609cfa9f8c56c35e844b4216ddc3a1b1ec5bef"
-  integrity sha512-xGH41Ig4dkSH5ROGezkgDbsgt/v5zbNUwE3TcFsSbDc6Qn3Qil17dhLsESSDDPTiyFDCPJRpfd4887dtsPgKtA==
+mongodb@^3.5.5:
+  version "3.5.5"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.5.5.tgz#1334c3e5a384469ac7ef0dea69d59acc829a496a"
+  integrity sha512-GCjDxR3UOltDq00Zcpzql6dQo1sVry60OXJY3TDmFc2SWFY6c8Gn1Ardidc5jDirvJrx2GC3knGOImKphbSL3A==
   dependencies:
     bl "^2.2.0"
     bson "^1.1.1"
