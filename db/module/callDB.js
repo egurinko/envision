@@ -89,6 +89,7 @@ module.exports = async (method, endpoint, options = null) => {
       return keys;
     }
   } catch (err) {
+    console.log("ERROR", err);
     // throw new Error(err);
   }
 };
