@@ -14,17 +14,17 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.21.5",
+    "knex": "^0.21.11",
     "mongo-seeding": "^3.4.1",
-    "mongodb": "^3.6.0",
+    "mongodb": "^3.6.2",
     "morgan": "^1.10.0",
     "node-cron": "^2.0.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.4",
-    "@vue/cli-plugin-eslint": "^4.5.4",
+    "@vue/cli-plugin-eslint": "^4.5.8",
     "@vue/cli-plugin-typescript": "^4.5.4",
-    "@vue/cli-service": "^4.5.4",
+    "@vue/cli-service": "^4.5.8",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^5.1.0",
     "babel-eslint": "^10.1.0",
@@ -33,8 +33,8 @@
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.14.1",
     "nodemon": "^2.0.4",
-    "sass": "^1.26.10",
     "sass-loader": "^10.0.4",
-    "typescript": "^4.0.2"
+    "sass": "^1.28.0",
+    "typescript": "^4.0.5"
   }
 }
