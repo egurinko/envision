@@ -1,0 +1,30 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: monthly
+    time: "11:00"
+  open-pull-requests-limit: 10
+  reviewers:
+  - egurinko
+  assignees:
+  - egurinko
+  ignore:
+  - dependency-name: typescript
+    versions:
+    - 4.2.2
+  - dependency-name: eslint-plugin-vue
+    versions:
+    - 7.5.0
+    - 7.6.0
+  - dependency-name: eslint
+    versions:
+    - 7.19.0
+  - dependency-name: sass
+    versions:
+    - 1.32.5
+    - 1.32.7
+  - dependency-name: knex
+    versions:
+    - 0.21.17
